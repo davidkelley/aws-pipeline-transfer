@@ -1,5 +1,3 @@
-![Logo][logo]
-
 # CodePipeline S3 File Transfer Action
 
 This project enables a custom CodePipeline action that allows you to specify files from pipeline artifacts, to be transferred to S3 buckets (see example below). Each transfer must contain a destination bucket, an optional key prefix to apply to all transfers and a source (`src`) key, which defines in a glob fashion the files to be uploaded.
@@ -80,5 +78,3 @@ AssetS3BucketTransferRole:
 ```
 
 For a full definition of what you can define inside the `UserParameters` key, see [the JSON Schema file](/functions/pipeline/pipeline/validate/schema.js).
-
-[logo]: /.github/images/logo-small.png
