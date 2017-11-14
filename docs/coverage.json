@@ -1,0 +1,59 @@
+{
+  "coverage": "98.66%",
+  "expectCount": 75,
+  "actualCount": 74,
+  "files": {
+    "functions/globals.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "functions/logger.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "functions/transfer/transfer/artifact/artifact.js": {
+      "expectCount": 27,
+      "actualCount": 27,
+      "undocumentLines": []
+    },
+    "functions/transfer/transfer/artifact/file.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "functions/transfer/transfer/attribute/attribute.js": {
+      "expectCount": 12,
+      "actualCount": 12,
+      "undocumentLines": []
+    },
+    "functions/transfer/transfer/constants.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "functions/transfer/transfer/destination.js": {
+      "expectCount": 11,
+      "actualCount": 11,
+      "undocumentLines": []
+    },
+    "functions/transfer/transfer/uploader.js": {
+      "expectCount": 9,
+      "actualCount": 8,
+      "undocumentLines": [
+        17
+      ]
+    },
+    "functions/transfer/transfer/validate/schema.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "functions/transfer/transfer/validate/validate.js": {
+      "expectCount": 4,
+      "actualCount": 4,
+      "undocumentLines": []
+    }
+  }
+}

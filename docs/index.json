@@ -1,0 +1,3557 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "functions/.external-ecmascript.js",
+    "static": true,
+    "longname": "functions/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "functions/globals.js",
+    "content": "/**\n* Determines the level of logging that the function will output. This enables\n* us to reduce the amount of \"noise\" generated by a battle-tested function,\n* whilst enabling us to output additional logging on a new version.\n*\n* Setting `process.env.LOG_LEVEL` will overwrite the default value of `\"info\"`\n* for this variable.\n*\n* @type {String}\n*/\nexport const LOG_LEVEL = (process.env.LOG_LEVEL || 'info');\n\n/**\n * The AWS Region that this Lambda function is currently executing in.\n *\n * _Note: This is normally populated by the Lambda execution environment._\n *\n * @type {String}\n */\nexport const AWS_REGION = process.env.AWS_REGION;\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/globals.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "variable",
+    "name": "LOG_LEVEL",
+    "memberof": "functions/globals.js",
+    "static": true,
+    "longname": "functions/globals.js~LOG_LEVEL",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/globals.js",
+    "importStyle": "{LOG_LEVEL}",
+    "description": "Determines the level of logging that the function will output. This enables\nus to reduce the amount of \"noise\" generated by a battle-tested function,\nwhilst enabling us to output additional logging on a new version.\n\nSetting `process.env.LOG_LEVEL` will overwrite the default value of `\"info\"`\nfor this variable.",
+    "lineNumber": 11,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 50,
+    "kind": "variable",
+    "name": "AWS_REGION",
+    "memberof": "functions/globals.js",
+    "static": true,
+    "longname": "functions/globals.js~AWS_REGION",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/globals.js",
+    "importStyle": "{AWS_REGION}",
+    "description": "The AWS Region that this Lambda function is currently executing in.\n\n_Note: This is normally populated by the Lambda execution environment._",
+    "lineNumber": 20,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 51,
+    "kind": "file",
+    "name": "functions/logger.js",
+    "content": "import Bunyan from 'bunyan';\n\nimport { LOG_LEVEL } from './globals';\n\n/**\n * Custom serializer for errors that are thrown by the Error library\n * that this function utilizes.\n */\nconst ErrorSerializer = (err) => {\n  const { message, name, type, origMessage, code = {} } = err;\n  return { message, name, type, origMessage, detail: code };\n};\n\n/**\n * The options that the logger is initialised with.\n *\n * @see https://github.com/trentm/node-bunyan\n */\nconst options = {\n  name: 'pipeline-transfer',\n  level: LOG_LEVEL,\n  serializers: {\n    err: ErrorSerializer,\n  },\n};\n\n/**\n * @external {Logger} https://github.com/trentm/node-bunyan\n */\nconst Logger = Bunyan.createLogger(options);\n\nexport default Logger;\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/logger.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 52,
+    "kind": "function",
+    "name": "ErrorSerializer",
+    "memberof": "functions/logger.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "functions/logger.js~ErrorSerializer",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/logger.js",
+    "importStyle": null,
+    "description": "Custom serializer for errors that are thrown by the Error library\nthat this function utilizes.",
+    "lineNumber": 9,
+    "params": [
+      {
+        "name": "err",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"message\": *, \"name\": *, \"type\": *, \"origMessage\": *, \"detail\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "variable",
+    "name": "options",
+    "memberof": "functions/logger.js",
+    "static": true,
+    "longname": "functions/logger.js~options",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/logger.js",
+    "importStyle": null,
+    "description": "The options that the logger is initialised with.",
+    "see": [
+      "https://github.com/trentm/node-bunyan"
+    ],
+    "lineNumber": 19,
+    "type": {
+      "types": [
+        "{\"name\": string, \"level\": *, \"serializers\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "external",
+    "name": "Logger",
+    "externalLink": "https://github.com/trentm/node-bunyan",
+    "memberof": "functions/logger.js",
+    "static": true,
+    "longname": "functions/logger.js~Logger",
+    "access": "public",
+    "description": "",
+    "lineNumber": 30
+  },
+  {
+    "__docId__": 55,
+    "kind": "file",
+    "name": "functions/transfer/transfer/artifact/artifact.js",
+    "content": "import fs from 'fs';\nimport glob from 'glob';\nimport uuid from 'uuid/v4';\nimport Path from 'path';\nimport extract from 'extract-zip';\nimport { S3 } from 'aws-sdk';\nimport wrappedError from 'error/wrapped';\nimport typedError from 'error/typed';\n\nimport { AWS_REGION } from '../../../globals';\n\nimport File from './file';\n\n/**\n * An error was encountered when attempting to download, commit and uncompress\n * the remote CodePipeline artifact.\n *\n * @type {Error}\n */\nconst readyError = wrappedError({\n  message: 'Error occurred retrieving artifact',\n  type: 'pipeline.artifact',\n});\n\n/**\n * The remote artifact could not be retrieved (S3 Error).\n *\n * @type {Error}\n */\nconst fetchError = wrappedError({\n  message: 'Could not retrieve artifact.',\n  type: 'pipeline.artifact.file',\n});\n\n/**\n * An error was encountered whilst attempting to read a file from inside the\n * artifact.\n *\n * @type {Error}\n */\nconst readError = wrappedError({\n  message: 'Could not read artifact file \"{filename}\"',\n  type: 'pipeline.artifact.file',\n});\n\n/**\n * The artifact was successfully downloaded, but an error occurred whilst\n * attempting to decompress it.\n *\n * @type {Error}\n */\nconst decompressionError = wrappedError({\n  message: 'Failed to decompress artifact.',\n  type: 'pipeline.artifact.file.decompression',\n});\n\n/**\n * The JSON key does not exist in the file.\n *\n * @type {Error}\n */\nconst keyNotFoundError = typedError({\n  message: 'Key \"{key}\" not found in file \"{filename}\"',\n  type: 'pipeline.artifact.file.json',\n});\n\n/**\n * This class handles retrieving CodePipeline artifact files as well as accessing\n * file contents in addition to attributes defined inside JSON files residing\n * within the artifact.\n *\n * As the artifacts passed to the function may reside within remote buckets which\n * this function does not have sufficient permissions to access, credentials are\n * used from the initial CodePipeline event object.\n */\nexport default class Artifact {\n  /**\n   * Constructs a new Artifact instance.\n   *\n   * @param {Object} s3Location - object representing a remote S3 location\n   * @param {String} s3Location.bucketName - the name of the S3 bucket.\n   * @param {String} s3Location.objectKey - the key of the file inside the S3 bucket.\n   */\n  constructor({ bucketName, objectKey }, { secretAccessKey, sessionToken, accessKeyId }) {\n    /**\n     * A local ID for this artifact.\n     *\n     * @type {String}\n     */\n    this.id = uuid();\n    /**\n     * A filename representing the name of the artifact once downloaded and stored\n     * locally.\n     *\n     * @type {String}\n     */\n    this.filename = `${this.id}.zip`;\n    /**\n     * A fully resolved Path to the local artifact when downloaded and written\n     * to the `/tmp/` directory.\n     *\n     * @type {String}\n     */\n    this.filepath = Path.join('/tmp/', this.filename);\n    /**\n     * A fully resolved path to the directory storing the decompressed contents\n     * of the remote artifact in the `/tmp` directory.\n     *\n     * @type {String}\n     */\n    this.dir = Path.join('/tmp/', this.id);\n    /**\n     * The name of the S3 bucket which the remote artifact file resides in.\n     *\n     * @type {String}\n     */\n    this.bucketName = bucketName;\n    /**\n     * The key for the remote artifact file.\n     *\n     * @type {String}\n     */\n    this.objectKey = objectKey;\n    /**\n     * The AWS Secret Access Key which will be used to retrieve the remote artifact.\n     *\n     * @type {String}\n     */\n    this.secretAccessKey = secretAccessKey;\n    /**\n     * The AWS Session Token which will be used to retrieve the remote artifact.\n     *\n     * @type {String}\n     */\n    this.sessionToken = sessionToken;\n    /**\n     * The AWS Access Key ID which will be used to retrieve the remote artifact.\n     *\n     * @type {String}\n     */\n    this.accessKeyId = accessKeyId;\n    /**\n     * Determines if this artifact has been retrieved, decompressed and\n     * written to local file storage.\n     *\n     * @type {Boolean}\n     */\n    this.isReady = false;\n  }\n\n  /**\n   * Transform the properties received from CodePipeline into a new instance\n   * of this class.\n   *\n   * This function maps the required properties from the CodePipeline invocation\n   * event structure.\n   *\n   * @return {Artifact} a new artifact file with correctly mapped parameters.\n   */\n  static toArtifact(artifact, credentials = {}) {\n    const { location: { s3Location } } = artifact;\n    return new Artifact(s3Location, credentials);\n  }\n\n  /**\n   * Returns an array which can be used to constuct a Map of artifacts.\n   *\n   * @return {Array[String, Artifact]}\n   */\n  static toArtifactMapEntry(artifact, credentials) {\n    return [artifact.name, Artifact.toArtifact(artifact, credentials)];\n  }\n\n  /**\n   * A utility function to ensure that this artifact has first retrived and\n   * decompressed the remote artifact file, before any attempts are made\n   * to retrieve artifact contents.\n   *\n   * @return {Boolean} true if ready, false otherwise.\n   */\n  async ready() {\n    try {\n      if (!this.isReady) {\n        const data = await this.fetch();\n        await this.write(data);\n        await this.unzip();\n        this.isReady = true;\n      }\n      return this.isReady;\n    } catch (err) {\n      throw readyError(err);\n    }\n  }\n\n  /**\n   * Returns an array of {@link File} instances which represent all matched\n   * files from inside the retrieved, decompressed artifact.\n   *\n   * @param {String} select - a linux-style file glob to match files with.\n   *\n   * @return {Array[File]} an array of all matched {@link File} instances.\n   */\n  async match(select) {\n    return new Promise((resolve, reject) => {\n      try {\n        const { dir: cwd } = this;\n        glob(select, { cwd, nonull: false, nodir: true }, (err, files) => {\n          if (err) {\n            // TODO: throw error\n          } else {\n            resolve(files.map((file) => {\n              const { dir, base: filename } = Path.parse(file);\n              const path = Path.join(cwd, file);\n              const data = fs.readFileSync(path, { encoding: 'binary' });\n              return new File(dir, filename, data);\n            }));\n          }\n        });\n      } catch (err) {\n        // TODO: catch error\n        reject();\n      }\n    });\n  }\n\n  /**\n   * Once {@link Artifact#ready} has resolved successfully, this function\n   * can be used to retrieve a specific file's contents from within the\n   * decompressed artifact.\n   *\n   * @return {Buffer} a utf-8 buffer of the file's contents.\n   */\n  get(filename) {\n    try {\n      const { dir } = this;\n      const path = Path.join(dir, filename);\n      return fs.readFileSync(path, { encoding: 'utf8' });\n    } catch (err) {\n      throw readError(err, { filename });\n    }\n  }\n\n  /**\n   * Once {@link Artifact#ready} has resolved successfully, this function\n   * can be used to retrieve the value of a specific property key from within\n   * a JSON file residing inside the decompressed artifact.\n   *\n   * @return [String] the value of the key from within a JSON file.\n   */\n  attribute(filename, key) {\n    try {\n      const obj = JSON.parse(this.get(filename));\n      if (!Object.keys(obj).includes(key)) {\n        throw keyNotFoundError({ filename, key });\n      } else {\n        return obj[key];\n      }\n    } catch (err) {\n      throw readError(err, { filename });\n    }\n  }\n\n  /**\n   * @private\n   *\n   * Assuming that the remote artifact has been downloaded and written to\n   * {@link Artifact#filepath}, attempt to extract the contents of the artifact\n   * into {@link Artifact#dir}.\n   *\n   * @return {Boolean} true once contents have been successfully decompressed.\n   */\n  unzip() {\n    return new Promise((resolve, reject) => {\n      const { filepath, dir } = this;\n      fs.mkdirSync(dir);\n      extract(filepath, { dir }, (err) => {\n        if (err) {\n          reject(decompressionError(err));\n        } else {\n          resolve(true);\n        }\n      });\n    });\n  }\n\n  /**\n   * @private\n   *\n   * Write the contents of the compressed, remote artifact to {@link Artifact#filepath}.\n   *\n   * @return {Boolean} true once the file has been written.\n   */\n  async write(data) {\n    const { filepath } = this;\n    fs.writeFileSync(filepath, data, { encoding: 'utf8' });\n    return true;\n  }\n\n  /**\n   * @private\n   *\n   * Using the S3 client ({@link Artifact#client}) retrieve the artifact from\n   * the remote S3 bucket.\n   *\n   * @return {Buffer} the buffer contents of the remote artifacts retrieved from S3.\n   */\n  async fetch() {\n    try {\n      const { bucketName, objectKey } = this;\n      const params = { Bucket: bucketName, Key: objectKey };\n      const { Body } = await this.client.getObject(params).promise();\n      return Body;\n    } catch (err) {\n      throw fetchError(err);\n    }\n  }\n\n  /**\n   * Returns a new S3 client with credentials pre-configured.\n   *\n   * @type {S3}\n   */\n  get client() {\n    const { secretAccessKey, sessionToken, accessKeyId } = this;\n    return new S3({ region: AWS_REGION, accessKeyId, secretAccessKey, sessionToken });\n  }\n}\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/artifact/artifact.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 56,
+    "kind": "variable",
+    "name": "readyError",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~readyError",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/artifact/artifact.js",
+    "importStyle": null,
+    "description": "An error was encountered when attempting to download, commit and uncompress\nthe remote CodePipeline artifact.",
+    "lineNumber": 20,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "variable",
+    "name": "fetchError",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~fetchError",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/artifact/artifact.js",
+    "importStyle": null,
+    "description": "The remote artifact could not be retrieved (S3 Error).",
+    "lineNumber": 30,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "variable",
+    "name": "readError",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~readError",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/artifact/artifact.js",
+    "importStyle": null,
+    "description": "An error was encountered whilst attempting to read a file from inside the\nartifact.",
+    "lineNumber": 41,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "variable",
+    "name": "decompressionError",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~decompressionError",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/artifact/artifact.js",
+    "importStyle": null,
+    "description": "The artifact was successfully downloaded, but an error occurred whilst\nattempting to decompress it.",
+    "lineNumber": 52,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "variable",
+    "name": "keyNotFoundError",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~keyNotFoundError",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/artifact/artifact.js",
+    "importStyle": null,
+    "description": "The JSON key does not exist in the file.",
+    "lineNumber": 62,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "class",
+    "name": "Artifact",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/artifact/artifact.js",
+    "importStyle": "Artifact",
+    "description": "This class handles retrieving CodePipeline artifact files as well as accessing\nfile contents in addition to attributes defined inside JSON files residing\nwithin the artifact.\n\nAs the artifacts passed to the function may reside within remote buckets which\nthis function does not have sufficient permissions to access, credentials are\nused from the initial CodePipeline event object.",
+    "lineNumber": 76,
+    "interface": false
+  },
+  {
+    "__docId__": 62,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#constructor",
+    "access": "public",
+    "description": "Constructs a new Artifact instance.",
+    "lineNumber": 84,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "s3Location",
+        "description": "object representing a remote S3 location"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "s3Location.bucketName",
+        "description": "the name of the S3 bucket."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "s3Location.objectKey",
+        "description": "the key of the file inside the S3 bucket."
+      }
+    ]
+  },
+  {
+    "__docId__": 63,
+    "kind": "member",
+    "name": "id",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#id",
+    "access": "public",
+    "description": "A local ID for this artifact.",
+    "lineNumber": 90,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 64,
+    "kind": "member",
+    "name": "filename",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#filename",
+    "access": "public",
+    "description": "A filename representing the name of the artifact once downloaded and stored\nlocally.",
+    "lineNumber": 97,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 65,
+    "kind": "member",
+    "name": "filepath",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#filepath",
+    "access": "public",
+    "description": "A fully resolved Path to the local artifact when downloaded and written\nto the `/tmp/` directory.",
+    "lineNumber": 104,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 66,
+    "kind": "member",
+    "name": "dir",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#dir",
+    "access": "public",
+    "description": "A fully resolved path to the directory storing the decompressed contents\nof the remote artifact in the `/tmp` directory.",
+    "lineNumber": 111,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "member",
+    "name": "bucketName",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#bucketName",
+    "access": "public",
+    "description": "The name of the S3 bucket which the remote artifact file resides in.",
+    "lineNumber": 117,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "member",
+    "name": "objectKey",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#objectKey",
+    "access": "public",
+    "description": "The key for the remote artifact file.",
+    "lineNumber": 123,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "member",
+    "name": "secretAccessKey",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#secretAccessKey",
+    "access": "public",
+    "description": "The AWS Secret Access Key which will be used to retrieve the remote artifact.",
+    "lineNumber": 129,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "member",
+    "name": "sessionToken",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#sessionToken",
+    "access": "public",
+    "description": "The AWS Session Token which will be used to retrieve the remote artifact.",
+    "lineNumber": 135,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 71,
+    "kind": "member",
+    "name": "accessKeyId",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#accessKeyId",
+    "access": "public",
+    "description": "The AWS Access Key ID which will be used to retrieve the remote artifact.",
+    "lineNumber": 141,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 72,
+    "kind": "member",
+    "name": "isReady",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#isReady",
+    "access": "public",
+    "description": "Determines if this artifact has been retrieved, decompressed and\nwritten to local file storage.",
+    "lineNumber": 148,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 73,
+    "kind": "method",
+    "name": "toArtifact",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact.toArtifact",
+    "access": "public",
+    "description": "Transform the properties received from CodePipeline into a new instance\nof this class.\n\nThis function maps the required properties from the CodePipeline invocation\nevent structure.",
+    "lineNumber": 160,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Artifact"
+      ],
+      "spread": false,
+      "description": "a new artifact file with correctly mapped parameters."
+    },
+    "params": [
+      {
+        "name": "artifact",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "credentials",
+        "optional": true,
+        "types": [
+          "{}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ]
+  },
+  {
+    "__docId__": 74,
+    "kind": "method",
+    "name": "toArtifactMapEntry",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact.toArtifactMapEntry",
+    "access": "public",
+    "description": "Returns an array which can be used to constuct a Map of artifacts.",
+    "lineNumber": 170,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array[String, Artifact]"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": [
+      {
+        "name": "artifact",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "credentials",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 75,
+    "kind": "method",
+    "name": "ready",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#ready",
+    "access": "public",
+    "description": "A utility function to ensure that this artifact has first retrived and\ndecompressed the remote artifact file, before any attempts are made\nto retrieve artifact contents.",
+    "lineNumber": 181,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": "true if ready, false otherwise."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 77,
+    "kind": "method",
+    "name": "match",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#match",
+    "access": "public",
+    "description": "Returns an array of {@link File} instances which represent all matched\nfiles from inside the retrieved, decompressed artifact.",
+    "lineNumber": 203,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "select",
+        "description": "a linux-style file glob to match files with."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array[File]"
+      ],
+      "spread": false,
+      "description": "an array of all matched {@link File} instances."
+    }
+  },
+  {
+    "__docId__": 78,
+    "kind": "method",
+    "name": "get",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#get",
+    "access": "public",
+    "description": "Once {@link Artifact#ready} has resolved successfully, this function\ncan be used to retrieve a specific file's contents from within the\ndecompressed artifact.",
+    "lineNumber": 233,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Buffer"
+      ],
+      "spread": false,
+      "description": "a utf-8 buffer of the file's contents."
+    },
+    "params": [
+      {
+        "name": "filename",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 79,
+    "kind": "method",
+    "name": "attribute",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#attribute",
+    "access": "public",
+    "description": "Once {@link Artifact#ready} has resolved successfully, this function\ncan be used to retrieve the value of a specific property key from within\na JSON file residing inside the decompressed artifact.",
+    "lineNumber": 250,
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "[String] the value of the key from within a JSON file."
+    },
+    "params": [
+      {
+        "name": "filename",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "key",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 80,
+    "kind": "method",
+    "name": "unzip",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#unzip",
+    "access": "private",
+    "description": "",
+    "lineNumber": 272,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": "true once contents have been successfully decompressed."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 81,
+    "kind": "method",
+    "name": "write",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#write",
+    "access": "private",
+    "description": "",
+    "lineNumber": 293,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": "true once the file has been written."
+    },
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 82,
+    "kind": "method",
+    "name": "fetch",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#fetch",
+    "access": "private",
+    "description": "",
+    "lineNumber": 307,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Buffer"
+      ],
+      "spread": false,
+      "description": "the buffer contents of the remote artifacts retrieved from S3."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 83,
+    "kind": "get",
+    "name": "client",
+    "memberof": "functions/transfer/transfer/artifact/artifact.js~Artifact",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/artifact.js~Artifact#client",
+    "access": "public",
+    "description": "Returns a new S3 client with credentials pre-configured.",
+    "lineNumber": 323,
+    "type": {
+      "nullable": null,
+      "types": [
+        "S3"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 84,
+    "kind": "file",
+    "name": "functions/transfer/transfer/artifact/file.js",
+    "content": "import Path from 'path';\nimport { S3 } from 'aws-sdk';\n\nimport { AWS_REGION } from '../../../globals';\n\n/**\n * Represents a file inside an artifact.\n *\n */\nexport default class File {\n  /**\n   * @param {String} path - the path to the file inside the artifact\n   * @param {String} filename - The name of the file, including the extension name\n   * @param {Buffer} data - A buffer of the files contents.\n   */\n  constructor(path, filename, data) {\n    /**\n     * The S3 key which represents this file (path + filename)\n     *\n     * @type {String}\n     */\n    this.key = Path.join('/', path, filename);\n    /**\n     * The data contained inside the file\n     *\n     * @type {Buffer}\n     */\n    this.data = data;\n  }\n\n  /**\n   * Uploads the file to the specific remote S3 bucket, using the supplied\n   * credentials and an optional prefix.\n   *\n   * @param {Object} opts - An options object\n   * @param {String} opts.bucket - The bucket to upload the file to.\n   * @param {Credentials} opts.credentials - An instantiated AWS.Credentials object.\n   * @param {String} opts.prefix - An optional prefix to apply to this file.\n   */\n  async upload({ bucket: Bucket, credentials, prefix = '' }) {\n    const { data, key } = this;\n    const s3 = new S3({ region: AWS_REGION, credentials });\n    const prefixedKey = Path.join('/', prefix, key);\n    await s3.putObject({ Bucket, Key: prefixedKey, Body: data });\n    return `s3://${Bucket}${prefixedKey}`;\n  }\n}\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/artifact/file.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 85,
+    "kind": "class",
+    "name": "File",
+    "memberof": "functions/transfer/transfer/artifact/file.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/artifact/file.js~File",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/artifact/file.js",
+    "importStyle": "File",
+    "description": "Represents a file inside an artifact.",
+    "lineNumber": 10,
+    "interface": false
+  },
+  {
+    "__docId__": 86,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "functions/transfer/transfer/artifact/file.js~File",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/file.js~File#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 16,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "the path to the file inside the artifact"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "filename",
+        "description": "The name of the file, including the extension name"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Buffer"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": "A buffer of the files contents."
+      }
+    ]
+  },
+  {
+    "__docId__": 87,
+    "kind": "member",
+    "name": "key",
+    "memberof": "functions/transfer/transfer/artifact/file.js~File",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/file.js~File#key",
+    "access": "public",
+    "description": "The S3 key which represents this file (path + filename)",
+    "lineNumber": 22,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 88,
+    "kind": "member",
+    "name": "data",
+    "memberof": "functions/transfer/transfer/artifact/file.js~File",
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/file.js~File#data",
+    "access": "public",
+    "description": "The data contained inside the file",
+    "lineNumber": 28,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Buffer"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 89,
+    "kind": "method",
+    "name": "upload",
+    "memberof": "functions/transfer/transfer/artifact/file.js~File",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/artifact/file.js~File#upload",
+    "access": "public",
+    "description": "Uploads the file to the specific remote S3 bucket, using the supplied\ncredentials and an optional prefix.",
+    "lineNumber": 40,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": "An options object"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts.bucket",
+        "description": "The bucket to upload the file to."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Credentials"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts.credentials",
+        "description": "An instantiated AWS.Credentials object."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts.prefix",
+        "description": "An optional prefix to apply to this file."
+      }
+    ],
+    "return": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 90,
+    "kind": "file",
+    "name": "functions/transfer/transfer/attribute/attribute.js",
+    "content": "import wrappedError from 'error/wrapped';\nimport typedError from 'error/typed';\n\n/**\n * An unsupported parameter value object was encountered.\n *\n * @type {Error}\n */\nconst artifactParameterError = typedError({\n  message: 'Unsupported object key \"{keys}\"',\n  type: 'pipeline.attribute',\n});\n\n/**\n * The remote artifact file did not contain a truthy key value.\n *\n * @type {Error}\n */\nconst remoteArtifactValueError = wrappedError({\n  message: 'Value was null or undefined for \"{path}\"',\n  type: 'pipeline.attribute.artifact.value',\n});\n\n/**\n * The defined remote artifact does not exist or access has not been granted.\n *\n * @type {Error}\n */\nconst artifactNotFound = typedError({\n  message: 'Artifact \"{artifactName}\" was referenced, but is not a valid InputArtifact.',\n  type: 'pipeline.attribute.artifact.not_found',\n});\n\n/**\n * Indicates a remote artifact type\n *\n * @type {String}\n */\nconst REMOTE = 'REMOTE';\n\n/**\n * Indicates a static artifact type\n *\n * @type {String}\n */\nconst STATIC = 'STATIC';\n\n/**\n * Resolves an attribute that has been defined as part of the UserParameters.\n * An attribute can either be a static, hardcoded value or can be a reference\n * to a key, found inside a file present in an input artifact.\n */\nexport default class Attribute {\n  /**\n   * @param {String,Object} mapping - a mapping object, either a hardcoded value\n   *  or a reference to a key, found inside a file present in an input artifact.\n   * @param {Array[Artifact]} artifacts - an array of artifacts that any remote\n   *  attribute value could be found inside.\n   */\n  constructor(mapping, artifacts) {\n    /**\n     * Either a hardcoded value (a string) or an object denoting a remote reference.\n     *\n     * @type {String,Object}\n     */\n    this.mapping = mapping;\n    /**\n     * An object containing {@link Artifact} instances, with the keys denoting\n     * the logical name of the artifact inside CodePipeline.\n     *\n     * @type {Array[Artifact]}\n     */\n    this.artifacts = artifacts;\n  }\n\n  /**\n   * Determine if the type of mapping that has been provided for the attribute\n   * value is either a static value, or needs to be resolved using a remote\n   * input artifact.\n   *\n   * @return {String} the type of attribute mapping provided\n   */\n  get type() {\n    const { mapping } = this;\n    if (typeof mapping !== 'string') {\n      return REMOTE;\n    }\n    return STATIC;\n  }\n\n  /**\n   * Resolves the value for the attribute, either returning the static attribute\n   * value, or the resolved value from inside a remote artifact.\n   *\n   * @return {String} the attribute's value\n   */\n  async value() {\n    const { type, mapping } = this;\n    if (type === STATIC) {\n      return mapping;\n    }\n    const properties = mapping['Fn::GetArtifactAtt'];\n    if (!properties) {\n      const keys = Object.keys(mapping).join(', ');\n      throw artifactParameterError({ keys });\n    }\n    return await this.fetch(...properties);\n  }\n\n  /**\n   * @private\n   *\n   * Fetch the value of a specific parameter using the key found inside a json file\n   * inside the specific artifact.\n   *\n   * @param {String} artifactName - the name of the artifact the file resides in.\n   * @param {String} filename - The name of the JSON file inside the artifact\n   * @param {String} key - The property key inside the JSON file\n   *\n   * @return {String} the value of the key inside the JSON file, inside the artifact.\n   */\n  async fetch(artifactName, filename, key) {\n    const artifact = this.artifacts[artifactName];\n    if (!artifact) {\n      throw artifactNotFound({ artifactName });\n    } else {\n      await artifact.ready();\n      const value = artifact.attribute(filename, key);\n      if (!value) {\n        throw remoteArtifactValueError({\n          path: `${artifactName}::${filename}::${key}`,\n        });\n      } else {\n        return value;\n      }\n    }\n  }\n}\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 91,
+    "kind": "variable",
+    "name": "artifactParameterError",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~artifactParameterError",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
+    "importStyle": null,
+    "description": "An unsupported parameter value object was encountered.",
+    "lineNumber": 9,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 92,
+    "kind": "variable",
+    "name": "remoteArtifactValueError",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~remoteArtifactValueError",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
+    "importStyle": null,
+    "description": "The remote artifact file did not contain a truthy key value.",
+    "lineNumber": 19,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 93,
+    "kind": "variable",
+    "name": "artifactNotFound",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~artifactNotFound",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
+    "importStyle": null,
+    "description": "The defined remote artifact does not exist or access has not been granted.",
+    "lineNumber": 29,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 94,
+    "kind": "variable",
+    "name": "REMOTE",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~REMOTE",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
+    "importStyle": null,
+    "description": "Indicates a remote artifact type",
+    "lineNumber": 39,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 95,
+    "kind": "variable",
+    "name": "STATIC",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~STATIC",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
+    "importStyle": null,
+    "description": "Indicates a static artifact type",
+    "lineNumber": 46,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 96,
+    "kind": "class",
+    "name": "Attribute",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
+    "importStyle": "Attribute",
+    "description": "Resolves an attribute that has been defined as part of the UserParameters.\nAn attribute can either be a static, hardcoded value or can be a reference\nto a key, found inside a file present in an input artifact.",
+    "lineNumber": 53,
+    "interface": false
+  },
+  {
+    "__docId__": 97,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js~Attribute",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 60,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String,Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "mapping",
+        "description": "a mapping object, either a hardcoded value\n or a reference to a key, found inside a file present in an input artifact."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Array[Artifact]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "artifacts",
+        "description": "an array of artifacts that any remote\n attribute value could be found inside."
+      }
+    ]
+  },
+  {
+    "__docId__": 98,
+    "kind": "member",
+    "name": "mapping",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js~Attribute",
+    "static": false,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#mapping",
+    "access": "public",
+    "description": "Either a hardcoded value (a string) or an object denoting a remote reference.",
+    "lineNumber": 66,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String,Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 99,
+    "kind": "member",
+    "name": "artifacts",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js~Attribute",
+    "static": false,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#artifacts",
+    "access": "public",
+    "description": "An object containing {@link Artifact} instances, with the keys denoting\nthe logical name of the artifact inside CodePipeline.",
+    "lineNumber": 73,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Array[Artifact]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 100,
+    "kind": "get",
+    "name": "type",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js~Attribute",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#type",
+    "access": "public",
+    "description": "Determine if the type of mapping that has been provided for the attribute\nvalue is either a static value, or needs to be resolved using a remote\ninput artifact.",
+    "lineNumber": 83,
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": "the type of attribute mapping provided"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 101,
+    "kind": "method",
+    "name": "value",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js~Attribute",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#value",
+    "access": "public",
+    "description": "Resolves the value for the attribute, either returning the static attribute\nvalue, or the resolved value from inside a remote artifact.",
+    "lineNumber": 97,
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": "the attribute's value"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 102,
+    "kind": "method",
+    "name": "fetch",
+    "memberof": "functions/transfer/transfer/attribute/attribute.js~Attribute",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#fetch",
+    "access": "private",
+    "description": "",
+    "lineNumber": 122,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "artifactName",
+        "description": "the name of the artifact the file resides in."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "filename",
+        "description": "The name of the JSON file inside the artifact"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "key",
+        "description": "The property key inside the JSON file"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": "the value of the key inside the JSON file, inside the artifact."
+    }
+  },
+  {
+    "__docId__": 103,
+    "kind": "file",
+    "name": "functions/transfer/transfer/constants.js",
+    "content": "/**\n * Retrieves the name of the AWS Lambda function from the Lambda execution\n * environment variables.\n *\n * @type {String}\n */\nexport const FUNCTION_NAME = (process.env.AWS_LAMBDA_FUNCTION_NAME || 'default');\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/constants.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 104,
+    "kind": "variable",
+    "name": "FUNCTION_NAME",
+    "memberof": "functions/transfer/transfer/constants.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/constants.js~FUNCTION_NAME",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/constants.js",
+    "importStyle": "{FUNCTION_NAME}",
+    "description": "Retrieves the name of the AWS Lambda function from the Lambda execution\nenvironment variables.",
+    "lineNumber": 7,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 105,
+    "kind": "file",
+    "name": "functions/transfer/transfer/destination.js",
+    "content": "import { STS, Credentials } from 'aws-sdk';\nimport typedError from 'error/typed';\n\nimport Attribute from './attribute';\nimport { FUNCTION_NAME } from './constants';\n\n/**\n * The AWS STS client used to assume roles inside the lambda function\n * for the appropriate S3 destination.\n *\n * @type {STS}\n */\nconst sts = new STS();\n\n/**\n * The defined remote artifact does not exist or access has not been granted.\n *\n * @type {Error}\n */\nconst artifactNotFound = typedError({\n  message: 'Artifact \"{artifactName}\" not a valid InputArtifact',\n  type: 'pipeline.artifact.not_found',\n});\n\n/**\n * This class represents a single, defined destination which the user\n * has specified inside the UserParameters key.\n *\n * Responsible for first resolving any source input artifacts and matching\n * all files found inside the artifact. Then assuming the correct role to\n * access the destination, and uploading them, using the {@link File#upload}\n * method.\n */\nexport default class Destination {\n  /**\n   * @param {Object} destination - a valid src/destination object.\n   * @param {String, Object} destination.roleArn - a static or remote reference\n   *  to a IAM Role which has sufficient permissons for the destination S3 Bucket.\n   * @param {String, Object} destination.bucket - a static or remote reference\n   *  to a destination S3 bucket.\n   * @param {Array[String]} destination.src - An array of source files to be\n   *  found inside one or more input artifacts.\n   * @param {String} destination.prefix - The prefix to apply to all uploaded\n   *  source files in the destination S3 bucket.\n   * @param {Object} artifacts - An object containing all\n   *  {@link Artifact} instances with the property key being the artifacts name.\n   */\n  constructor({ roleArn, bucket, src, prefix = '/' }, artifacts) {\n    /**\n     * A static or remote reference to a IAM Role which has sufficient\n     * permissons for the destination S3 Bucket.\n     *\n     * @type {Attribute}\n     */\n    this.roleArn = new Attribute(roleArn, artifacts);\n    /**\n     * A static or remote reference to a destination S3 bucket.\n     *\n     * @type {Attribute}\n     */\n    this.bucket = new Attribute(bucket, artifacts);\n    /**\n     * An array of source files to be found inside one or more input artifacts.\n     *\n     * @type {Array[String]}\n     */\n    this.sources = src;\n    /**\n     * The prefix to apply to all uploaded source files in the\n     * destination S3 bucket.\n     *\n     * @type {String}\n     */\n    this.prefix = prefix;\n  }\n\n  /**\n   * Retrieves credentials by assuming the defined role, which (should) enable\n   * IAM access to the remote S3 destination.\n   *\n   * @return {Object} an object containing AWS access keys.\n   */\n  async credentials() {\n    const roleArn = await this.roleArn.value();\n    const {\n      Credentials: {\n        AccessKeyId,\n        SecretAccessKey,\n        SessionToken,\n      },\n    } = await sts.assumeRole({\n      RoleSessionName: FUNCTION_NAME,\n      ExternalId: FUNCTION_NAME,\n      RoleArn: roleArn,\n    }).promise();\n    return new Credentials(AccessKeyId, SecretAccessKey, SessionToken);\n  }\n\n  /**\n   * Retrieves all matched file objects from inside the \"src\" definition.\n   * This function will resolve all matched file references, across all input\n   * artifacts.\n   *\n   * @return {Array[File]} an array of file objects ready for upload.\n   */\n  async files() {\n    const { artifacts, sources } = this;\n    const files = sources.map(async (src) => {\n      const [artifactName, glob] = src.split('::');\n      const artifact = artifacts[artifactName];\n      if (!artifact) {\n        throw artifactNotFound({ artifactName });\n      }\n      await artifact.ready();\n      return artifact.match(glob);\n    });\n    return await Promise.all(files);\n  }\n\n  /**\n   * Uploads all matched files from their source input artifacts to the\n   * defined destinations, prefixed with the appropriate key.\n   *\n   * Note that this function first assumes the correct role for this destination.\n   *\n   * @return {Boolean} true if successful, throws otherwise.\n   */\n  async upload() {\n    const { prefix } = this;\n    const credentials = await this.credentials();\n    const bucket = await this.bucket.value();\n    const files = await this.files();\n    const uploads = files.map(f => f.upload({ bucket, credentials, prefix }));\n    await Promise.all(uploads);\n    return true;\n  }\n}\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/destination.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 106,
+    "kind": "variable",
+    "name": "sts",
+    "memberof": "functions/transfer/transfer/destination.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/destination.js~sts",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/destination.js",
+    "importStyle": null,
+    "description": "The AWS STS client used to assume roles inside the lambda function\nfor the appropriate S3 destination.",
+    "lineNumber": 13,
+    "type": {
+      "nullable": null,
+      "types": [
+        "STS"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 107,
+    "kind": "variable",
+    "name": "artifactNotFound",
+    "memberof": "functions/transfer/transfer/destination.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/destination.js~artifactNotFound",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/destination.js",
+    "importStyle": null,
+    "description": "The defined remote artifact does not exist or access has not been granted.",
+    "lineNumber": 20,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 108,
+    "kind": "class",
+    "name": "Destination",
+    "memberof": "functions/transfer/transfer/destination.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/destination.js~Destination",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/destination.js",
+    "importStyle": "Destination",
+    "description": "This class represents a single, defined destination which the user\nhas specified inside the UserParameters key.\n\nResponsible for first resolving any source input artifacts and matching\nall files found inside the artifact. Then assuming the correct role to\naccess the destination, and uploading them, using the {@link File#upload}\nmethod.",
+    "lineNumber": 34,
+    "interface": false
+  },
+  {
+    "__docId__": 109,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "functions/transfer/transfer/destination.js~Destination",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "functions/transfer/transfer/destination.js~Destination#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 48,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "destination",
+        "description": "a valid src/destination object."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String, Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "destination.roleArn",
+        "description": "a static or remote reference\n to a IAM Role which has sufficient permissons for the destination S3 Bucket."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String, Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "destination.bucket",
+        "description": "a static or remote reference\n to a destination S3 bucket."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Array[String]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "destination.src",
+        "description": "An array of source files to be\n found inside one or more input artifacts."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "destination.prefix",
+        "description": "The prefix to apply to all uploaded\n source files in the destination S3 bucket."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "artifacts",
+        "description": "An object containing all\n {@link Artifact} instances with the property key being the artifacts name."
+      }
+    ]
+  },
+  {
+    "__docId__": 110,
+    "kind": "member",
+    "name": "roleArn",
+    "memberof": "functions/transfer/transfer/destination.js~Destination",
+    "static": false,
+    "longname": "functions/transfer/transfer/destination.js~Destination#roleArn",
+    "access": "public",
+    "description": "A static or remote reference to a IAM Role which has sufficient\npermissons for the destination S3 Bucket.",
+    "lineNumber": 55,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Attribute"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 111,
+    "kind": "member",
+    "name": "bucket",
+    "memberof": "functions/transfer/transfer/destination.js~Destination",
+    "static": false,
+    "longname": "functions/transfer/transfer/destination.js~Destination#bucket",
+    "access": "public",
+    "description": "A static or remote reference to a destination S3 bucket.",
+    "lineNumber": 61,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Attribute"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 112,
+    "kind": "member",
+    "name": "sources",
+    "memberof": "functions/transfer/transfer/destination.js~Destination",
+    "static": false,
+    "longname": "functions/transfer/transfer/destination.js~Destination#sources",
+    "access": "public",
+    "description": "An array of source files to be found inside one or more input artifacts.",
+    "lineNumber": 67,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Array[String]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 113,
+    "kind": "member",
+    "name": "prefix",
+    "memberof": "functions/transfer/transfer/destination.js~Destination",
+    "static": false,
+    "longname": "functions/transfer/transfer/destination.js~Destination#prefix",
+    "access": "public",
+    "description": "The prefix to apply to all uploaded source files in the\ndestination S3 bucket.",
+    "lineNumber": 74,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 114,
+    "kind": "method",
+    "name": "credentials",
+    "memberof": "functions/transfer/transfer/destination.js~Destination",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/destination.js~Destination#credentials",
+    "access": "public",
+    "description": "Retrieves credentials by assuming the defined role, which (should) enable\nIAM access to the remote S3 destination.",
+    "lineNumber": 83,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "an object containing AWS access keys."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 115,
+    "kind": "method",
+    "name": "files",
+    "memberof": "functions/transfer/transfer/destination.js~Destination",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/destination.js~Destination#files",
+    "access": "public",
+    "description": "Retrieves all matched file objects from inside the \"src\" definition.\nThis function will resolve all matched file references, across all input\nartifacts.",
+    "lineNumber": 106,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array[File]"
+      ],
+      "spread": false,
+      "description": "an array of file objects ready for upload."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 116,
+    "kind": "method",
+    "name": "upload",
+    "memberof": "functions/transfer/transfer/destination.js~Destination",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/destination.js~Destination#upload",
+    "access": "public",
+    "description": "Uploads all matched files from their source input artifacts to the\ndefined destinations, prefixed with the appropriate key.\n\nNote that this function first assumes the correct role for this destination.",
+    "lineNumber": 128,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": "true if successful, throws otherwise."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 117,
+    "kind": "file",
+    "name": "functions/transfer/transfer/uploader.js",
+    "content": "import typedError from 'error/typed';\n\nimport Artifact from './artifact';\nimport Destination from './destination';\nimport validate from './validate';\n\n/**\n * A validation error was encountered\n *\n * @type {Error}\n */\nconst inputArtifactsError = typedError({\n  message: 'No InputArtifacts defined.',\n  type: 'pipeline.start',\n});\n\nexport default class Uploader {\n  /**\n   * Uploads artifacts to a remote S3 bucket defined inside an array of file\n   * globs, of locations inside pipeline input artifacts.\n   *\n   * @example\n   * ```\n   *  {\n   *     \"CodePipeline.job\": {\n   *         \"id\": \"11111111-abcd-1111-abcd-111111abcdef\",\n   *         \"accountId\": \"111111111111\",\n   *         \"data\": {\n   *             \"actionConfiguration\": {\n   *                 \"configuration\": {\n   *                     \"FunctionName\": \"MyLambdaFunctionForAWSCodePipeline\",\n   *                     \"UserParameters\": \"....\"\n   *                 }\n   *             },\n   *             \"inputArtifacts\": [\n   *                 {\n   *                     \"location\": {\n   *                         \"s3Location\": {\n   *                             \"bucketName\": \"codepipeline-us-east-2-1234567890\",\n   *                             \"objectKey\": \"rj90jda90ja90j09tj09jaf.zip\"\n   *                         },\n   *                         \"type\": \"S3\"\n   *                     },\n   *                     \"revision\": null,\n   *                     \"name\": \"ArtifactName\"\n   *                 }\n   *             ],\n   *             \"outputArtifacts\": [],\n   *             \"artifactCredentials\": {\n   *                 \"secretAccessKey\": \"....\",\n   *                 \"sessionToken\": \"....\",\n   *                 \"accessKeyId\": \"....\"\n   *             },\n   *             \"continuationToken\": \"A continuation token if continuing job\"\n   *         }\n   *     }\n   *  }\n   * ```\n   *\n   * @param {Object} data - A CodePipeline data event object.\n   */\n  constructor({ data }) {\n    /**\n     * The data object as received from AWS CodePipeline.\n     *\n     * @type {Object}\n     */\n    this.data = data;\n    /**\n     * The parsed contents of the `UserParameters` string as defined inside the\n     * action in the CodePipeline resource. This should be a valid array of objects,\n     * similar to the example below:\n     *\n     * ```\n     * [\n     * {\n     *   \"roleArn\": {\n     *     \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3BucketTransferRole\"]\n     *   },\n     *   \"bucket\": {\n     *     \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3Bucket\"]\n     *   },\n     *   \"prefix\": \"s3/key/prefix/\",\n     *   \"src\": [\n     *     \"BuildOutput::*.js\"\n     *   ]\n     * }\n     * ]\n     * ```\n     *\n     * @type {Object}\n     */\n    this.parameters = JSON.parse(this.data.actionConfiguration.configuration.UserParameters);\n    const inputs = data.inputArtifacts;\n    if (!inputs || inputs.length === 0) {\n      throw inputArtifactsError({});\n    }\n    const mapper = a => Artifact.toArtifactMapEntry(a, data.artifactCredentials);\n    /**\n     * An array of {@link Artifact} objects which have been made available to\n     * the CodePipeline action definition.\n     *\n     * @type {String}\n     */\n    this.artifacts = inputs.map(mapper).reduce((memo, [key, val]) => {\n      const obj = memo;\n      obj[key] = val;\n      return obj;\n    }, {});\n  }\n\n  /**\n   * Retrieve validated (and defaulted) parameters which have been defined inside\n   * the action in the CodePipeline resource.\n   *\n   * @return {Object} valid parameters to be used to construct the state machine input.\n   */\n  async userParameters() {\n    return await validate(this.parameters);\n  }\n\n  /**\n   * Maps all defined src/dest combinations (from {@link Uploader#userParameters}) to\n   * destination objects ready for upload.\n   *\n   * @return {Array[Destination]} an array of Destination objects\n   */\n  async destinations() {\n    const { artifacts } = this;\n    const params = await this.userParameters();\n    return params.map(p => new Destination(p, artifacts));\n  }\n\n  /**\n   * Performs the intended operation and uploads source files from pipeine\n   * artifacts to remote S3 locations by assuming the provided roles to\n   * provide the correct permission sets.\n   *\n   * The promise resolves successfully after all source files have been uploaded.\n   *\n   * @return {Boolean} true if successful, throws otherwise.\n   */\n  async perform() {\n    const destinations = await this.destinations();\n    await Promise.all(destinations.map(d => d.upload()));\n    return true;\n  }\n}\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/uploader.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 118,
+    "kind": "variable",
+    "name": "inputArtifactsError",
+    "memberof": "functions/transfer/transfer/uploader.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/uploader.js~inputArtifactsError",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/uploader.js",
+    "importStyle": null,
+    "description": "A validation error was encountered",
+    "lineNumber": 12,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 119,
+    "kind": "class",
+    "name": "Uploader",
+    "memberof": "functions/transfer/transfer/uploader.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/uploader.js~Uploader",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/uploader.js",
+    "importStyle": "Uploader",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 120,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "functions/transfer/transfer/uploader.js~Uploader",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "functions/transfer/transfer/uploader.js~Uploader#constructor",
+    "access": "public",
+    "description": "Uploads artifacts to a remote S3 bucket defined inside an array of file\nglobs, of locations inside pipeline input artifacts.",
+    "examples": [
+      "```\n {\n    \"CodePipeline.job\": {\n        \"id\": \"11111111-abcd-1111-abcd-111111abcdef\",\n        \"accountId\": \"111111111111\",\n        \"data\": {\n            \"actionConfiguration\": {\n                \"configuration\": {\n                    \"FunctionName\": \"MyLambdaFunctionForAWSCodePipeline\",\n                    \"UserParameters\": \"....\"\n                }\n            },\n            \"inputArtifacts\": [\n                {\n                    \"location\": {\n                        \"s3Location\": {\n                            \"bucketName\": \"codepipeline-us-east-2-1234567890\",\n                            \"objectKey\": \"rj90jda90ja90j09tj09jaf.zip\"\n                        },\n                        \"type\": \"S3\"\n                    },\n                    \"revision\": null,\n                    \"name\": \"ArtifactName\"\n                }\n            ],\n            \"outputArtifacts\": [],\n            \"artifactCredentials\": {\n                \"secretAccessKey\": \"....\",\n                \"sessionToken\": \"....\",\n                \"accessKeyId\": \"....\"\n            },\n            \"continuationToken\": \"A continuation token if continuing job\"\n        }\n    }\n }\n```"
+    ],
+    "lineNumber": 62,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": "A CodePipeline data event object."
+      }
+    ]
+  },
+  {
+    "__docId__": 121,
+    "kind": "member",
+    "name": "data",
+    "memberof": "functions/transfer/transfer/uploader.js~Uploader",
+    "static": false,
+    "longname": "functions/transfer/transfer/uploader.js~Uploader#data",
+    "access": "public",
+    "description": "The data object as received from AWS CodePipeline.",
+    "lineNumber": 68,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 122,
+    "kind": "member",
+    "name": "parameters",
+    "memberof": "functions/transfer/transfer/uploader.js~Uploader",
+    "static": false,
+    "longname": "functions/transfer/transfer/uploader.js~Uploader#parameters",
+    "access": "public",
+    "description": "The parsed contents of the `UserParameters` string as defined inside the\naction in the CodePipeline resource. This should be a valid array of objects,\nsimilar to the example below:\n\n```\n[\n{\n  \"roleArn\": {\n    \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3BucketTransferRole\"]\n  },\n  \"bucket\": {\n    \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3Bucket\"]\n  },\n  \"prefix\": \"s3/key/prefix/\",\n  \"src\": [\n    \"BuildOutput::*.js\"\n  ]\n}\n]\n```",
+    "lineNumber": 93,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 123,
+    "kind": "member",
+    "name": "artifacts",
+    "memberof": "functions/transfer/transfer/uploader.js~Uploader",
+    "static": false,
+    "longname": "functions/transfer/transfer/uploader.js~Uploader#artifacts",
+    "access": "public",
+    "description": "An array of {@link Artifact} objects which have been made available to\nthe CodePipeline action definition.",
+    "lineNumber": 105,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 124,
+    "kind": "method",
+    "name": "userParameters",
+    "memberof": "functions/transfer/transfer/uploader.js~Uploader",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/uploader.js~Uploader#userParameters",
+    "access": "public",
+    "description": "Retrieve validated (and defaulted) parameters which have been defined inside\nthe action in the CodePipeline resource.",
+    "lineNumber": 118,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "valid parameters to be used to construct the state machine input."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 125,
+    "kind": "method",
+    "name": "destinations",
+    "memberof": "functions/transfer/transfer/uploader.js~Uploader",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/uploader.js~Uploader#destinations",
+    "access": "public",
+    "description": "Maps all defined src/dest combinations (from {@link Uploader#userParameters}) to\ndestination objects ready for upload.",
+    "lineNumber": 128,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array[Destination]"
+      ],
+      "spread": false,
+      "description": "an array of Destination objects"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 126,
+    "kind": "method",
+    "name": "perform",
+    "memberof": "functions/transfer/transfer/uploader.js~Uploader",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "functions/transfer/transfer/uploader.js~Uploader#perform",
+    "access": "public",
+    "description": "Performs the intended operation and uploads source files from pipeine\nartifacts to remote S3 locations by assuming the provided roles to\nprovide the correct permission sets.\n\nThe promise resolves successfully after all source files have been uploaded.",
+    "lineNumber": 143,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": "true if successful, throws otherwise."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 127,
+    "kind": "file",
+    "name": "functions/transfer/transfer/validate/schema.js",
+    "content": "/**\n * Defines the schema used to retrieve either statically defined values\n * or attributes from inside remote artifacts.\n *\n * @type {Object}\n */\nconst remoteAttribute = {\n  oneOf: [\n    {\n      type: 'string',\n    },\n    {\n      type: 'object',\n      required: [\n        'Fn::GetArtifactAtt',\n      ],\n      properties: {\n        'Fn::GetArtifactAtt': {\n          type: 'array',\n          items: [\n            {\n              type: 'string',\n            },\n            {\n              type: 'string',\n            },\n            {\n              type: 'string',\n            },\n          ],\n        },\n      },\n    },\n  ],\n};\n\n/**\n * This schema defines the keys, properties and valid values that can be included\n * inside the `UserParameters` key when defining the use of this action inside\n * CodePipeline.\n *\n * @type {Object}\n */\nconst Schema = {\n  type: 'array',\n  minItems: 1,\n  uniqueItems: true,\n  items: {\n    type: 'object',\n    required: [\n      'roleArn',\n      'bucket',\n      'src',\n    ],\n    properties: {\n      roleArn: remoteAttribute,\n      bucket: remoteAttribute,\n      prefix: {\n        type: 'string',\n        default: '/',\n      },\n      src: {\n        type: 'array',\n        minItems: 1,\n        uniqueItems: true,\n        items: {\n          type: 'string',\n          pattern: '^.+::.+$',\n        },\n      },\n    },\n  },\n};\n\nexport default Schema;\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/validate/schema.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 128,
+    "kind": "variable",
+    "name": "remoteAttribute",
+    "memberof": "functions/transfer/transfer/validate/schema.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/validate/schema.js~remoteAttribute",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/validate/schema.js",
+    "importStyle": null,
+    "description": "Defines the schema used to retrieve either statically defined values\nor attributes from inside remote artifacts.",
+    "lineNumber": 7,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 129,
+    "kind": "variable",
+    "name": "Schema",
+    "memberof": "functions/transfer/transfer/validate/schema.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/validate/schema.js~Schema",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/validate/schema.js",
+    "importStyle": "Schema",
+    "description": "This schema defines the keys, properties and valid values that can be included\ninside the `UserParameters` key when defining the use of this action inside\nCodePipeline.",
+    "lineNumber": 44,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 130,
+    "kind": "file",
+    "name": "functions/transfer/transfer/validate/validate.js",
+    "content": "import Ajv from 'ajv';\nimport typedError from 'error/typed';\n\nimport Schema from './schema';\n\n/**\n * A validation error was encountered\n *\n * @type {Error}\n */\nconst validationError = typedError({\n  message: 'Invalid data: {messages}',\n  type: 'pipeline.validation',\n});\n\n/**\n * Build a new AJV validator isntance, ensuring that all errors are returned\n * if the data does not match the defined schema and any defined defaults are also\n * assigned to the returned data.\n */\nconst ajv = new Ajv({ useDefaults: true, allErrors: true });\n\n/**\n * Compiles the raw schema object, providing a method which can be used\n * to validate against a basic javascript object.\n */\nconst validate = ajv.compile(Schema);\n\n/**\n * Wraps the AJV library to provide a helper function which validates the\n * passed data object against the imported schema file.\n *\n * If the schema fails to validate, an array of error messages are generated.\n *\n * @return {Object} a mutated data object, containing any defaulted properties\n *  where defined in the schema.\n */\nexport default function (data) {\n  return new Promise((resolve, reject) => {\n    const valid = validate(data);\n    if (!valid) {\n      const messages = validate.errors.map(e => `Schema ${e.message}`).join('. ');\n      reject(validationError({ messages }));\n    } else {\n      resolve(data);\n    }\n  });\n}\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/validate/validate.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 131,
+    "kind": "variable",
+    "name": "validationError",
+    "memberof": "functions/transfer/transfer/validate/validate.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/validate/validate.js~validationError",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/validate/validate.js",
+    "importStyle": null,
+    "description": "A validation error was encountered",
+    "lineNumber": 11,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 132,
+    "kind": "variable",
+    "name": "ajv",
+    "memberof": "functions/transfer/transfer/validate/validate.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/validate/validate.js~ajv",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/validate/validate.js",
+    "importStyle": null,
+    "description": "Build a new AJV validator isntance, ensuring that all errors are returned\nif the data does not match the defined schema and any defined defaults are also\nassigned to the returned data.",
+    "lineNumber": 21,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 133,
+    "kind": "variable",
+    "name": "validate",
+    "memberof": "functions/transfer/transfer/validate/validate.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/validate/validate.js~validate",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/validate/validate.js",
+    "importStyle": null,
+    "description": "Compiles the raw schema object, providing a method which can be used\nto validate against a basic javascript object.",
+    "lineNumber": 27,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 134,
+    "kind": "function",
+    "name": "validate",
+    "memberof": "functions/transfer/transfer/validate/validate.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "functions/transfer/transfer/validate/validate.js~validate",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/validate/validate.js",
+    "importStyle": "validate",
+    "description": "Wraps the AJV library to provide a helper function which validates the\npassed data object against the imported schema file.\n\nIf the schema fails to validate, an array of error messages are generated.",
+    "lineNumber": 38,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "a mutated data object, containing any defaulted properties\n where defined in the schema."
+    },
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "kind": "index",
+    "content": "# CodePipeline S3 File Transfer Action\n\nThis project enables a custom CodePipeline action that allows you to specify files from pipeline artifacts, to be transferred to S3 buckets (see example below). Each transfer must contain a destination bucket, an optional key prefix to apply to all transfers and a source (`src`) key, which defines in a glob fashion the files to be uploaded.\n\nThe role provided to each transfer enables fine-grained access control, as the deployed function does not have sufficient permissions. Sample IAM policies are detailed below.\n\nIn-order to ensure your Pipeline has necessary permissions to invoke a Lambda function, follow the [setup steps here](http://docs.aws.amazon.com/codepipeline/latest/userguide/actions-invoke-lambda-function.html).\n\nAn example action definition inside a CodePipeline CloudFormation resource definition:\n\n```yaml\n- Name: Transfer\n  Actions:\n    - Name: S3\n      RunOrder: 1\n      InputArtifacts:\n        - Name: BuildOutput\n        - Name: DeployOutput\n      ActionTypeId:\n        Category: Invoke\n        Owner: AWS\n        Version: 1\n        Provider: Lambda\n      Configuration:\n        FunctionName: !ImportValue TransferFunctionName\n        UserParameters: !Sub |\n          [\n            {\n              \"roleArn\": {\n                \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3BucketTransferRole\"]\n              },\n              \"bucket\": {\n                \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3Bucket\"]\n              },\n              \"prefix\": \"s3/key/prefix/\",\n              \"src\": [\n                \"BuildOutput::*.js\"\n              ]\n            },\n            {\n              \"roleArn\": \"arn:aws:iam::123456789012:role/image-s3-bucket-permissions\",\n              \"bucket\": \"pre-created-s3-bucket\",\n              \"prefix\": \"s3/images/prefix/\",\n              \"src\": [\n                \"BuildOutput::images/*\"\n              ]\n            }\n          ]\n```\n\nAn example IAM policy for granting the Transfer function permissions to your assets bucket:\n\n```yaml\nAssetS3BucketTransferRole:\n  Type: AWS::IAM::Role\n  Properties:\n    Path: !Sub \"/${Name}/\"\n    AssumeRolePolicyDocument:\n      Version: \"2012-10-17\"\n      Statement:\n        - Effect: Allow\n          Principal:\n            AWS: !ImportValue TransferFunctionRoleArn\n          Condition:\n            StringEquals:\n              sts:ExternalId: !ImportValue TransferFunction\n          Action: sts:AssumeRole\n    Policies:\n      - PolicyName: UploadAssetsPermission\n        PolicyDocument:\n          Version: 2012-10-17\n          Statement:\n            - Effect: Allow\n              Action:\n                - s3:PutObject\n              Resource:\n                - !Sub \"${AssetS3Bucket}/*\"\n```\n\nFor a full definition of what you can define inside the `UserParameters` key, see [the JSON Schema file](/functions/transfer/transfer/validate/schema.js).\n",
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"pipeline-transfer\",\n  \"version\": \"0.0.1\",\n  \"private\": true,\n  \"engines\": {\n    \"node\": \">=4.3\"\n  },\n  \"dependencies\": {\n    \"ajv\": \"^5.3.0\",\n    \"babel-runtime\": \"6.11.6\",\n    \"bunyan\": \"^1.8.12\",\n    \"error\": \"^7.0.2\",\n    \"extract-zip\": \"^1.6.6\",\n    \"node-glob\": \"^1.2.0\",\n    \"node-zip\": \"^1.1.1\",\n    \"uuid\": \"^3.1.0\"\n  },\n  \"devDependencies\": {\n    \"aws-sdk\": \"^2.6.7\",\n    \"aws-sdk-mock\": \"~1.6.1\",\n    \"babel-eslint\": \"^7.2.3\",\n    \"babel-jest\": \"^20.0.3\",\n    \"babel-loader\": \"^7.0.0\",\n    \"babel-polyfill\": \"^6.23.0\",\n    \"babel-preset-env\": \"^1.4.0\",\n    \"esdoc\": \"^1.0.2\",\n    \"esdoc-coverage-plugin\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^3.1.1\",\n    \"eslint-config-airbnb\": \"^9.0.1\",\n    \"eslint-plugin-import\": \"^1.11.1\",\n    \"eslint-plugin-jsx-a11y\": \"^2.0.1\",\n    \"eslint-plugin-react\": \"^5.2.2\",\n    \"faker\": \"~3.1.0\",\n    \"ignore-loader\": \"^0.1.2\",\n    \"jest\": \"^20.0\",\n    \"json-loader\": \"^0.5.4\",\n    \"lambda-wrapper\": \"^0.1.2\",\n    \"nock\": \"^9.0.14\",\n    \"node-zip\": \"^1.1.1\",\n    \"path-to-regexp\": \"^1.5.3\",\n    \"serverless-jest-plugin\": \"^0.1.3\",\n    \"sinon\": \"~1.17\",\n    \"uglifyjs-webpack-plugin\": \"^1.0.1\",\n    \"webpack\": \"^2.4.1\"\n  },\n  \"babel\": {\n    \"presets\": [\n      [\n        \"env\",\n        {\n          \"targets\": {\n            \"node\": \"6.1\"\n          }\n        }\n      ]\n    ]\n  },\n  \"jest\": {\n    \"transform\": {\n      \"\\\\.(js|jsx)$\": \"babel-jest\",\n      \"\\\\.(json)$\": \"<rootDir>/__tests__/__utils__/fileTransformer.js\"\n    },\n    \"moduleNameMapper\": {\n      \"^@functions/(.+)\": \"<rootDir>/functions/$1\"\n    },\n    \"setupTestFrameworkScriptFile\": \"<rootDir>/__tests__/__utils__/setup.js\"\n  },\n  \"eslintConfig\": {\n    \"parser\": \"babel-eslint\",\n    \"extends\": \"airbnb\",\n    \"env\": {\n      \"jest\": true\n    }\n  },\n  \"scripts\": {\n    \"build\": \"webpack --progress --colors\",\n    \"build:doc\": \"esdoc\",\n    \"lint\": \"eslint events __tests__ functions pages test handler.js webpack.config.js\",\n    \"lint:fix\": \"eslint --fix $1\",\n    \"test\": \"NODE_ENV=test jest __tests__/.+/*.test.js --coverage --notify\",\n    \"test:watch\": \"npm run test -- --watch\"\n  }\n}\n",
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "__docId__": 135,
+    "kind": "testFile",
+    "name": "__tests__/functions/transfer/transfer/artifact/artifact.test.js",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport Artifact from '@functions/transfer/transfer/artifact';\n\nimport S3 from 'aws-sdk/clients/s3';\nimport AWS from 'aws-sdk-mock';\nimport faker from 'faker';\nimport Zip from 'node-zip';\nimport fs from 'fs';\n\ndescribe('Artifact', () => {\n  const bucketName = faker.random.uuid();\n\n  const objectKey = faker.random.uuid();\n\n  const secretAccessKey = faker.random.uuid();\n\n  const sessionToken = faker.random.uuid();\n\n  const accessKeyId = faker.random.uuid();\n\n  const credentials = { secretAccessKey, sessionToken, accessKeyId };\n\n  const location = { bucketName, objectKey };\n\n  describe('#id', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.id).toEqual(expect.stringMatching(/^[-a-zA-Z0-9]+$/));\n    });\n  });\n\n  describe('#filename', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.filename).toEqual(`${artifact.id}.zip`);\n    });\n  });\n\n  describe('#filepath', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.filepath).toEqual(`/tmp/${artifact.id}.zip`);\n    });\n  });\n\n  describe('#dir', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.dir).toEqual(expect.stringMatching(/^\\/tmp\\/[-a-zA-Z0-9]+$/));\n    });\n  });\n\n  describe('#bucketName', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.bucketName).toEqual(bucketName);\n    });\n  });\n\n  describe('#objectKey', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.objectKey).toEqual(objectKey);\n    });\n  });\n\n  describe('#secretAccessKey', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.secretAccessKey).toEqual(secretAccessKey);\n    });\n  });\n\n  describe('#sessionToken', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.sessionToken).toEqual(sessionToken);\n    });\n  });\n\n  describe('#accessKeyId', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.accessKeyId).toEqual(accessKeyId);\n    });\n  });\n\n  describe('#ready', () => {\n    const artifact = new Artifact(location, credentials);\n\n    const { dir, filepath } = artifact;\n\n    const key = faker.random.word();\n\n    const value = faker.random.number();\n\n    const jsonFile = `${faker.random.uuid()}.json`;\n\n    const data = JSON.stringify({ [key]: value });\n\n    describe('when the artifact readys successfully', () => {\n      beforeEach(() => {\n        const zipFile = new Zip();\n        zipFile.file(jsonFile, data);\n        const zipped = zipFile.generate({ base64: false, compression: 'DEFLATE' });\n        AWS.mock('S3', 'getObject', (params, cb) => {\n          expect(params).toEqual(expect.objectContaining({\n            Bucket: bucketName,\n            Key: objectKey,\n          }));\n          cb(null, { Body: new Buffer(zipped, 'binary') });\n        });\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(filepath);\n        fs.unlinkSync(`${dir}/${jsonFile}`);\n        fs.rmdirSync(dir);\n        AWS.restore('S3', 'getObject');\n      });\n\n      it('fetches, loads and unzips correctly', () =>\n        expect(artifact.ready()).resolves.toBe(true));\n    });\n\n    describe('when the artifact fails to ready', () => {\n      const invalidArtifact = new Artifact({}, credentials);\n\n      it('rejects with an error', () =>\n        expect(invalidArtifact.ready()).rejects.toEqual(expect.any(Error)));\n    });\n  });\n\n  describe('#match', () => {\n    describe('when files are matched', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const relativePath = 'output';\n\n      const path = `${dir}/${relativePath}`;\n\n      const filename = faker.system.fileName();\n\n      const selector = '**/*';\n\n      const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n        fs.mkdirSync(path);\n        fs.writeFileSync(`${path}/${filename}`, data, { encoding: 'utf8' });\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(`${path}/${filename}`);\n        fs.rmdirSync(path);\n        fs.rmdirSync(dir);\n      });\n\n      it('should return the correct files', async () => {\n        const [file] = await artifact.match(selector);\n        expect(file.key).toEqual(`/${relativePath}/${filename}`);\n        expect(file.data).toEqual(new Buffer(data).toString('binary'));\n      });\n    });\n  });\n\n  describe('#get', () => {\n    describe('when the file exists', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const filename = faker.random.uuid();\n\n      const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n        fs.writeFileSync(`${dir}/${filename}`, data, { encoding: 'utf8' });\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(`${dir}/${filename}`);\n        fs.rmdirSync(dir);\n      });\n\n      it('should return the file', () => {\n        expect(artifact.get(filename)).toEqual(data);\n      });\n    });\n\n    describe('when the file does not exist', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const filename = faker.random.uuid();\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n      });\n\n      afterEach(() => {\n        fs.rmdirSync(dir);\n      });\n\n      it('throws an error', () => {\n        expect(() => artifact.get(filename)).toThrow(Error);\n      });\n    });\n  });\n\n  describe('#attribute', () => {\n    describe('when the file and key exists', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const filename = faker.random.uuid();\n\n      const key = faker.random.word();\n\n      const value = faker.random.number();\n\n      const data = JSON.stringify({ [key]: value });\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n        fs.writeFileSync(`${dir}/${filename}`, data, { encoding: 'utf8' });\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(`${dir}/${filename}`);\n        fs.rmdirSync(dir);\n      });\n\n      it('should return the file', () => {\n        expect(artifact.attribute(filename, key)).toEqual(value);\n      });\n    });\n\n    describe('when the files does not exist', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const filename = faker.random.uuid();\n\n      const key = faker.random.word();\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n      });\n\n      afterEach(() => {\n        fs.rmdirSync(dir);\n      });\n\n      it('should throw an error', () => {\n        expect(() => artifact.attribute(filename, key)).toThrow(Error);\n      });\n    });\n\n    describe('when the key is not present', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const filename = faker.random.uuid();\n\n      const key = faker.random.word();\n\n      const data = JSON.stringify({});\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n        fs.writeFileSync(`${dir}/${filename}`, data, { encoding: 'utf8' });\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(`${dir}/${filename}`);\n        fs.rmdirSync(dir);\n      });\n\n      it('should throw an error', () => {\n        expect(() => artifact.attribute(filename, key)).toThrow(Error);\n      });\n    });\n  });\n\n  describe('#unzip', () => {\n    describe('when the artifact can be unzipped', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { filepath } = artifact;\n\n      const key = `${faker.random.uuid()}.json`;\n\n      const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });\n\n      beforeEach(() => {\n        const zipFile = new Zip();\n        zipFile.file(key, data);\n        const zipped = zipFile.generate({ base64: false, compression: 'DEFLATE' });\n        fs.writeFileSync(filepath, zipped, 'binary');\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(filepath);\n      });\n\n      it('should unzip the file', async () => {\n        const success = await artifact.unzip();\n        expect(success).toBe(true);\n        expect(artifact.get(key)).toEqual(data);\n      });\n    });\n\n    describe('when the artifact cannot be unzipped', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { filepath } = artifact;\n\n      beforeEach(() => {\n        fs.writeFileSync(filepath, '', 'utf8');\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(filepath);\n      });\n\n      it('reject with an error', async () =>\n        expect(artifact.unzip()).rejects.toEqual(expect.any(Error)));\n    });\n  });\n\n  describe('#write', () => {\n    const artifact = new Artifact(location, credentials);\n\n    const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });\n\n    it('writes a file to the correct location', () =>\n      expect(artifact.write(data)).resolves.toEqual(true));\n\n    afterEach(() => {\n      fs.unlinkSync(artifact.filepath);\n    });\n  });\n\n  describe('#fetch', () => {\n    describe('when the artifact can be retrieved', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });\n\n      beforeEach(() => {\n        AWS.mock('S3', 'getObject', (params, cb) => {\n          expect(params).toEqual(expect.objectContaining({\n            Bucket: bucketName,\n            Key: objectKey,\n          }));\n          cb(null, { Body: new Buffer(data) });\n        });\n      });\n\n      afterEach(() => {\n        AWS.restore('S3', 'getObject');\n      });\n\n      it('should retrieve the correct data', () =>\n        expect(artifact.fetch()).resolves.toEqual(new Buffer(data)));\n    });\n\n    describe('when the artifact cannot be retrieved', () => {\n      const artifact = new Artifact(location, credentials);\n\n      beforeEach(() => {\n        AWS.mock('S3', 'getObject', (params, cb) => {\n          cb(new Error('TEST'));\n        });\n      });\n\n      afterEach(() => {\n        AWS.restore('S3', 'getObject');\n      });\n\n      it('should reject with an error', () =>\n        expect(artifact.fetch()).rejects.toEqual(expect.any(Error)));\n    });\n  });\n\n  describe('#client', () => {\n    it('returns an S3 client', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.client).toBeInstanceOf(S3);\n    });\n  });\n});\n\ndescribe('Artifact#toArtifact', () => {\n  const bucketName = faker.random.uuid();\n\n  const objectKey = faker.random.uuid();\n\n  const secretAccessKey = faker.random.uuid();\n\n  const sessionToken = faker.random.uuid();\n\n  const accessKeyId = faker.random.uuid();\n\n  const credentials = { secretAccessKey, sessionToken, accessKeyId };\n\n  const name = faker.random.word();\n\n  const artifact = { name, location: { s3Location: { bucketName, objectKey } } };\n\n  it('correctly builds an artifact instance', () => {\n    const obj = Artifact.toArtifact(artifact, credentials);\n    expect(obj).toBeInstanceOf(Artifact);\n    expect(obj.bucketName).toEqual(bucketName);\n    expect(obj.objectKey).toEqual(objectKey);\n    expect(obj.secretAccessKey).toEqual(secretAccessKey);\n    expect(obj.sessionToken).toEqual(sessionToken);\n    expect(obj.accessKeyId).toEqual(accessKeyId);\n  });\n});\n\ndescribe('Artifact#toArtifactMapEntry', () => {\n  const bucketName = faker.random.uuid();\n\n  const objectKey = faker.random.uuid();\n\n  const secretAccessKey = faker.random.uuid();\n\n  const sessionToken = faker.random.uuid();\n\n  const accessKeyId = faker.random.uuid();\n\n  const credentials = { secretAccessKey, sessionToken, accessKeyId };\n\n  const name = faker.random.word();\n\n  const artifact = { name, location: { s3Location: { bucketName, objectKey } } };\n\n  it('correctly builds an artifact instance', () => {\n    const arr = Artifact.toArtifactMapEntry(artifact, credentials);\n    expect(arr[0]).toEqual(name);\n    expect(arr[1]).toBeInstanceOf(Artifact);\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/artifact/artifact.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 136,
+    "kind": "test",
+    "name": "describe0",
+    "testId": 0,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "access": null,
+    "description": "Artifact",
+    "lineNumber": 11
+  },
+  {
+    "__docId__": 137,
+    "kind": "test",
+    "name": "describe1",
+    "testId": 1,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe1",
+    "access": null,
+    "description": "#id",
+    "lineNumber": 26
+  },
+  {
+    "__docId__": 138,
+    "kind": "test",
+    "name": "it2",
+    "testId": 2,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe1",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe1.it2",
+    "access": null,
+    "description": "returns the correct value",
+    "lineNumber": 27
+  },
+  {
+    "__docId__": 139,
+    "kind": "test",
+    "name": "describe3",
+    "testId": 3,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe3",
+    "access": null,
+    "description": "#filename",
+    "lineNumber": 33
+  },
+  {
+    "__docId__": 140,
+    "kind": "test",
+    "name": "it4",
+    "testId": 4,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe3",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe3.it4",
+    "access": null,
+    "description": "returns the correct value",
+    "lineNumber": 34
+  },
+  {
+    "__docId__": 141,
+    "kind": "test",
+    "name": "describe5",
+    "testId": 5,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe5",
+    "access": null,
+    "description": "#filepath",
+    "lineNumber": 40
+  },
+  {
+    "__docId__": 142,
+    "kind": "test",
+    "name": "it6",
+    "testId": 6,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe5",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe5.it6",
+    "access": null,
+    "description": "returns the correct value",
+    "lineNumber": 41
+  },
+  {
+    "__docId__": 143,
+    "kind": "test",
+    "name": "describe7",
+    "testId": 7,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe7",
+    "access": null,
+    "description": "#dir",
+    "lineNumber": 47
+  },
+  {
+    "__docId__": 144,
+    "kind": "test",
+    "name": "it8",
+    "testId": 8,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe7",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe7.it8",
+    "access": null,
+    "description": "returns the correct value",
+    "lineNumber": 48
+  },
+  {
+    "__docId__": 145,
+    "kind": "test",
+    "name": "describe9",
+    "testId": 9,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe9",
+    "access": null,
+    "description": "#bucketName",
+    "lineNumber": 54
+  },
+  {
+    "__docId__": 146,
+    "kind": "test",
+    "name": "it10",
+    "testId": 10,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe9",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe9.it10",
+    "access": null,
+    "description": "returns the correct value",
+    "lineNumber": 55
+  },
+  {
+    "__docId__": 147,
+    "kind": "test",
+    "name": "describe11",
+    "testId": 11,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe11",
+    "access": null,
+    "description": "#objectKey",
+    "lineNumber": 61
+  },
+  {
+    "__docId__": 148,
+    "kind": "test",
+    "name": "it12",
+    "testId": 12,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe11",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe11.it12",
+    "access": null,
+    "description": "returns the correct value",
+    "lineNumber": 62
+  },
+  {
+    "__docId__": 149,
+    "kind": "test",
+    "name": "describe13",
+    "testId": 13,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe13",
+    "access": null,
+    "description": "#secretAccessKey",
+    "lineNumber": 68
+  },
+  {
+    "__docId__": 150,
+    "kind": "test",
+    "name": "it14",
+    "testId": 14,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe13",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe13.it14",
+    "access": null,
+    "description": "returns the correct value",
+    "lineNumber": 69
+  },
+  {
+    "__docId__": 151,
+    "kind": "test",
+    "name": "describe15",
+    "testId": 15,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe15",
+    "access": null,
+    "description": "#sessionToken",
+    "lineNumber": 75
+  },
+  {
+    "__docId__": 152,
+    "kind": "test",
+    "name": "it16",
+    "testId": 16,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe15",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe15.it16",
+    "access": null,
+    "description": "returns the correct value",
+    "lineNumber": 76
+  },
+  {
+    "__docId__": 153,
+    "kind": "test",
+    "name": "describe17",
+    "testId": 17,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe17",
+    "access": null,
+    "description": "#accessKeyId",
+    "lineNumber": 82
+  },
+  {
+    "__docId__": 154,
+    "kind": "test",
+    "name": "it18",
+    "testId": 18,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe17",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe17.it18",
+    "access": null,
+    "description": "returns the correct value",
+    "lineNumber": 83
+  },
+  {
+    "__docId__": 155,
+    "kind": "test",
+    "name": "describe19",
+    "testId": 19,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe19",
+    "access": null,
+    "description": "#ready",
+    "lineNumber": 89
+  },
+  {
+    "__docId__": 156,
+    "kind": "test",
+    "name": "describe20",
+    "testId": 20,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe19",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe19.describe20",
+    "access": null,
+    "description": "when the artifact readys successfully",
+    "lineNumber": 102
+  },
+  {
+    "__docId__": 157,
+    "kind": "test",
+    "name": "it21",
+    "testId": 21,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe19.describe20",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe19.describe20.it21",
+    "access": null,
+    "description": "fetches, loads and unzips correctly",
+    "lineNumber": 123
+  },
+  {
+    "__docId__": 158,
+    "kind": "test",
+    "name": "describe22",
+    "testId": 22,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe19",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe19.describe22",
+    "access": null,
+    "description": "when the artifact fails to ready",
+    "lineNumber": 127
+  },
+  {
+    "__docId__": 159,
+    "kind": "test",
+    "name": "it23",
+    "testId": 23,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe19.describe22",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe19.describe22.it23",
+    "access": null,
+    "description": "rejects with an error",
+    "lineNumber": 130
+  },
+  {
+    "__docId__": 160,
+    "kind": "test",
+    "name": "describe24",
+    "testId": 24,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe24",
+    "access": null,
+    "description": "#match",
+    "lineNumber": 135
+  },
+  {
+    "__docId__": 161,
+    "kind": "test",
+    "name": "describe25",
+    "testId": 25,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe24",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe24.describe25",
+    "access": null,
+    "description": "when files are matched",
+    "lineNumber": 136
+  },
+  {
+    "__docId__": 162,
+    "kind": "test",
+    "name": "it26",
+    "testId": 26,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe24.describe25",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe24.describe25.it26",
+    "access": null,
+    "description": "should return the correct files",
+    "lineNumber": 163
+  },
+  {
+    "__docId__": 163,
+    "kind": "test",
+    "name": "describe27",
+    "testId": 27,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe27",
+    "access": null,
+    "description": "#get",
+    "lineNumber": 171
+  },
+  {
+    "__docId__": 164,
+    "kind": "test",
+    "name": "describe28",
+    "testId": 28,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe27",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe27.describe28",
+    "access": null,
+    "description": "when the file exists",
+    "lineNumber": 172
+  },
+  {
+    "__docId__": 165,
+    "kind": "test",
+    "name": "it29",
+    "testId": 29,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe27.describe28",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe27.describe28.it29",
+    "access": null,
+    "description": "should return the file",
+    "lineNumber": 191
+  },
+  {
+    "__docId__": 166,
+    "kind": "test",
+    "name": "describe30",
+    "testId": 30,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe27",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe27.describe30",
+    "access": null,
+    "description": "when the file does not exist",
+    "lineNumber": 196
+  },
+  {
+    "__docId__": 167,
+    "kind": "test",
+    "name": "it31",
+    "testId": 31,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe27.describe30",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe27.describe30.it31",
+    "access": null,
+    "description": "throws an error",
+    "lineNumber": 211
+  },
+  {
+    "__docId__": 168,
+    "kind": "test",
+    "name": "describe32",
+    "testId": 32,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32",
+    "access": null,
+    "description": "#attribute",
+    "lineNumber": 217
+  },
+  {
+    "__docId__": 169,
+    "kind": "test",
+    "name": "describe33",
+    "testId": 33,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32.describe33",
+    "access": null,
+    "description": "when the file and key exists",
+    "lineNumber": 218
+  },
+  {
+    "__docId__": 170,
+    "kind": "test",
+    "name": "it34",
+    "testId": 34,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32.describe33",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32.describe33.it34",
+    "access": null,
+    "description": "should return the file",
+    "lineNumber": 241
+  },
+  {
+    "__docId__": 171,
+    "kind": "test",
+    "name": "describe35",
+    "testId": 35,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32.describe35",
+    "access": null,
+    "description": "when the files does not exist",
+    "lineNumber": 246
+  },
+  {
+    "__docId__": 172,
+    "kind": "test",
+    "name": "it36",
+    "testId": 36,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32.describe35",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32.describe35.it36",
+    "access": null,
+    "description": "should throw an error",
+    "lineNumber": 263
+  },
+  {
+    "__docId__": 173,
+    "kind": "test",
+    "name": "describe37",
+    "testId": 37,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32.describe37",
+    "access": null,
+    "description": "when the key is not present",
+    "lineNumber": 268
+  },
+  {
+    "__docId__": 174,
+    "kind": "test",
+    "name": "it38",
+    "testId": 38,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32.describe37",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe32.describe37.it38",
+    "access": null,
+    "description": "should throw an error",
+    "lineNumber": 289
+  },
+  {
+    "__docId__": 175,
+    "kind": "test",
+    "name": "describe39",
+    "testId": 39,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe39",
+    "access": null,
+    "description": "#unzip",
+    "lineNumber": 295
+  },
+  {
+    "__docId__": 176,
+    "kind": "test",
+    "name": "describe40",
+    "testId": 40,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe39",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe39.describe40",
+    "access": null,
+    "description": "when the artifact can be unzipped",
+    "lineNumber": 296
+  },
+  {
+    "__docId__": 177,
+    "kind": "test",
+    "name": "it41",
+    "testId": 41,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe39.describe40",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe39.describe40.it41",
+    "access": null,
+    "description": "should unzip the file",
+    "lineNumber": 316
+  },
+  {
+    "__docId__": 178,
+    "kind": "test",
+    "name": "describe42",
+    "testId": 42,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe39",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe39.describe42",
+    "access": null,
+    "description": "when the artifact cannot be unzipped",
+    "lineNumber": 323
+  },
+  {
+    "__docId__": 179,
+    "kind": "test",
+    "name": "it43",
+    "testId": 43,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe39.describe42",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe39.describe42.it43",
+    "access": null,
+    "description": "reject with an error",
+    "lineNumber": 336
+  },
+  {
+    "__docId__": 180,
+    "kind": "test",
+    "name": "describe44",
+    "testId": 44,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe44",
+    "access": null,
+    "description": "#write",
+    "lineNumber": 341
+  },
+  {
+    "__docId__": 181,
+    "kind": "test",
+    "name": "it45",
+    "testId": 45,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe44",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe44.it45",
+    "access": null,
+    "description": "writes a file to the correct location",
+    "lineNumber": 346
+  },
+  {
+    "__docId__": 182,
+    "kind": "test",
+    "name": "describe46",
+    "testId": 46,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe46",
+    "access": null,
+    "description": "#fetch",
+    "lineNumber": 354
+  },
+  {
+    "__docId__": 183,
+    "kind": "test",
+    "name": "describe47",
+    "testId": 47,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe46",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe46.describe47",
+    "access": null,
+    "description": "when the artifact can be retrieved",
+    "lineNumber": 355
+  },
+  {
+    "__docId__": 184,
+    "kind": "test",
+    "name": "it48",
+    "testId": 48,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe46.describe47",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe46.describe47.it48",
+    "access": null,
+    "description": "should retrieve the correct data",
+    "lineNumber": 374
+  },
+  {
+    "__docId__": 185,
+    "kind": "test",
+    "name": "describe49",
+    "testId": 49,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe46",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe46.describe49",
+    "access": null,
+    "description": "when the artifact cannot be retrieved",
+    "lineNumber": 378
+  },
+  {
+    "__docId__": 186,
+    "kind": "test",
+    "name": "it50",
+    "testId": 50,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe46.describe49",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe46.describe49.it50",
+    "access": null,
+    "description": "should reject with an error",
+    "lineNumber": 391
+  },
+  {
+    "__docId__": 187,
+    "kind": "test",
+    "name": "describe51",
+    "testId": 51,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe51",
+    "access": null,
+    "description": "#client",
+    "lineNumber": 396
+  },
+  {
+    "__docId__": 188,
+    "kind": "test",
+    "name": "it52",
+    "testId": 52,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe51",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe0.describe51.it52",
+    "access": null,
+    "description": "returns an S3 client",
+    "lineNumber": 397
+  },
+  {
+    "__docId__": 189,
+    "kind": "test",
+    "name": "describe53",
+    "testId": 53,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe53",
+    "access": null,
+    "description": "Artifact#toArtifact",
+    "lineNumber": 404
+  },
+  {
+    "__docId__": 190,
+    "kind": "test",
+    "name": "it54",
+    "testId": 54,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe53",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe53.it54",
+    "access": null,
+    "description": "correctly builds an artifact instance",
+    "lineNumber": 421
+  },
+  {
+    "__docId__": 191,
+    "kind": "test",
+    "name": "describe55",
+    "testId": 55,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe55",
+    "access": null,
+    "description": "Artifact#toArtifactMapEntry",
+    "lineNumber": 432
+  },
+  {
+    "__docId__": 192,
+    "kind": "test",
+    "name": "it56",
+    "testId": 56,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe55",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/artifact.test.js~describe55.it56",
+    "access": null,
+    "description": "correctly builds an artifact instance",
+    "lineNumber": 449
+  },
+  {
+    "__docId__": 193,
+    "kind": "testFile",
+    "name": "__tests__/functions/transfer/transfer/artifact/file.test.js",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport File from '@functions/transfer/transfer/artifact/file';\n\ndescribe('File', () => {\n  test('TODO');\n});\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/artifact/file.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 194,
+    "kind": "test",
+    "name": "describe57",
+    "testId": 57,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57",
+    "access": null,
+    "description": "File",
+    "lineNumber": 5
+  },
+  {
+    "__docId__": 195,
+    "kind": "test",
+    "name": "test58",
+    "testId": 58,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.test58",
+    "access": null,
+    "description": "TODO",
+    "lineNumber": 6
+  },
+  {
+    "__docId__": 196,
+    "kind": "testFile",
+    "name": "__tests__/functions/transfer/transfer/attribute/attribute.test.js",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport Attribute from '@functions/transfer/transfer/attribute';\n\ndescribe('Attribute', () => {\n  test('TODO');\n});\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/attribute/attribute.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 197,
+    "kind": "test",
+    "name": "describe59",
+    "testId": 59,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe59",
+    "access": null,
+    "description": "Attribute",
+    "lineNumber": 5
+  },
+  {
+    "__docId__": 198,
+    "kind": "test",
+    "name": "test60",
+    "testId": 60,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe59",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe59.test60",
+    "access": null,
+    "description": "TODO",
+    "lineNumber": 6
+  },
+  {
+    "__docId__": 199,
+    "kind": "testFile",
+    "name": "__tests__/functions/transfer/transfer/uploader.test.js",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport Uploader from '@functions/transfer/transfer/uploader';\n// import Artifact from '@functions/transfer/transfer/artifact';\n\n// import faker from 'faker';\n// import AWS from 'aws-sdk-mock';\n// import Zip from 'node-zip';\n\ndescribe('Uploader', () => {\n  test('TODO');\n});\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/uploader.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 200,
+    "kind": "test",
+    "name": "describe61",
+    "testId": 61,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe61",
+    "access": null,
+    "description": "Uploader",
+    "lineNumber": 10
+  },
+  {
+    "__docId__": 201,
+    "kind": "test",
+    "name": "test62",
+    "testId": 62,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe61",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe61.test62",
+    "access": null,
+    "description": "TODO",
+    "lineNumber": 11
+  },
+  {
+    "__docId__": 202,
+    "kind": "testFile",
+    "name": "__tests__/functions/transfer/transfer/validate/schema.test.js",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport Schema from '@functions/transfer/transfer/validate/schema';\n\nimport Ajv from 'ajv';\n\ndescribe('Schema', () => {\n  it('compiles successfully', () => {\n    expect(() => { new Ajv().compile(Schema); }).not.toThrow();\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/validate/schema.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 203,
+    "kind": "test",
+    "name": "describe63",
+    "testId": 63,
+    "memberof": "__tests__/functions/transfer/transfer/validate/schema.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/validate/schema.test.js~describe63",
+    "access": null,
+    "description": "Schema",
+    "lineNumber": 7
+  },
+  {
+    "__docId__": 204,
+    "kind": "test",
+    "name": "it64",
+    "testId": 64,
+    "memberof": "__tests__/functions/transfer/transfer/validate/schema.test.js~describe63",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/validate/schema.test.js~describe63.it64",
+    "access": null,
+    "description": "compiles successfully",
+    "lineNumber": 8
+  },
+  {
+    "__docId__": 205,
+    "kind": "testFile",
+    "name": "__tests__/functions/transfer/transfer/validate/validate.test.js",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport validate from '@functions/transfer/transfer/validate';\n\nimport faker from 'faker';\n\ndescribe('#validate', () => {\n  describe('when a schema is valid', () => {\n    const data = [\n      {\n        bucket: faker.random.word(),\n        prefix: '/some/random/key',\n        roleArn: {\n          'Fn::GetArtifactAtt': ['DeployOutput', 'Outputs.json', 'S3BucketKey'],\n        },\n        src: [\n          'BuildOutput::out/**/*.png',\n        ],\n      },\n    ];\n\n    it('resolves with the correct object', () =>\n      expect(validate(data)).resolves.toMatchObject(data));\n  });\n\n  describe('when a schema is invalid', () => {\n    it('rejects on empty schema', () =>\n      expect(validate({})).rejects.toEqual(expect.any(Error)));\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/validate/validate.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 206,
+    "kind": "test",
+    "name": "describe65",
+    "testId": 65,
+    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65",
+    "access": null,
+    "description": "#validate",
+    "lineNumber": 7
+  },
+  {
+    "__docId__": 207,
+    "kind": "test",
+    "name": "describe66",
+    "testId": 66,
+    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe66",
+    "access": null,
+    "description": "when a schema is valid",
+    "lineNumber": 8
+  },
+  {
+    "__docId__": 208,
+    "kind": "test",
+    "name": "it67",
+    "testId": 67,
+    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe66",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe66.it67",
+    "access": null,
+    "description": "resolves with the correct object",
+    "lineNumber": 22
+  },
+  {
+    "__docId__": 209,
+    "kind": "test",
+    "name": "describe68",
+    "testId": 68,
+    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe68",
+    "access": null,
+    "description": "when a schema is invalid",
+    "lineNumber": 26
+  },
+  {
+    "__docId__": 210,
+    "kind": "test",
+    "name": "it69",
+    "testId": 69,
+    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe68",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe68.it69",
+    "access": null,
+    "description": "rejects on empty schema",
+    "lineNumber": 27
+  },
+  {
+    "__docId__": 211,
+    "kind": "testFile",
+    "name": "__tests__/functions/transfer/transfer.test.js",
+    "content": "/* eslint-disable import/no-unresolved */\n\n// import Pipeline from '@functions/pipeline';\n\n// import faker from 'faker';\n// import AWS from 'aws-sdk-mock';\n\ndescribe('Pipeline', () => {\n  test('TODO');\n});\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 212,
+    "kind": "test",
+    "name": "describe70",
+    "testId": 70,
+    "memberof": "__tests__/functions/transfer/transfer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer.test.js~describe70",
+    "access": null,
+    "description": "Pipeline",
+    "lineNumber": 8
+  },
+  {
+    "__docId__": 213,
+    "kind": "test",
+    "name": "test71",
+    "testId": 71,
+    "memberof": "__tests__/functions/transfer/transfer.test.js~describe70",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer.test.js~describe70.test71",
+    "access": null,
+    "description": "TODO",
+    "lineNumber": 9
+  }
+]

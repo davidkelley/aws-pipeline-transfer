@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">functions/transfer/transfer/destination.js | pipeline-transfer</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-artifact">transfer/transfer/artifact</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/artifact.js~Artifact.html">Artifact</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/file.js~File.html">File</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-attribute">transfer/transfer/attribute</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/attribute/attribute.js~Attribute.html">Attribute</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-validate">transfer/transfer/validate</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-validate">validate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Schema">Schema</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">functions/transfer/transfer/destination.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { STS, Credentials } from &apos;aws-sdk&apos;;
+import typedError from &apos;error/typed&apos;;
+
+import Attribute from &apos;./attribute&apos;;
+import { FUNCTION_NAME } from &apos;./constants&apos;;
+
+/**
+ * The AWS STS client used to assume roles inside the lambda function
+ * for the appropriate S3 destination.
+ *
+ * @type {STS}
+ */
+const sts = new STS();
+
+/**
+ * The defined remote artifact does not exist or access has not been granted.
+ *
+ * @type {Error}
+ */
+const artifactNotFound = typedError({
+  message: &apos;Artifact &quot;{artifactName}&quot; not a valid InputArtifact&apos;,
+  type: &apos;pipeline.artifact.not_found&apos;,
+});
+
+/**
+ * This class represents a single, defined destination which the user
+ * has specified inside the UserParameters key.
+ *
+ * Responsible for first resolving any source input artifacts and matching
+ * all files found inside the artifact. Then assuming the correct role to
+ * access the destination, and uploading them, using the {@link File#upload}
+ * method.
+ */
+export default class Destination {
+  /**
+   * @param {Object} destination - a valid src/destination object.
+   * @param {String, Object} destination.roleArn - a static or remote reference
+   *  to a IAM Role which has sufficient permissons for the destination S3 Bucket.
+   * @param {String, Object} destination.bucket - a static or remote reference
+   *  to a destination S3 bucket.
+   * @param {Array[String]} destination.src - An array of source files to be
+   *  found inside one or more input artifacts.
+   * @param {String} destination.prefix - The prefix to apply to all uploaded
+   *  source files in the destination S3 bucket.
+   * @param {Object} artifacts - An object containing all
+   *  {@link Artifact} instances with the property key being the artifacts name.
+   */
+  constructor({ roleArn, bucket, src, prefix = &apos;/&apos; }, artifacts) {
+    /**
+     * A static or remote reference to a IAM Role which has sufficient
+     * permissons for the destination S3 Bucket.
+     *
+     * @type {Attribute}
+     */
+    this.roleArn = new Attribute(roleArn, artifacts);
+    /**
+     * A static or remote reference to a destination S3 bucket.
+     *
+     * @type {Attribute}
+     */
+    this.bucket = new Attribute(bucket, artifacts);
+    /**
+     * An array of source files to be found inside one or more input artifacts.
+     *
+     * @type {Array[String]}
+     */
+    this.sources = src;
+    /**
+     * The prefix to apply to all uploaded source files in the
+     * destination S3 bucket.
+     *
+     * @type {String}
+     */
+    this.prefix = prefix;
+  }
+
+  /**
+   * Retrieves credentials by assuming the defined role, which (should) enable
+   * IAM access to the remote S3 destination.
+   *
+   * @return {Object} an object containing AWS access keys.
+   */
+  async credentials() {
+    const roleArn = await this.roleArn.value();
+    const {
+      Credentials: {
+        AccessKeyId,
+        SecretAccessKey,
+        SessionToken,
+      },
+    } = await sts.assumeRole({
+      RoleSessionName: FUNCTION_NAME,
+      ExternalId: FUNCTION_NAME,
+      RoleArn: roleArn,
+    }).promise();
+    return new Credentials(AccessKeyId, SecretAccessKey, SessionToken);
+  }
+
+  /**
+   * Retrieves all matched file objects from inside the &quot;src&quot; definition.
+   * This function will resolve all matched file references, across all input
+   * artifacts.
+   *
+   * @return {Array[File]} an array of file objects ready for upload.
+   */
+  async files() {
+    const { artifacts, sources } = this;
+    const files = sources.map(async (src) =&gt; {
+      const [artifactName, glob] = src.split(&apos;::&apos;);
+      const artifact = artifacts[artifactName];
+      if (!artifact) {
+        throw artifactNotFound({ artifactName });
+      }
+      await artifact.ready();
+      return artifact.match(glob);
+    });
+    return await Promise.all(files);
+  }
+
+  /**
+   * Uploads all matched files from their source input artifacts to the
+   * defined destinations, prefixed with the appropriate key.
+   *
+   * Note that this function first assumes the correct role for this destination.
+   *
+   * @return {Boolean} true if successful, throws otherwise.
+   */
+  async upload() {
+    const { prefix } = this;
+    const credentials = await this.credentials();
+    const bucket = await this.bucket.value();
+    const files = await this.files();
+    const uploads = files.map(f =&gt; f.upload({ bucket, credentials, prefix }));
+    await Promise.all(uploads);
+    return true;
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

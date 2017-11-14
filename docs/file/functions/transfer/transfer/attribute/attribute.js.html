@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../">
+  <title data-ice="title">functions/transfer/transfer/attribute/attribute.js | pipeline-transfer</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-artifact">transfer/transfer/artifact</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/artifact.js~Artifact.html">Artifact</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/file.js~File.html">File</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-attribute">transfer/transfer/attribute</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/attribute/attribute.js~Attribute.html">Attribute</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-validate">transfer/transfer/validate</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-validate">validate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Schema">Schema</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">functions/transfer/transfer/attribute/attribute.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import wrappedError from &apos;error/wrapped&apos;;
+import typedError from &apos;error/typed&apos;;
+
+/**
+ * An unsupported parameter value object was encountered.
+ *
+ * @type {Error}
+ */
+const artifactParameterError = typedError({
+  message: &apos;Unsupported object key &quot;{keys}&quot;&apos;,
+  type: &apos;pipeline.attribute&apos;,
+});
+
+/**
+ * The remote artifact file did not contain a truthy key value.
+ *
+ * @type {Error}
+ */
+const remoteArtifactValueError = wrappedError({
+  message: &apos;Value was null or undefined for &quot;{path}&quot;&apos;,
+  type: &apos;pipeline.attribute.artifact.value&apos;,
+});
+
+/**
+ * The defined remote artifact does not exist or access has not been granted.
+ *
+ * @type {Error}
+ */
+const artifactNotFound = typedError({
+  message: &apos;Artifact &quot;{artifactName}&quot; was referenced, but is not a valid InputArtifact.&apos;,
+  type: &apos;pipeline.attribute.artifact.not_found&apos;,
+});
+
+/**
+ * Indicates a remote artifact type
+ *
+ * @type {String}
+ */
+const REMOTE = &apos;REMOTE&apos;;
+
+/**
+ * Indicates a static artifact type
+ *
+ * @type {String}
+ */
+const STATIC = &apos;STATIC&apos;;
+
+/**
+ * Resolves an attribute that has been defined as part of the UserParameters.
+ * An attribute can either be a static, hardcoded value or can be a reference
+ * to a key, found inside a file present in an input artifact.
+ */
+export default class Attribute {
+  /**
+   * @param {String,Object} mapping - a mapping object, either a hardcoded value
+   *  or a reference to a key, found inside a file present in an input artifact.
+   * @param {Array[Artifact]} artifacts - an array of artifacts that any remote
+   *  attribute value could be found inside.
+   */
+  constructor(mapping, artifacts) {
+    /**
+     * Either a hardcoded value (a string) or an object denoting a remote reference.
+     *
+     * @type {String,Object}
+     */
+    this.mapping = mapping;
+    /**
+     * An object containing {@link Artifact} instances, with the keys denoting
+     * the logical name of the artifact inside CodePipeline.
+     *
+     * @type {Array[Artifact]}
+     */
+    this.artifacts = artifacts;
+  }
+
+  /**
+   * Determine if the type of mapping that has been provided for the attribute
+   * value is either a static value, or needs to be resolved using a remote
+   * input artifact.
+   *
+   * @return {String} the type of attribute mapping provided
+   */
+  get type() {
+    const { mapping } = this;
+    if (typeof mapping !== &apos;string&apos;) {
+      return REMOTE;
+    }
+    return STATIC;
+  }
+
+  /**
+   * Resolves the value for the attribute, either returning the static attribute
+   * value, or the resolved value from inside a remote artifact.
+   *
+   * @return {String} the attribute&apos;s value
+   */
+  async value() {
+    const { type, mapping } = this;
+    if (type === STATIC) {
+      return mapping;
+    }
+    const properties = mapping[&apos;Fn::GetArtifactAtt&apos;];
+    if (!properties) {
+      const keys = Object.keys(mapping).join(&apos;, &apos;);
+      throw artifactParameterError({ keys });
+    }
+    return await this.fetch(...properties);
+  }
+
+  /**
+   * @private
+   *
+   * Fetch the value of a specific parameter using the key found inside a json file
+   * inside the specific artifact.
+   *
+   * @param {String} artifactName - the name of the artifact the file resides in.
+   * @param {String} filename - The name of the JSON file inside the artifact
+   * @param {String} key - The property key inside the JSON file
+   *
+   * @return {String} the value of the key inside the JSON file, inside the artifact.
+   */
+  async fetch(artifactName, filename, key) {
+    const artifact = this.artifacts[artifactName];
+    if (!artifact) {
+      throw artifactNotFound({ artifactName });
+    } else {
+      await artifact.ready();
+      const value = artifact.attribute(filename, key);
+      if (!value) {
+        throw remoteArtifactValueError({
+          path: `${artifactName}::${filename}::${key}`,
+        });
+      } else {
+        return value;
+      }
+    }
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

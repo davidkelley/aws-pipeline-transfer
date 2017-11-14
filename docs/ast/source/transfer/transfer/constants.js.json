@@ -1,0 +1,694 @@
+{
+  "type": "File",
+  "start": 0,
+  "end": 212,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 8,
+      "column": 0
+    }
+  },
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 212,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 8,
+        "column": 0
+      }
+    },
+    "sourceType": "module",
+    "body": [
+      {
+        "type": "ExportNamedDeclaration",
+        "start": 130,
+        "end": 211,
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 0
+          },
+          "end": {
+            "line": 7,
+            "column": 81
+          }
+        },
+        "specifiers": [],
+        "source": null,
+        "declaration": {
+          "type": "VariableDeclaration",
+          "start": 137,
+          "end": 211,
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 7
+            },
+            "end": {
+              "line": 7,
+              "column": 81
+            }
+          },
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "start": 143,
+              "end": 210,
+              "loc": {
+                "start": {
+                  "line": 7,
+                  "column": 13
+                },
+                "end": {
+                  "line": 7,
+                  "column": 80
+                }
+              },
+              "id": {
+                "type": "Identifier",
+                "start": 143,
+                "end": 156,
+                "loc": {
+                  "start": {
+                    "line": 7,
+                    "column": 13
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 26
+                  },
+                  "identifierName": "FUNCTION_NAME"
+                },
+                "name": "FUNCTION_NAME",
+                "leadingComments": null
+              },
+              "init": {
+                "type": "LogicalExpression",
+                "start": 160,
+                "end": 209,
+                "loc": {
+                  "start": {
+                    "line": 7,
+                    "column": 30
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 79
+                  }
+                },
+                "left": {
+                  "type": "MemberExpression",
+                  "start": 160,
+                  "end": 196,
+                  "loc": {
+                    "start": {
+                      "line": 7,
+                      "column": 30
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 66
+                    }
+                  },
+                  "object": {
+                    "type": "MemberExpression",
+                    "start": 160,
+                    "end": 171,
+                    "loc": {
+                      "start": {
+                        "line": 7,
+                        "column": 30
+                      },
+                      "end": {
+                        "line": 7,
+                        "column": 41
+                      }
+                    },
+                    "object": {
+                      "type": "Identifier",
+                      "start": 160,
+                      "end": 167,
+                      "loc": {
+                        "start": {
+                          "line": 7,
+                          "column": 30
+                        },
+                        "end": {
+                          "line": 7,
+                          "column": 37
+                        },
+                        "identifierName": "process"
+                      },
+                      "name": "process"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "start": 168,
+                      "end": 171,
+                      "loc": {
+                        "start": {
+                          "line": 7,
+                          "column": 38
+                        },
+                        "end": {
+                          "line": 7,
+                          "column": 41
+                        },
+                        "identifierName": "env"
+                      },
+                      "name": "env"
+                    },
+                    "computed": false
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "start": 172,
+                    "end": 196,
+                    "loc": {
+                      "start": {
+                        "line": 7,
+                        "column": 42
+                      },
+                      "end": {
+                        "line": 7,
+                        "column": 66
+                      },
+                      "identifierName": "AWS_LAMBDA_FUNCTION_NAME"
+                    },
+                    "name": "AWS_LAMBDA_FUNCTION_NAME"
+                  },
+                  "computed": false
+                },
+                "operator": "||",
+                "right": {
+                  "type": "StringLiteral",
+                  "start": 200,
+                  "end": 209,
+                  "loc": {
+                    "start": {
+                      "line": 7,
+                      "column": 70
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 79
+                    }
+                  },
+                  "extra": {
+                    "rawValue": "default",
+                    "raw": "'default'"
+                  },
+                  "value": "default"
+                },
+                "extra": {
+                  "parenthesized": true,
+                  "parenStart": 159
+                }
+              },
+              "leadingComments": null
+            }
+          ],
+          "kind": "const",
+          "leadingComments": [
+            {
+              "type": "CommentBlock",
+              "value": "*\n * Retrieves the name of the AWS Lambda function from the Lambda execution\n * environment variables.\n *\n * @type {String}\n ",
+              "start": 0,
+              "end": 129,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 0
+                },
+                "end": {
+                  "line": 6,
+                  "column": 3
+                }
+              }
+            }
+          ],
+          "trailingComments": []
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * Retrieves the name of the AWS Lambda function from the Lambda execution\n * environment variables.\n *\n * @type {String}\n ",
+            "start": 0,
+            "end": 129,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 6,
+                "column": 3
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "directives": []
+  },
+  "comments": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Retrieves the name of the AWS Lambda function from the Lambda execution\n * environment variables.\n *\n * @type {String}\n ",
+      "start": 0,
+      "end": 129,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Retrieves the name of the AWS Lambda function from the Lambda execution\n * environment variables.\n *\n * @type {String}\n ",
+      "start": 0,
+      "end": 129,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "export",
+        "keyword": "export",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "export",
+      "start": 130,
+      "end": 136,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "const",
+        "keyword": "const",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "const",
+      "start": 137,
+      "end": 142,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 7
+        },
+        "end": {
+          "line": 7,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "FUNCTION_NAME",
+      "start": 143,
+      "end": 156,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 13
+        },
+        "end": {
+          "line": 7,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 157,
+      "end": 158,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 27
+        },
+        "end": {
+          "line": 7,
+          "column": 28
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 159,
+      "end": 160,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 29
+        },
+        "end": {
+          "line": 7,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "process",
+      "start": 160,
+      "end": 167,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 30
+        },
+        "end": {
+          "line": 7,
+          "column": 37
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 167,
+      "end": 168,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 37
+        },
+        "end": {
+          "line": 7,
+          "column": 38
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "env",
+      "start": 168,
+      "end": 171,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 38
+        },
+        "end": {
+          "line": 7,
+          "column": 41
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 171,
+      "end": 172,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 41
+        },
+        "end": {
+          "line": 7,
+          "column": 42
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "AWS_LAMBDA_FUNCTION_NAME",
+      "start": 172,
+      "end": 196,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 42
+        },
+        "end": {
+          "line": 7,
+          "column": 66
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "||",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": 1,
+        "updateContext": null
+      },
+      "value": "||",
+      "start": 197,
+      "end": 199,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 67
+        },
+        "end": {
+          "line": 7,
+          "column": 69
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "default",
+      "start": 200,
+      "end": 209,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 70
+        },
+        "end": {
+          "line": 7,
+          "column": 79
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 209,
+      "end": 210,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 79
+        },
+        "end": {
+          "line": 7,
+          "column": 80
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 210,
+      "end": 211,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 80
+        },
+        "end": {
+          "line": 7,
+          "column": 81
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "eof",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 212,
+      "end": 212,
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 0
+        },
+        "end": {
+          "line": 8,
+          "column": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,61 +1,142 @@
+# Deploys a CodePipeline resource, which periodically polls GitHub for changes
+# on a specific branch. It then fetches the sources, passes it to CodeBuild
+# and finally deploys the CloudFormation template found inside the
+# build artifact (from CodeBuild).
 AWSTemplateFormatVersion: "2010-09-09"
 
-Description: "Creates a build, test and deployment pipeline."
+Description: "[Pipeline] [Utility] AWS CodePipeline S3 transfer deployment pipeline"
 
+# You can use the optional Parameters section to pass values into your template
+# when you create a stack. With parameters, you can create templates that are
+# customized each time you create a stack. Each parameter must contain a value
+# when you create a stack. You can specify a default value to make the parameter
+# optional so that you don't need to pass in a value when creating a stack.
 Parameters:
 
+  # A GitHub API Token that has permissions to access either a public or
+  # private repository.
+  #
+  # @see https://github.com/settings/tokens
+  GitHubToken:
+    Type: String
+    NoEcho: true
+    Description: |
+      A Github OAuth Token with public_repo or repo scope
+
+  # The GitHub repository to poll for changes. This parameter accepts both
+  # the username/organization that owns the repository and the name of the
+  # repository itself.
+  #
+  # This parameter is split by the "/" character were required inside the
+  # template.
+  Repository:
+    Type: String
+    AllowedPattern: "^[-_a-zA-Z0-9]+/[-_a-zA-Z0-9]+$"
+    ConstraintDescription: |
+      Ensure you have defined a full path, including the username or
+      organisation name.
+    Description: |
+      The full name of the repository, such as "<username>/<name>".
+
+  # The branch to listen for changes on. When commits are made to this branch
+  # the CodePipeline will trigger.
+  #
+  # Due to AWS naming restrictions and where this parameter is used to provide uniqueness
+  # across multi-branch deployments, it is restricted to alpha-numeric characters
+  # only.
   Branch:
     Type: String
-    Default: master
-    Description: Branch to use from the repository.
+    AllowedPattern: "^[-_a-zA-Z0-9]+$"
+    ConstraintDescription: |
+      Only alpha numeric characters, as well as "-" and "_" are allowed.
+    Description: |
+      Branch to use from the repository.
 
+  # A logical name for the project inside AWS. The project is used, in combination
+  # with the branch to produce unique physical resource names, where required.
+  #
+  # Due to AWS naming restrictions and where this parameter is used to
+  # provide uniqueness it is restricted to alpha-numeric characters only.
   Project:
     Type: String
-    Default: aws-pipeline-transfer
-    Description: The name this project will be identified as inside AWS.
+    AllowedPattern: "^[-_a-zA-Z0-9]+$"
+    ConstraintDescription: |
+      Only alpha numeric characters, as well as "-" and "_" are allowed.
+    Description: |
+      The logical name of this project identified inside AWS.
 
-  ProjectExecutionRole:
-    Type: String
-    Description: The pre-created IAM role to use.
-
-  ArtifactStore:
-    Type: String
-    Description: The S3 bucket to use as the artifact store.
-
-  RepositoryName:
-    Type: String
-    Description: The name of the repository that triggers this pipeline
-
+# The required Resources section declares the AWS resources that you want to
+# include in the stack, such as a CodePipeline, CodeBuild and IAM Resources.
 Resources:
+
+  # This S3 bucket stores artifacts created by both CodeBuild and CodePipeline.
+  # Artifacts are passed around the pipeline and can be accessed by different actions.
+  # This bucket represents the physical store for these artifacts.
+  #
+  # It has a lifecycle configuration configured, to ensure that "old" unused
+  # artifacts from previous pipeline executions are cleaned up responsibly.
+  PipelineArtifactStore:
+    Type: AWS::S3::Bucket
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      LifecycleConfiguration:
+        Rules:
+          - Status: Enabled
+            ExpirationInDays: 1
+
+  # This resources defines the pipeline for the deployments for this service.
+  # Inspecting the properties, you can see how the Source, Build and Releaese
+  # stages are defined and the actions they include.
+  #
+  # The logical ordering of the stages determines the order in which they execute.
+  # The "RunOrder" defined for each action determines the order of execution for the pipeline,
+  # two actions that have the same "RunOrder" are executed concurrently and cannot depend
+  # upon artifacts from each other.
+  #
+  # Input and Output artifacts are "logically named" and inside the pipeline, provide
+  # a recognisable representation for the underlying files which the present. For example,
+  # given the artifact named "GitHubOutput", this artifact represents an object
+  # stored inside S3 (PipelineArtifactStore).
+  #
+  # When deploying CloudFormation with CodePipeline, special actions are defined which
+  # enable you to configure a template to launch from inside a pipeline artifact.
+  #
+  # @see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
       RestartExecutionOnUpdate: false
       ArtifactStore:
-        Location: !Ref ArtifactStore
+        Location: !Ref PipelineArtifactStore
         Type: S3
-      RoleArn: !Ref ProjectExecutionRole
+      RoleArn: !GetAtt PipelineRole.Arn
       Stages:
         - Name: Source
           Actions:
-            - Name: Source
+            - Name: GitHub
               RunOrder: 1
               ActionTypeId:
                 Category: Source
-                Owner: AWS
+                Owner: ThirdParty
                 Version: 1
-                Provider: CodeCommit
+                Provider: GitHub
               OutputArtifacts:
-                - Name: SourceOutput
+                - Name: GitHubOutput
               Configuration:
-                BranchName: !Ref Branch
-                RepositoryName: !Ref RepositoryName
+                # Here we are using CloudFormation Fn::Split and Fn::Select to
+                # break up the Repository parameter value into the owner and
+                # repository names respectively.
+                Owner: !Select [ 0, !Split [ "/", !Ref Repository ] ]
+                Repo: !Select [ 1, !Split [ "/", !Ref Repository ] ]
+                Branch: !Ref Branch
+                OAuthToken: !Ref GitHubToken
         - Name: Build
           Actions:
             - Name: Build
               RunOrder: 2
               InputArtifacts:
-                - Name: SourceOutput
+                - Name: GitHubOutput
               ActionTypeId:
                 Category: Build
                 Owner: AWS
@@ -79,18 +160,10 @@ Resources:
               Configuration:
                 ActionMode: CHANGE_SET_REPLACE
                 Capabilities: CAPABILITY_IAM
-                RoleArn: !Ref ProjectExecutionRole
-                StackName: !Sub "${Project}-${Branch}-release"
-                ChangeSetName: !Sub "${Project}-${Branch}-release-cs"
+                RoleArn: !GetAtt CloudformationRole.Arn
+                StackName: !Sub "${AWS::StackName}-service"
+                ChangeSetName: !Sub "${AWS::StackName}-service"
                 TemplatePath: BuildOutput::template.yml
-                ParameterOverrides:
-                  Fn::Sub:
-                    - |
-                      {
-                        "Name": "${Name}"
-                      }
-                    - Name:
-                        Ref: Project
             - Name: Deploy
               RunOrder: 3
               ActionTypeId:
@@ -101,16 +174,19 @@ Resources:
               Configuration:
                 ActionMode: CHANGE_SET_EXECUTE
                 Capabilities: CAPABILITY_IAM
-                ChangeSetName: !Sub "${Project}-${Branch}-release-cs"
-                RoleArn: !Ref ProjectExecutionRole
-                StackName: !Sub "${Project}-${Branch}-release"
+                ChangeSetName: !Sub "${AWS::StackName}-service"
+                RoleArn: !GetAtt CloudformationRole.Arn
+                StackName: !Sub "${AWS::StackName}-service"
 
+  # Deploys our CodeBuild project which enables us to lint, test and build our
+  # project (the commands defined inside buildspec.yml). This CodeBuild project
+  # is configured specifically to be triggered by CodePipeline, in addition to
+  # producing a build artifact that is compatible with CodePipeline.
   Build:
     Type: AWS::CodeBuild::Project
     Properties:
-      Name: !Ref Project
-      TimeoutInMinutes: 10
-      ServiceRole: !Ref ProjectExecutionRole
+      TimeoutInMinutes: 5
+      ServiceRole: !GetAtt BuildRole.Arn
       Source:
         Type: CODEPIPELINE
       Environment:
@@ -118,9 +194,128 @@ Resources:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: aws/codebuild/nodejs:6.3.1
         EnvironmentVariables:
-          - Name: S3_BUCKET
-            Value: !Ref ArtifactStore
+          # We pass in references from this CloudFormation as variables that
+          # will be made accessible inside the environment, such as $AWS_ACCOUNT_ID.
+          #
+          # Note that "secrets" should not be passed in this fashion. But instead
+          # created inside parameter store. However, this is not demonstrated in this
+          # pipeline.
+          - Name: ARTIFACT_STORE
+            Value: !Ref PipelineArtifactStore
           - Name: AWS_ACCOUNT_ID
             Value: !Ref AWS::AccountId
       Artifacts:
         Type: CODEPIPELINE
+
+  # Creates a CloudWatch log group for the CodeBuild project, with a small
+  # log retention. If this LogGroup is not explicitly created, CodeBuild
+  # will automatically create a new log group with an unlimited retention, which
+  # would not be "cleared up" if the stack is deleted.
+  BuildLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/codebuild/${Build}"
+      RetentionInDays: 1
+
+  # Deploys the IAM Role that CodePipeline will pass to CloudFormation, in-order
+  # to deploy our service resources. If required, this resource can be restricted
+  # to disallow specific resources from being created/updated/deleted as necessary.
+  CloudformationRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action: sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service: !Sub "cloudformation.${AWS::URLSuffix}"
+        Version: '2012-10-17'
+      Path: /
+      Policies:
+        - PolicyName: CloudFormationRole
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action:
+                  - '*'
+                Effect: Allow
+                Resource: '*'
+
+  # Deploys the IAM Role that CodePipeline uses, in-order to access services utilized
+  # by the pipeline resource defined in this file.
+  PipelineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action: sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service: !Sub "codepipeline.${AWS::URLSuffix}"
+        Version: '2012-10-17'
+      Path: /
+      Policies:
+        - PolicyName: CodePipelineAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action:
+                  - 's3:*'
+                Effect: Allow
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:s3:::${PipelineArtifactStore}"
+                  - !Sub "arn:${AWS::Partition}:s3:::${PipelineArtifactStore}/*"
+              - Action:
+                  - 'codebuild:*'
+                Effect: Allow
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/${Build}"
+              - Action:
+                  - 'cloudformation:CreateStack'
+                  - 'cloudformation:DescribeStacks'
+                  - 'cloudformation:DeleteStack'
+                  - 'cloudformation:UpdateStack'
+                  - 'cloudformation:CreateChangeSet'
+                  - 'cloudformation:ExecuteChangeSet'
+                  - 'cloudformation:DeleteChangeSet'
+                  - 'cloudformation:DescribeChangeSet'
+                  - 'cloudformation:SetStackPolicy'
+                Effect: Allow
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:cloudformation:${AWS::Region}:${AWS::AccountId}:*/${Project}*/*"
+                  - '*'
+              - Action:
+                  - 'iam:PassRole'
+                Effect: Allow
+                Resource:
+                  - '*'
+
+  # Deploys the IAM Role that CodeBuild uses to successfully complete any actions
+  # defined inside the buildspec.yml file.
+  BuildRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action: sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service: !Sub "codebuild.${AWS::URLSuffix}"
+        Version: '2012-10-17'
+      Path: /
+      Policies:
+        - PolicyName: CodeBuildPackageAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Effect: Allow
+                Resource: '*'
+              - Action:
+                  - 's3:*'
+                  - 'cloudformation:*'
+                Effect: Allow
+                Resource: '*'

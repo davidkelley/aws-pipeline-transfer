@@ -21,10 +21,6 @@ Resources:
       CodeUri: ./out
       Timeout: 10
       Role: !GetAtt TransferFunctionExecutionRole.Arn
-      # Environment:
-      #   Variables:
-      #     STATE_MACHINE: !Ref Statemachine
-      #     FILE_BUCKET: !Ref PipelineFileStore
 
   TransferFunctionExecutionRole:
     Type: AWS::IAM::Role

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../">
+  <title data-ice="title">functions/transfer/transfer/artifact/artifact.js | pipeline-transfer</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-artifact">transfer/transfer/artifact</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/artifact.js~Artifact.html">Artifact</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/file.js~File.html">File</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-attribute">transfer/transfer/attribute</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/attribute/attribute.js~Attribute.html">Attribute</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-validate">transfer/transfer/validate</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-validate">validate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Schema">Schema</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">functions/transfer/transfer/artifact/artifact.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import fs from &apos;fs&apos;;
+import glob from &apos;glob&apos;;
+import uuid from &apos;uuid/v4&apos;;
+import Path from &apos;path&apos;;
+import extract from &apos;extract-zip&apos;;
+import { S3 } from &apos;aws-sdk&apos;;
+import wrappedError from &apos;error/wrapped&apos;;
+import typedError from &apos;error/typed&apos;;
+
+import { AWS_REGION } from &apos;../../../globals&apos;;
+
+import File from &apos;./file&apos;;
+
+/**
+ * An error was encountered when attempting to download, commit and uncompress
+ * the remote CodePipeline artifact.
+ *
+ * @type {Error}
+ */
+const readyError = wrappedError({
+  message: &apos;Error occurred retrieving artifact&apos;,
+  type: &apos;pipeline.artifact&apos;,
+});
+
+/**
+ * The remote artifact could not be retrieved (S3 Error).
+ *
+ * @type {Error}
+ */
+const fetchError = wrappedError({
+  message: &apos;Could not retrieve artifact.&apos;,
+  type: &apos;pipeline.artifact.file&apos;,
+});
+
+/**
+ * An error was encountered whilst attempting to read a file from inside the
+ * artifact.
+ *
+ * @type {Error}
+ */
+const readError = wrappedError({
+  message: &apos;Could not read artifact file &quot;{filename}&quot;&apos;,
+  type: &apos;pipeline.artifact.file&apos;,
+});
+
+/**
+ * The artifact was successfully downloaded, but an error occurred whilst
+ * attempting to decompress it.
+ *
+ * @type {Error}
+ */
+const decompressionError = wrappedError({
+  message: &apos;Failed to decompress artifact.&apos;,
+  type: &apos;pipeline.artifact.file.decompression&apos;,
+});
+
+/**
+ * The JSON key does not exist in the file.
+ *
+ * @type {Error}
+ */
+const keyNotFoundError = typedError({
+  message: &apos;Key &quot;{key}&quot; not found in file &quot;{filename}&quot;&apos;,
+  type: &apos;pipeline.artifact.file.json&apos;,
+});
+
+/**
+ * This class handles retrieving CodePipeline artifact files as well as accessing
+ * file contents in addition to attributes defined inside JSON files residing
+ * within the artifact.
+ *
+ * As the artifacts passed to the function may reside within remote buckets which
+ * this function does not have sufficient permissions to access, credentials are
+ * used from the initial CodePipeline event object.
+ */
+export default class Artifact {
+  /**
+   * Constructs a new Artifact instance.
+   *
+   * @param {Object} s3Location - object representing a remote S3 location
+   * @param {String} s3Location.bucketName - the name of the S3 bucket.
+   * @param {String} s3Location.objectKey - the key of the file inside the S3 bucket.
+   */
+  constructor({ bucketName, objectKey }, { secretAccessKey, sessionToken, accessKeyId }) {
+    /**
+     * A local ID for this artifact.
+     *
+     * @type {String}
+     */
+    this.id = uuid();
+    /**
+     * A filename representing the name of the artifact once downloaded and stored
+     * locally.
+     *
+     * @type {String}
+     */
+    this.filename = `${this.id}.zip`;
+    /**
+     * A fully resolved Path to the local artifact when downloaded and written
+     * to the `/tmp/` directory.
+     *
+     * @type {String}
+     */
+    this.filepath = Path.join(&apos;/tmp/&apos;, this.filename);
+    /**
+     * A fully resolved path to the directory storing the decompressed contents
+     * of the remote artifact in the `/tmp` directory.
+     *
+     * @type {String}
+     */
+    this.dir = Path.join(&apos;/tmp/&apos;, this.id);
+    /**
+     * The name of the S3 bucket which the remote artifact file resides in.
+     *
+     * @type {String}
+     */
+    this.bucketName = bucketName;
+    /**
+     * The key for the remote artifact file.
+     *
+     * @type {String}
+     */
+    this.objectKey = objectKey;
+    /**
+     * The AWS Secret Access Key which will be used to retrieve the remote artifact.
+     *
+     * @type {String}
+     */
+    this.secretAccessKey = secretAccessKey;
+    /**
+     * The AWS Session Token which will be used to retrieve the remote artifact.
+     *
+     * @type {String}
+     */
+    this.sessionToken = sessionToken;
+    /**
+     * The AWS Access Key ID which will be used to retrieve the remote artifact.
+     *
+     * @type {String}
+     */
+    this.accessKeyId = accessKeyId;
+    /**
+     * Determines if this artifact has been retrieved, decompressed and
+     * written to local file storage.
+     *
+     * @type {Boolean}
+     */
+    this.isReady = false;
+  }
+
+  /**
+   * Transform the properties received from CodePipeline into a new instance
+   * of this class.
+   *
+   * This function maps the required properties from the CodePipeline invocation
+   * event structure.
+   *
+   * @return {Artifact} a new artifact file with correctly mapped parameters.
+   */
+  static toArtifact(artifact, credentials = {}) {
+    const { location: { s3Location } } = artifact;
+    return new Artifact(s3Location, credentials);
+  }
+
+  /**
+   * Returns an array which can be used to constuct a Map of artifacts.
+   *
+   * @return {Array[String, Artifact]}
+   */
+  static toArtifactMapEntry(artifact, credentials) {
+    return [artifact.name, Artifact.toArtifact(artifact, credentials)];
+  }
+
+  /**
+   * A utility function to ensure that this artifact has first retrived and
+   * decompressed the remote artifact file, before any attempts are made
+   * to retrieve artifact contents.
+   *
+   * @return {Boolean} true if ready, false otherwise.
+   */
+  async ready() {
+    try {
+      if (!this.isReady) {
+        const data = await this.fetch();
+        await this.write(data);
+        await this.unzip();
+        this.isReady = true;
+      }
+      return this.isReady;
+    } catch (err) {
+      throw readyError(err);
+    }
+  }
+
+  /**
+   * Returns an array of {@link File} instances which represent all matched
+   * files from inside the retrieved, decompressed artifact.
+   *
+   * @param {String} select - a linux-style file glob to match files with.
+   *
+   * @return {Array[File]} an array of all matched {@link File} instances.
+   */
+  async match(select) {
+    return new Promise((resolve, reject) =&gt; {
+      try {
+        const { dir: cwd } = this;
+        glob(select, { cwd, nonull: false, nodir: true }, (err, files) =&gt; {
+          if (err) {
+            // TODO: throw error
+          } else {
+            resolve(files.map((file) =&gt; {
+              const { dir, base: filename } = Path.parse(file);
+              const path = Path.join(cwd, file);
+              const data = fs.readFileSync(path, { encoding: &apos;binary&apos; });
+              return new File(dir, filename, data);
+            }));
+          }
+        });
+      } catch (err) {
+        // TODO: catch error
+        reject();
+      }
+    });
+  }
+
+  /**
+   * Once {@link Artifact#ready} has resolved successfully, this function
+   * can be used to retrieve a specific file&apos;s contents from within the
+   * decompressed artifact.
+   *
+   * @return {Buffer} a utf-8 buffer of the file&apos;s contents.
+   */
+  get(filename) {
+    try {
+      const { dir } = this;
+      const path = Path.join(dir, filename);
+      return fs.readFileSync(path, { encoding: &apos;utf8&apos; });
+    } catch (err) {
+      throw readError(err, { filename });
+    }
+  }
+
+  /**
+   * Once {@link Artifact#ready} has resolved successfully, this function
+   * can be used to retrieve the value of a specific property key from within
+   * a JSON file residing inside the decompressed artifact.
+   *
+   * @return [String] the value of the key from within a JSON file.
+   */
+  attribute(filename, key) {
+    try {
+      const obj = JSON.parse(this.get(filename));
+      if (!Object.keys(obj).includes(key)) {
+        throw keyNotFoundError({ filename, key });
+      } else {
+        return obj[key];
+      }
+    } catch (err) {
+      throw readError(err, { filename });
+    }
+  }
+
+  /**
+   * @private
+   *
+   * Assuming that the remote artifact has been downloaded and written to
+   * {@link Artifact#filepath}, attempt to extract the contents of the artifact
+   * into {@link Artifact#dir}.
+   *
+   * @return {Boolean} true once contents have been successfully decompressed.
+   */
+  unzip() {
+    return new Promise((resolve, reject) =&gt; {
+      const { filepath, dir } = this;
+      fs.mkdirSync(dir);
+      extract(filepath, { dir }, (err) =&gt; {
+        if (err) {
+          reject(decompressionError(err));
+        } else {
+          resolve(true);
+        }
+      });
+    });
+  }
+
+  /**
+   * @private
+   *
+   * Write the contents of the compressed, remote artifact to {@link Artifact#filepath}.
+   *
+   * @return {Boolean} true once the file has been written.
+   */
+  async write(data) {
+    const { filepath } = this;
+    fs.writeFileSync(filepath, data, { encoding: &apos;utf8&apos; });
+    return true;
+  }
+
+  /**
+   * @private
+   *
+   * Using the S3 client ({@link Artifact#client}) retrieve the artifact from
+   * the remote S3 bucket.
+   *
+   * @return {Buffer} the buffer contents of the remote artifacts retrieved from S3.
+   */
+  async fetch() {
+    try {
+      const { bucketName, objectKey } = this;
+      const params = { Bucket: bucketName, Key: objectKey };
+      const { Body } = await this.client.getObject(params).promise();
+      return Body;
+    } catch (err) {
+      throw fetchError(err);
+    }
+  }
+
+  /**
+   * Returns a new S3 client with credentials pre-configured.
+   *
+   * @type {S3}
+   */
+  get client() {
+    const { secretAccessKey, sessionToken, accessKeyId } = this;
+    return new S3({ region: AWS_REGION, accessKeyId, secretAccessKey, sessionToken });
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -77,4 +77,4 @@ AssetS3BucketTransferRole:
                 - !Sub "${AssetS3Bucket}/*"
 ```
 
-For a full definition of what you can define inside the `UserParameters` key, see [the JSON Schema file](/functions/pipeline/pipeline/validate/schema.js).
+For a full definition of what you can define inside the `UserParameters` key, see [the JSON Schema file](/functions/transfer/transfer/validate/schema.js).

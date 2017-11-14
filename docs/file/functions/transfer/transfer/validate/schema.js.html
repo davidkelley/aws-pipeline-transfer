@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../">
+  <title data-ice="title">functions/transfer/transfer/validate/schema.js | pipeline-transfer</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-artifact">transfer/transfer/artifact</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/artifact.js~Artifact.html">Artifact</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/file.js~File.html">File</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-attribute">transfer/transfer/attribute</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/attribute/attribute.js~Attribute.html">Attribute</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-validate">transfer/transfer/validate</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-validate">validate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Schema">Schema</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">functions/transfer/transfer/validate/schema.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Defines the schema used to retrieve either statically defined values
+ * or attributes from inside remote artifacts.
+ *
+ * @type {Object}
+ */
+const remoteAttribute = {
+  oneOf: [
+    {
+      type: &apos;string&apos;,
+    },
+    {
+      type: &apos;object&apos;,
+      required: [
+        &apos;Fn::GetArtifactAtt&apos;,
+      ],
+      properties: {
+        &apos;Fn::GetArtifactAtt&apos;: {
+          type: &apos;array&apos;,
+          items: [
+            {
+              type: &apos;string&apos;,
+            },
+            {
+              type: &apos;string&apos;,
+            },
+            {
+              type: &apos;string&apos;,
+            },
+          ],
+        },
+      },
+    },
+  ],
+};
+
+/**
+ * This schema defines the keys, properties and valid values that can be included
+ * inside the `UserParameters` key when defining the use of this action inside
+ * CodePipeline.
+ *
+ * @type {Object}
+ */
+const Schema = {
+  type: &apos;array&apos;,
+  minItems: 1,
+  uniqueItems: true,
+  items: {
+    type: &apos;object&apos;,
+    required: [
+      &apos;roleArn&apos;,
+      &apos;bucket&apos;,
+      &apos;src&apos;,
+    ],
+    properties: {
+      roleArn: remoteAttribute,
+      bucket: remoteAttribute,
+      prefix: {
+        type: &apos;string&apos;,
+        default: &apos;/&apos;,
+      },
+      src: {
+        type: &apos;array&apos;,
+        minItems: 1,
+        uniqueItems: true,
+        items: {
+          type: &apos;string&apos;,
+          pattern: &apos;^.+::.+$&apos;,
+        },
+      },
+    },
+  },
+};
+
+export default Schema;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">functions/transfer/transfer/uploader.js | pipeline-transfer</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-artifact">transfer/transfer/artifact</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/artifact.js~Artifact.html">Artifact</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/file.js~File.html">File</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-attribute">transfer/transfer/attribute</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/attribute/attribute.js~Attribute.html">Attribute</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-validate">transfer/transfer/validate</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-validate">validate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Schema">Schema</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">functions/transfer/transfer/uploader.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import typedError from &apos;error/typed&apos;;
+
+import Artifact from &apos;./artifact&apos;;
+import Destination from &apos;./destination&apos;;
+import validate from &apos;./validate&apos;;
+
+/**
+ * A validation error was encountered
+ *
+ * @type {Error}
+ */
+const inputArtifactsError = typedError({
+  message: &apos;No InputArtifacts defined.&apos;,
+  type: &apos;pipeline.start&apos;,
+});
+
+export default class Uploader {
+  /**
+   * Uploads artifacts to a remote S3 bucket defined inside an array of file
+   * globs, of locations inside pipeline input artifacts.
+   *
+   * @example
+   * ```
+   *  {
+   *     &quot;CodePipeline.job&quot;: {
+   *         &quot;id&quot;: &quot;11111111-abcd-1111-abcd-111111abcdef&quot;,
+   *         &quot;accountId&quot;: &quot;111111111111&quot;,
+   *         &quot;data&quot;: {
+   *             &quot;actionConfiguration&quot;: {
+   *                 &quot;configuration&quot;: {
+   *                     &quot;FunctionName&quot;: &quot;MyLambdaFunctionForAWSCodePipeline&quot;,
+   *                     &quot;UserParameters&quot;: &quot;....&quot;
+   *                 }
+   *             },
+   *             &quot;inputArtifacts&quot;: [
+   *                 {
+   *                     &quot;location&quot;: {
+   *                         &quot;s3Location&quot;: {
+   *                             &quot;bucketName&quot;: &quot;codepipeline-us-east-2-1234567890&quot;,
+   *                             &quot;objectKey&quot;: &quot;rj90jda90ja90j09tj09jaf.zip&quot;
+   *                         },
+   *                         &quot;type&quot;: &quot;S3&quot;
+   *                     },
+   *                     &quot;revision&quot;: null,
+   *                     &quot;name&quot;: &quot;ArtifactName&quot;
+   *                 }
+   *             ],
+   *             &quot;outputArtifacts&quot;: [],
+   *             &quot;artifactCredentials&quot;: {
+   *                 &quot;secretAccessKey&quot;: &quot;....&quot;,
+   *                 &quot;sessionToken&quot;: &quot;....&quot;,
+   *                 &quot;accessKeyId&quot;: &quot;....&quot;
+   *             },
+   *             &quot;continuationToken&quot;: &quot;A continuation token if continuing job&quot;
+   *         }
+   *     }
+   *  }
+   * ```
+   *
+   * @param {Object} data - A CodePipeline data event object.
+   */
+  constructor({ data }) {
+    /**
+     * The data object as received from AWS CodePipeline.
+     *
+     * @type {Object}
+     */
+    this.data = data;
+    /**
+     * The parsed contents of the `UserParameters` string as defined inside the
+     * action in the CodePipeline resource. This should be a valid array of objects,
+     * similar to the example below:
+     *
+     * ```
+     * [
+     * {
+     *   &quot;roleArn&quot;: {
+     *     &quot;Fn::GetArtifactAtt&quot;: [&quot;DeployOutput&quot;, &quot;Outputs.json&quot;, &quot;AssetS3BucketTransferRole&quot;]
+     *   },
+     *   &quot;bucket&quot;: {
+     *     &quot;Fn::GetArtifactAtt&quot;: [&quot;DeployOutput&quot;, &quot;Outputs.json&quot;, &quot;AssetS3Bucket&quot;]
+     *   },
+     *   &quot;prefix&quot;: &quot;s3/key/prefix/&quot;,
+     *   &quot;src&quot;: [
+     *     &quot;BuildOutput::*.js&quot;
+     *   ]
+     * }
+     * ]
+     * ```
+     *
+     * @type {Object}
+     */
+    this.parameters = JSON.parse(this.data.actionConfiguration.configuration.UserParameters);
+    const inputs = data.inputArtifacts;
+    if (!inputs || inputs.length === 0) {
+      throw inputArtifactsError({});
+    }
+    const mapper = a =&gt; Artifact.toArtifactMapEntry(a, data.artifactCredentials);
+    /**
+     * An array of {@link Artifact} objects which have been made available to
+     * the CodePipeline action definition.
+     *
+     * @type {String}
+     */
+    this.artifacts = inputs.map(mapper).reduce((memo, [key, val]) =&gt; {
+      const obj = memo;
+      obj[key] = val;
+      return obj;
+    }, {});
+  }
+
+  /**
+   * Retrieve validated (and defaulted) parameters which have been defined inside
+   * the action in the CodePipeline resource.
+   *
+   * @return {Object} valid parameters to be used to construct the state machine input.
+   */
+  async userParameters() {
+    return await validate(this.parameters);
+  }
+
+  /**
+   * Maps all defined src/dest combinations (from {@link Uploader#userParameters}) to
+   * destination objects ready for upload.
+   *
+   * @return {Array[Destination]} an array of Destination objects
+   */
+  async destinations() {
+    const { artifacts } = this;
+    const params = await this.userParameters();
+    return params.map(p =&gt; new Destination(p, artifacts));
+  }
+
+  /**
+   * Performs the intended operation and uploads source files from pipeine
+   * artifacts to remote S3 locations by assuming the provided roles to
+   * provide the correct permission sets.
+   *
+   * The promise resolves successfully after all source files have been uploaded.
+   *
+   * @return {Boolean} true if successful, throws otherwise.
+   */
+  async perform() {
+    const destinations = await this.destinations();
+    await Promise.all(destinations.map(d =&gt; d.upload()));
+    return true;
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
