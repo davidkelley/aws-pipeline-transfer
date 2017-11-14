@@ -133,7 +133,39 @@ describe('Artifact', () => {
   });
 
   describe('#match', () => {
-    test('TODO');
+    describe('when files are matched', () => {
+      const artifact = new Artifact(location, credentials);
+
+      const { dir } = artifact;
+
+      const relativePath = 'output';
+
+      const path = `${dir}/${relativePath}`;
+
+      const filename = faker.system.fileName();
+
+      const selector = '**/*';
+
+      const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });
+
+      beforeEach(() => {
+        fs.mkdirSync(dir);
+        fs.mkdirSync(path);
+        fs.writeFileSync(`${path}/${filename}`, data, { encoding: 'utf8' });
+      });
+
+      afterEach(() => {
+        fs.unlinkSync(`${path}/${filename}`);
+        fs.rmdirSync(path);
+        fs.rmdirSync(dir);
+      });
+
+      it('should return the correct files', async () => {
+        const [file] = await artifact.match(selector);
+        expect(file.key).toEqual(`/${relativePath}/${filename}`);
+        expect(file.data).toEqual(new Buffer(data).toString('binary'));
+      });
+    });
   });
 
   describe('#get', () => {

@@ -9,6 +9,8 @@ import typedError from 'error/typed';
 
 import { AWS_REGION } from '../../../globals';
 
+import File from './file';
+
 /**
  * An error was encountered when attempting to download, commit and uncompress
  * the remote CodePipeline artifact.
@@ -202,15 +204,15 @@ export default class Artifact {
     return new Promise((resolve, reject) => {
       try {
         const { dir: cwd } = this;
-        glob(select, { cwd, nonull: false }, (err, files) => {
+        glob(select, { cwd, nonull: false, nodir: true }, (err, files) => {
           if (err) {
             // TODO: throw error
           } else {
             resolve(files.map((file) => {
               const { dir, base: filename } = Path.parse(file);
-              const path = dir.replace(new RegExp(`^${cwd}`), '');
-              const data = fs.readFileSync(file, { encoding: 'binary' });
-              return new File(path, filename, data);
+              const path = Path.join(cwd, file);
+              const data = fs.readFileSync(path, { encoding: 'binary' });
+              return new File(dir, filename, data);
             }));
           }
         });
