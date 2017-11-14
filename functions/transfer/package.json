@@ -1,0 +1,6 @@
+{
+  "name": "transfer",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./transfer.js"
+}

@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  src:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    entrypoint: npm run
+    volumes:
+      - .:/service

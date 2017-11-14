@@ -1,0 +1,33 @@
+version: 0.1
+
+phases:
+  pre_build:
+    commands:
+      - echo "Updating AWS CLI..."
+      - pip install --upgrade awscli
+
+      - echo "Installing Project Dependencies..."
+      - npm install
+
+      - echo "Creating artifacts directory"
+      - mkdir artifacts
+
+  build:
+    commands:
+      - echo "Running lint..."
+      - npm run lint
+
+      - echo "Running tests..."
+      - npm run test
+
+      - echo "Packaging..."
+      - npm run build
+
+      - echo "Compiling Cloudformation (Bucket $S3_BUCKET)..."
+      - "aws cloudformation package --template-file service.yml --s3-prefix build --s3-bucket $S3_BUCKET --output-template-file artifacts/template.yml"
+
+artifacts:
+  type: zip
+  discard-paths: yes
+  files:
+    - artifacts/**/*

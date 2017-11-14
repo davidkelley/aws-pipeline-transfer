@@ -1,0 +1,82 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Transform: AWS::Serverless-2016-10-31
+
+Description: "Deploys a Lambda function that controls AWS S3 file uploads."
+
+Parameters:
+
+  Name:
+    Type: String
+    Default: aws-pipeline-transfer
+    Description: A logical resource name for the service
+
+Resources:
+
+  TransferFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: transfer.handler
+      Runtime: nodejs6.10
+      CodeUri: ./out
+      Timeout: 10
+      Role: !GetAtt TransferFunctionExecutionRole.Arn
+      # Environment:
+      #   Variables:
+      #     STATE_MACHINE: !Ref Statemachine
+      #     FILE_BUCKET: !Ref PipelineFileStore
+
+  TransferFunctionExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: !Sub "/${Name}/"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - !Sub "lambda.${AWS::URLSuffix}"
+            Action: sts:AssumeRole
+
+  TransferFunctionExecutionPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: APIPermissions
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource:
+              - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:${TransferFunctionLogGroup}"
+          - Effect: Allow
+            Action:
+              - sts:AssumeRole
+            Resource:
+              - !Sub "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/*"
+      Roles:
+        - !Ref TransferFunctionExecutionRole
+
+  TransferFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${TransferFunction}"
+      RetentionInDays: 1
+
+Outputs:
+
+  TransferFunction:
+    Description: CodePipeline Function Name
+    Value: !Ref TransferFunction
+
+  TransferFunctionArn:
+    Description: CodePipeline Function ARN
+    Value: !GetAtt TransferFunction.Arn
+
+  TransferFunctionRoleArn:
+    Description: Transfer Lambda Function IAM Role Arn
+    Value !GetAtt TransferFunctionExecutionRole.Arn
