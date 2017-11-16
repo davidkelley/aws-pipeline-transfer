@@ -316,6 +316,7 @@ Resources:
                 Effect: Allow
                 Resource:
                   - !GetAtt PipelineArtifactStore.Arn
+                  - !Sub "${PipelineArtifactStore.Arn}/*"
               - Action:
                   - logs:CreateLogGroup
                   - logs:CreateLogStream
