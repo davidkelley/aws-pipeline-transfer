@@ -68,11 +68,17 @@ Outputs:
   TransferFunction:
     Description: CodePipeline Function Name
     Value: !Ref TransferFunction
+    Export:
+      Name: TransferFunctionName
 
   TransferFunctionArn:
     Description: CodePipeline Function ARN
     Value: !GetAtt TransferFunction.Arn
+    Export:
+      Name: TransferFunctionArn
 
   TransferFunctionRoleArn:
     Description: Transfer Lambda Function IAM Role Arn
     Value: !GetAtt TransferFunctionExecutionRole.Arn
+    Export:
+      Name: TransferFunctionRoleArn
