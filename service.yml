@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 
 Transform: AWS::Serverless-2016-10-31
 
-Description: "Deploys a Lambda function that controls AWS S3 file uploads."
+Description: "Deploys a Lambda function that controls AWS S3 file uploads via CodePipeline."
 
 Parameters:
 
@@ -75,4 +75,4 @@ Outputs:
 
   TransferFunctionRoleArn:
     Description: Transfer Lambda Function IAM Role Arn
-    Value !GetAtt TransferFunctionExecutionRole.Arn
+    Value: !GetAtt TransferFunctionExecutionRole.Arn

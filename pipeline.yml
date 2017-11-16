@@ -263,13 +263,13 @@ Resources:
                   - 's3:*'
                 Effect: Allow
                 Resource:
-                  - !Sub "arn:${AWS::Partition}:s3:::${PipelineArtifactStore}"
-                  - !Sub "arn:${AWS::Partition}:s3:::${PipelineArtifactStore}/*"
+                  - !GetAtt PipelineArtifactStore.Arn
+                  - !Sub "${PipelineArtifactStore.Arn}/*"
               - Action:
                   - 'codebuild:*'
                 Effect: Allow
                 Resource:
-                  - !Sub "arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/${Build}"
+                  - !GetAtt Build.Arn
               - Action:
                   - 'cloudformation:CreateStack'
                   - 'cloudformation:DescribeStacks'
@@ -282,13 +282,12 @@ Resources:
                   - 'cloudformation:SetStackPolicy'
                 Effect: Allow
                 Resource:
-                  - !Sub "arn:${AWS::Partition}:cloudformation:${AWS::Region}:${AWS::AccountId}:*/${Project}*/*"
                   - '*'
               - Action:
                   - 'iam:PassRole'
                 Effect: Allow
                 Resource:
-                  - '*'
+                  - !GetAtt CloudformationRole.Arn
 
   # Deploys the IAM Role that CodeBuild uses to successfully complete any actions
   # defined inside the buildspec.yml file.
@@ -309,13 +308,18 @@ Resources:
             Version: '2012-10-17'
             Statement:
               - Action:
+                  - 's3:PutObject'
+                Effect: Allow
+                Resource:
+                  - !GetAtt PipelineArtifactStore.Arn
+              - Action:
                   - logs:CreateLogGroup
                   - logs:CreateLogStream
                   - logs:PutLogEvents
                 Effect: Allow
-                Resource: '*'
+                Resource:
+                  - '*'
               - Action:
-                  - 's3:*'
                   - 'cloudformation:*'
                 Effect: Allow
                 Resource: '*'
