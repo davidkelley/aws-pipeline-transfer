@@ -54,6 +54,12 @@ Resources:
               - sts:AssumeRole
             Resource:
               - !Sub "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/*"
+          - Effect: Allow
+            Action:
+              - codepipeline:PutJobSuccessResult
+              - codepipeline:PutJobFailureResult
+            Resource:
+              - "*"
       Roles:
         - !Ref TransferFunctionExecutionRole
 
