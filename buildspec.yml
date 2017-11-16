@@ -24,7 +24,7 @@ phases:
       - npm run build
 
       - echo "Compiling Cloudformation (Bucket $S3_BUCKET)..."
-      - "aws cloudformation package --template-file service.yml --s3-prefix build --s3-bucket $S3_BUCKET --output-template-file artifacts/template.yml"
+      - "aws cloudformation package --template-file service.yml --s3-prefix build --s3-bucket $ARTIFACT_STORE --output-template-file artifacts/template.yml"
 
 artifacts:
   type: zip
