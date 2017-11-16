@@ -31,7 +31,7 @@
     "eslint-plugin-import": "^1.11.1",
     "eslint-plugin-jsx-a11y": "^2.0.1",
     "eslint-plugin-react": "^5.2.2",
-    "faker": "~3.1.0",
+    "faker": "~4.1.0",
     "ignore-loader": "^0.1.2",
     "jest": "^20.0",
     "json-loader": "^0.5.4",

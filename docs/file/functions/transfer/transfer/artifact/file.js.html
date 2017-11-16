@@ -32,6 +32,7 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer">transfer</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-handler">handler</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
@@ -47,8 +48,19 @@
 <div class="content" data-ice="content"><h1 data-ice="title">functions/transfer/transfer/artifact/file.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Path from &apos;path&apos;;
 import { S3 } from &apos;aws-sdk&apos;;
+import wrappedError from &apos;error/wrapped&apos;;
 
 import { AWS_REGION } from &apos;../../../globals&apos;;
+
+/**
+ * The JSON key does not exist in the file.
+ *
+ * @type {Error}
+ */
+const uploadError = wrappedError({
+  message: &apos;Failed to upload file with key &quot;{key}&quot;&apos;,
+  type: &apos;pipeline.artifact.file.upload&apos;,
+});
 
 /**
  * Represents a file inside an artifact.
@@ -86,10 +98,14 @@ export default class File {
    */
   async upload({ bucket: Bucket, credentials, prefix = &apos;&apos; }) {
     const { data, key } = this;
-    const s3 = new S3({ region: AWS_REGION, credentials });
-    const prefixedKey = Path.join(&apos;/&apos;, prefix, key);
-    await s3.putObject({ Bucket, Key: prefixedKey, Body: data });
-    return `s3://${Bucket}${prefixedKey}`;
+    try {
+      const s3 = new S3({ region: AWS_REGION, credentials });
+      const prefixedKey = Path.join(&apos;/&apos;, prefix, key);
+      await s3.putObject({ Bucket, Key: prefixedKey, Body: data }).promise();
+      return `s3://${Bucket}${prefixedKey}`;
+    } catch (err) {
+      throw uploadError(err, { key });
+    }
   }
 }
 </code></pre>

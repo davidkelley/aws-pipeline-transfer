@@ -1,7 +1,7 @@
 {
-  "coverage": "98.66%",
-  "expectCount": 75,
-  "actualCount": 74,
+  "coverage": "96.2%",
+  "expectCount": 79,
+  "actualCount": 76,
   "files": {
     "functions/globals.js": {
       "expectCount": 2,
@@ -19,13 +19,13 @@
       "undocumentLines": []
     },
     "functions/transfer/transfer/artifact/file.js": {
-      "expectCount": 5,
-      "actualCount": 5,
+      "expectCount": 6,
+      "actualCount": 6,
       "undocumentLines": []
     },
     "functions/transfer/transfer/attribute/attribute.js": {
-      "expectCount": 12,
-      "actualCount": 12,
+      "expectCount": 11,
+      "actualCount": 11,
       "undocumentLines": []
     },
     "functions/transfer/transfer/constants.js": {
@@ -34,8 +34,8 @@
       "undocumentLines": []
     },
     "functions/transfer/transfer/destination.js": {
-      "expectCount": 11,
-      "actualCount": 11,
+      "expectCount": 13,
+      "actualCount": 13,
       "undocumentLines": []
     },
     "functions/transfer/transfer/uploader.js": {
@@ -54,6 +54,14 @@
       "expectCount": 4,
       "actualCount": 4,
       "undocumentLines": []
+    },
+    "functions/transfer/transfer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        10
+      ]
     }
   }
 }

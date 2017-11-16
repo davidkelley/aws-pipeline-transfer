@@ -32,6 +32,7 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer">transfer</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-handler">handler</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
@@ -48,14 +49,217 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* eslint-disable import/no-unresolved */
 
 import Uploader from &apos;@functions/transfer/transfer/uploader&apos;;
-// import Artifact from &apos;@functions/transfer/transfer/artifact&apos;;
+import Artifact from &apos;@functions/transfer/transfer/artifact&apos;;
+import Destination from &apos;@functions/transfer/transfer/destination&apos;;
 
-// import faker from &apos;faker&apos;;
-// import AWS from &apos;aws-sdk-mock&apos;;
-// import Zip from &apos;node-zip&apos;;
+import faker from &apos;faker&apos;;
+import AWS from &apos;aws-sdk-mock&apos;;
+import Zip from &apos;node-zip&apos;;
 
 describe(&apos;Uploader&apos;, () =&gt; {
-  test(&apos;TODO&apos;);
+  const artifactName = faker.random.word();
+
+  const roleArnKey = faker.random.word();
+
+  const roleArn = faker.internet.url();
+
+  const bucketKey = faker.random.word();
+
+  const bucket = faker.random.uuid();
+
+  const jsonFile = JSON.stringify({ [roleArnKey]: roleArn, [bucketKey]: bucket });
+
+  const jsonFileName = faker.system.fileName();
+
+  const credentials = {
+    AccessKeyId: faker.random.uuid(),
+    SecretAccessKey: faker.random.uuid(),
+    SessionToken: faker.random.uuid(),
+  };
+
+  beforeEach(() =&gt; {
+    const zipFile = new Zip();
+    zipFile.file(jsonFileName, jsonFile);
+    AWS.mock(&apos;S3&apos;, &apos;getObject&apos;, (params, cb) =&gt; {
+      process.nextTick(() =&gt; {
+        const zipped = zipFile.generate({ base64: false, compression: &apos;DEFLATE&apos; });
+        cb(null, { Body: new Buffer(zipped, &apos;binary&apos;) });
+      });
+    });
+  });
+
+  beforeEach(() =&gt; {
+    AWS.mock(&apos;S3&apos;, &apos;putObject&apos;, (params, cb) =&gt; {
+      process.nextTick(() =&gt; { cb(null, {}); });
+    });
+  });
+
+  beforeEach(() =&gt; {
+    AWS.mock(&apos;STS&apos;, &apos;assumeRole&apos;, (params, cb) =&gt; {
+      expect(params).toEqual(expect.objectContaining({
+        RoleSessionName: process.env.AWS_LAMBDA_FUNCTION_NAME,
+        ExternalId: process.env.AWS_LAMBDA_FUNCTION_NAME,
+        RoleArn: roleArn,
+      }));
+      cb(null, { Credentials: credentials });
+    });
+  });
+
+  afterEach(() =&gt; {
+    AWS.restore(&apos;S3&apos;, &apos;getObject&apos;);
+    AWS.restore(&apos;STS&apos;, &apos;assumeRole&apos;);
+  });
+
+  const job = {
+    data: {
+      actionConfiguration: {
+        configuration: {
+          UserParameters: JSON.stringify([
+            {
+              roleArn: {
+                &apos;Fn::GetParam&apos;: [artifactName, jsonFileName, roleArnKey],
+              },
+              bucket: {
+                &apos;Fn::GetParam&apos;: [artifactName, jsonFileName, bucketKey],
+              },
+              src: [
+                `${artifactName}::${jsonFileName}`,
+              ],
+            },
+          ]),
+        },
+      },
+      inputArtifacts: [
+        {
+          location: {
+            s3Location: {
+              bucketName: faker.random.word(),
+              objectKey: faker.random.uuid(),
+            },
+          },
+          name: artifactName,
+        },
+      ],
+      artifactCredentials: {
+        secretAccessKey: faker.random.uuid(),
+        sessionToken: faker.random.uuid(),
+        accessKeyId: faker.random.uuid(),
+      },
+    },
+  };
+
+  describe(&apos;#new&apos;, () =&gt; {
+    describe(&apos;when the job is valid&apos;, () =&gt; {
+      it(&apos;instantiates correctly&apos;, () =&gt; {
+        const uploader = new Uploader(job);
+        expect(uploader.data).toEqual(job.data);
+        expect(uploader.parameters).toEqual(expect.any(Object));
+        expect(uploader.artifacts).toEqual(expect.objectContaining({
+          [artifactName]: expect.any(Artifact),
+        }));
+      });
+    });
+
+    describe(&apos;when there are no input artifacts&apos;, () =&gt; {
+      const invalidJob = {
+        data: {
+          actionConfiguration: {
+            configuration: {
+              UserParameters: JSON.stringify({}),
+            },
+          },
+          inputArtifacts: [],
+        },
+      };
+
+      it(&apos;throws an error&apos;, () =&gt; expect(() =&gt; new Uploader(invalidJob)).toThrow(Error));
+    });
+  });
+
+  describe(&apos;#userParameters&apos;, () =&gt; {
+    describe(&apos;when data is valid&apos;, () =&gt; {
+      it(&apos;returns the correct data object&apos;, () =&gt; {
+        const uploader = new Uploader(job);
+        return expect(uploader.userParameters()).resolves.toEqual(expect.arrayContaining([
+          expect.objectContaining({
+            roleArn: {
+              &apos;Fn::GetParam&apos;: [artifactName, jsonFileName, roleArnKey],
+            },
+            bucket: {
+              &apos;Fn::GetParam&apos;: [artifactName, jsonFileName, bucketKey],
+            },
+            src: [
+              `${artifactName}::${jsonFileName}`,
+            ],
+          }),
+        ]));
+      });
+    });
+
+    describe(&apos;when there is no data&apos;, () =&gt; {
+      it(&apos;throws an error&apos;, () =&gt; {
+        const uploader = new Uploader(job);
+        uploader.parameters = {};
+        return expect(uploader.userParameters()).rejects.toEqual(expect.any(Error));
+      });
+    });
+
+    describe(&apos;when data is not valid&apos;, () =&gt; {
+      const invalidData = [{
+        [faker.random.uuid()]: faker.random.number(),
+      }];
+
+      it(&apos;throws an error&apos;, () =&gt; {
+        const uploader = new Uploader(job);
+        uploader.parameters = invalidData;
+        return expect(uploader.userParameters()).rejects.toEqual(expect.any(Error));
+      });
+    });
+  });
+
+  describe(&apos;#destinations&apos;, () =&gt; {
+    describe(&apos;when the job is valid&apos;, () =&gt; {
+      it(&apos;returns an array of destination objects&apos;, () =&gt; {
+        const uploader = new Uploader(job);
+        return expect(uploader.destinations()).resolves.toEqual(expect.arrayContaining([
+          expect.any(Destination),
+        ]));
+      });
+    });
+
+    describe(&apos;when the job is invalid&apos;, () =&gt; {
+      const invalidData = [{
+        [faker.random.uuid()]: faker.random.number(),
+      }];
+
+      it(&apos;throws an error&apos;, () =&gt; {
+        const uploader = new Uploader(job);
+        uploader.parameters = invalidData;
+        return expect(uploader.destinations()).rejects.toEqual(expect.any(Error));
+      });
+    });
+  });
+
+  describe(&apos;#perform&apos;, () =&gt; {
+    describe(&apos;when the destination can be uploaded&apos;, () =&gt; {
+      const remoteLocation = faker.internet.url();
+
+      const upload = jest.fn().mockImplementation(async () =&gt; remoteLocation);
+
+      const uploader = new Uploader(job);
+
+      jest.spyOn(uploader, &apos;destinations&apos;).mockImplementation(async () =&gt; ([{ upload }]));
+
+      it(&apos;returns an array of remote locations&apos;, async () =&gt; {
+        const urls = await uploader.perform();
+        expect(urls).toEqual(expect.arrayContaining([
+          expect.stringMatching(remoteLocation),
+        ]));
+        expect(upload).toHaveBeenCalled();
+        expect(uploader.destinations).toHaveBeenCalled();
+      });
+    });
+  });
 });
 </code></pre>
 

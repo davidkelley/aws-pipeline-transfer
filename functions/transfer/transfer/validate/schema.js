@@ -12,10 +12,10 @@ const remoteAttribute = {
     {
       type: 'object',
       required: [
-        'Fn::GetArtifactAtt',
+        'Fn::GetParam',
       ],
       properties: {
-        'Fn::GetArtifactAtt': {
+        'Fn::GetParam': {
           type: 'array',
           items: [
             {

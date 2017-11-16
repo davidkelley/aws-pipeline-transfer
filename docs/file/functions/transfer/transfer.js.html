@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../../../../">
-  <title data-ice="title">functions/transfer/transfer/validate/schema.js | pipeline-transfer</title>
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">functions/transfer/transfer.js | pipeline-transfer</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -45,82 +45,36 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">functions/transfer/transfer/validate/schema.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
- * Defines the schema used to retrieve either statically defined values
- * or attributes from inside remote artifacts.
- *
- * @type {Object}
- */
-const remoteAttribute = {
-  oneOf: [
-    {
-      type: &apos;string&apos;,
-    },
-    {
-      type: &apos;object&apos;,
-      required: [
-        &apos;Fn::GetParam&apos;,
-      ],
-      properties: {
-        &apos;Fn::GetParam&apos;: {
-          type: &apos;array&apos;,
-          items: [
-            {
-              type: &apos;string&apos;,
-            },
-            {
-              type: &apos;string&apos;,
-            },
-            {
-              type: &apos;string&apos;,
-            },
-          ],
-        },
-      },
-    },
-  ],
-};
+<div class="content" data-ice="content"><h1 data-ice="title">functions/transfer/transfer.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { CodePipeline } from &apos;aws-sdk&apos;;
 
-/**
- * This schema defines the keys, properties and valid values that can be included
- * inside the `UserParameters` key when defining the use of this action inside
- * CodePipeline.
- *
- * @type {Object}
- */
-const Schema = {
-  type: &apos;array&apos;,
-  minItems: 1,
-  uniqueItems: true,
-  items: {
-    type: &apos;object&apos;,
-    required: [
-      &apos;roleArn&apos;,
-      &apos;bucket&apos;,
-      &apos;src&apos;,
-    ],
-    properties: {
-      roleArn: remoteAttribute,
-      bucket: remoteAttribute,
-      prefix: {
-        type: &apos;string&apos;,
-        default: &apos;/&apos;,
-      },
-      src: {
-        type: &apos;array&apos;,
-        minItems: 1,
-        uniqueItems: true,
-        items: {
-          type: &apos;string&apos;,
-          pattern: &apos;^.+::.+$&apos;,
-        },
-      },
-    },
-  },
-};
+import { AWS_REGION } from &apos;../globals&apos;;
 
-export default Schema;
+import Logger from &apos;../logger&apos;;
+import Uploader from &apos;./transfer/uploader&apos;;
+
+const client = new CodePipeline({ region: AWS_REGION });
+
+export async function handler(event, context, cb) {
+  const pipeline = event[&apos;CodePipeline.job&apos;];
+  const { id } = pipeline;
+  const result = { jobId: id };
+  try {
+    const urls = await new Uploader(pipeline).perform();
+    urls.forEach(url =&gt; Logger.info(`Uploaded: ${url}`));
+    await client.putJobSuccessResult(result).promise();
+    cb(null, result);
+  } catch (err) {
+    Logger.error(err);
+    result.failureDetails = {
+      message: err.message,
+      type: &apos;JobFailed&apos;,
+    };
+    await client.putJobFailureResult(result).promise();
+    cb(err);
+  }
+  return result;
+}
 </code></pre>
 
 </div>

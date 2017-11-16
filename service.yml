@@ -48,7 +48,7 @@ Resources:
               - logs:CreateLogStream
               - logs:PutLogEvents
             Resource:
-              - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:${TransferFunctionLogGroup}"
+              - !GetAtt TransferFunctionLogGroup.Arn
           - Effect: Allow
             Action:
               - sts:AssumeRole

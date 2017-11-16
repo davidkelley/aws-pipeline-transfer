@@ -1,4 +1,3 @@
-import wrappedError from 'error/wrapped';
 import typedError from 'error/typed';
 
 /**
@@ -9,16 +8,6 @@ import typedError from 'error/typed';
 const artifactParameterError = typedError({
   message: 'Unsupported object key "{keys}"',
   type: 'pipeline.attribute',
-});
-
-/**
- * The remote artifact file did not contain a truthy key value.
- *
- * @type {Error}
- */
-const remoteArtifactValueError = wrappedError({
-  message: 'Value was null or undefined for "{path}"',
-  type: 'pipeline.attribute.artifact.value',
 });
 
 /**
@@ -99,7 +88,7 @@ export default class Attribute {
     if (type === STATIC) {
       return mapping;
     }
-    const properties = mapping['Fn::GetArtifactAtt'];
+    const properties = mapping['Fn::GetParam'];
     if (!properties) {
       const keys = Object.keys(mapping).join(', ');
       throw artifactParameterError({ keys });
@@ -125,14 +114,7 @@ export default class Attribute {
       throw artifactNotFound({ artifactName });
     } else {
       await artifact.ready();
-      const value = artifact.attribute(filename, key);
-      if (!value) {
-        throw remoteArtifactValueError({
-          path: `${artifactName}::${filename}::${key}`,
-        });
-      } else {
-        return value;
-      }
+      return artifact.attribute(filename, key);
     }
   }
 }

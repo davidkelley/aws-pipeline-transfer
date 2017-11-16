@@ -27,10 +27,10 @@ An example action definition inside a CodePipeline CloudFormation resource defin
           [
             {
               "roleArn": {
-                "Fn::GetArtifactAtt": ["DeployOutput", "Outputs.json", "AssetS3BucketTransferRole"]
+                "Fn::GetParam": ["DeployOutput", "Outputs.json", "AssetS3BucketTransferRole"]
               },
               "bucket": {
-                "Fn::GetArtifactAtt": ["DeployOutput", "Outputs.json", "AssetS3Bucket"]
+                "Fn::GetParam": ["DeployOutput", "Outputs.json", "AssetS3Bucket"]
               },
               "prefix": "s3/key/prefix/",
               "src": [

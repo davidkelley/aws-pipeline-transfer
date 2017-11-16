@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../">
+  <title data-ice="title">__tests__/functions/transfer/transfer/destination.test.js | pipeline-transfer</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer">transfer</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-handler">handler</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-artifact">transfer/transfer/artifact</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/artifact.js~Artifact.html">Artifact</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/artifact/file.js~File.html">File</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-attribute">transfer/transfer/attribute</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/attribute/attribute.js~Attribute.html">Attribute</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer-validate">transfer/transfer/validate</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-validate">validate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Schema">Schema</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">__tests__/functions/transfer/transfer/destination.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* eslint-disable import/no-unresolved */
+
+import Destination from &apos;@functions/transfer/transfer/destination&apos;;
+import Attribute from &apos;@functions/transfer/transfer/attribute&apos;;
+import File from &apos;@functions/transfer/transfer/artifact/file&apos;;
+
+import faker from &apos;faker&apos;;
+import Path from &apos;path&apos;;
+import { Credentials, STS } from &apos;aws-sdk&apos;;
+import AWS from &apos;aws-sdk-mock&apos;;
+
+describe(&apos;Destination&apos;, () =&gt; {
+  const roleArn = faker.random.uuid();
+
+  const bucket = faker.random.word();
+
+  const artifact = {
+    ready: async () =&gt; true,
+    match: async () =&gt; {
+      const path = Path.join(&apos;/&apos;, faker.random.uuid());
+      const filename = faker.system.fileName();
+      const data = new Buffer(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));
+      return [
+        new File(path, filename, data),
+      ];
+    },
+  };
+
+  const artifactName = faker.random.word();
+
+  const artifacts = { [artifactName]: artifact };
+
+  const sources = [
+    `${artifactName}::**/*`,
+  ];
+
+  const prefix = Path.join(&apos;/&apos;, faker.random.uuid());
+
+  const properties = { roleArn, bucket, src: sources, prefix };
+
+  describe(&apos;#new&apos;, () =&gt; {
+    it(&apos;instantiates correctly&apos;, () =&gt; {
+      const destination = new Destination(properties, artifacts);
+      expect(destination.artifacts).toEqual(artifacts);
+      expect(destination.roleArn).toEqual(expect.any(Attribute));
+      expect(destination.bucket).toEqual(expect.any(Attribute));
+      expect(destination.sources).toEqual(sources);
+      expect(destination.prefix).toEqual(prefix);
+      expect(destination.sts).toEqual(expect.any(STS));
+    });
+
+    describe(&apos;.roleArn resolution&apos;, () =&gt; {
+      it(&apos;resolves to the correct value&apos;, () =&gt; {
+        const destination = new Destination(properties, artifacts);
+        expect(destination.roleArn.value()).resolves.toEqual(roleArn);
+      });
+    });
+
+    describe(&apos;.bucket resolution&apos;, () =&gt; {
+      it(&apos;resolves to the correct value&apos;, () =&gt; {
+        const destination = new Destination(properties, artifacts);
+        expect(destination.bucket.value()).resolves.toEqual(bucket);
+      });
+    });
+  });
+
+  describe(&apos;#credentials&apos;, () =&gt; {
+    describe(&apos;when the request is successful&apos;, () =&gt; {
+      const accessKeyId = faker.random.uuid();
+
+      const secretAccessKey = faker.random.uuid();
+
+      const sessionToken = faker.random.uuid();
+
+      const credentials = {
+        AccessKeyId: accessKeyId,
+        SecretAccessKey: secretAccessKey,
+        SessionToken: sessionToken,
+      };
+
+      beforeEach(() =&gt; {
+        AWS.mock(&apos;STS&apos;, &apos;assumeRole&apos;, (params, cb) =&gt; {
+          expect(params).toEqual(expect.objectContaining({
+            RoleSessionName: process.env.AWS_LAMBDA_FUNCTION_NAME,
+            ExternalId: process.env.AWS_LAMBDA_FUNCTION_NAME,
+            RoleArn: roleArn,
+          }));
+          cb(null, { Credentials: credentials });
+        });
+      });
+
+      afterEach(() =&gt; {
+        AWS.restore(&apos;STS&apos;, &apos;assumeRole&apos;);
+      });
+
+      it(&apos;returns a correctly instantiated AWS Credentials object&apos;, async () =&gt; {
+        const destination = new Destination(properties, artifacts);
+        const assumed = await destination.credentials();
+        expect(assumed).toEqual(expect.any(Credentials));
+        expect(assumed.accessKeyId).toEqual(accessKeyId);
+        expect(assumed.secretAccessKey).toEqual(secretAccessKey);
+        expect(assumed.sessionToken).toEqual(sessionToken);
+      });
+    });
+
+    describe(&apos;when the request is invalid&apos;, () =&gt; {
+      beforeEach(() =&gt; {
+        AWS.mock(&apos;STS&apos;, &apos;assumeRole&apos;, (params, cb) =&gt; {
+          cb(new Error(&apos;TEST&apos;), {});
+        });
+      });
+
+      afterEach(() =&gt; {
+        AWS.restore(&apos;STS&apos;, &apos;assumeRole&apos;);
+      });
+
+      it(&apos;returns a correctly instantiated AWS Credentials object&apos;, () =&gt; {
+        const destination = new Destination(properties, artifacts);
+        return expect(destination.credentials()).rejects.toEqual(expect.any(Error));
+      });
+    });
+  });
+
+  describe(&apos;#files&apos;, () =&gt; {
+    describe(&apos;when the artifact exists&apos;, () =&gt; {
+      it(&apos;resolves with an array of instantiated files&apos;, () =&gt; {
+        const destination = new Destination(properties, artifacts);
+        return expect(destination.files()).resolves.toEqual(expect.arrayContaining([
+          expect.any(File),
+        ]));
+      });
+    });
+
+    describe(&apos;when there are no files&apos;, () =&gt; {
+      const noFileProperties = { roleArn, bucket, src: [], prefix };
+
+      it(&apos;resolves with an empty array&apos;, () =&gt; {
+        const destination = new Destination(noFileProperties, artifacts);
+        return expect(destination.files()).resolves.toEqual([]);
+      });
+    });
+
+    describe(&apos;when the artifact does not exist&apos;, () =&gt; {
+      const invalidFileProperties = { roleArn, bucket, src: [
+        `${faker.random.uuid()}::${faker.system.fileName()}`,
+      ], prefix };
+
+      it(&apos;resolves with an empty array&apos;, () =&gt; {
+        const destination = new Destination(invalidFileProperties, artifacts);
+        return expect(destination.files()).rejects.toEqual(expect.any(Error));
+      });
+    });
+  });
+
+  describe(&apos;#upload&apos;, () =&gt; {
+    describe(&apos;when all files can be uploaded successfully&apos;, () =&gt; {
+      const destination = new Destination(properties, artifacts);
+
+      const uploadLocation = `s3://${faker.random.uuid()}/${faker.system.fileName()}`;
+
+      const upload = jest.fn().mockImplementation(async () =&gt; uploadLocation);
+
+      const credentials = new Credentials(
+        faker.random.uuid(),
+        faker.random.uuid(),
+        faker.random.uuid()
+      );
+
+      jest.spyOn(destination, &apos;files&apos;).mockImplementation(async () =&gt; ([{ upload }]));
+
+      jest.spyOn(destination, &apos;credentials&apos;).mockImplementation(async () =&gt; credentials);
+
+      it(&apos;resolves with an array of remote locations&apos;, async () =&gt; {
+        const urls = await destination.upload();
+        expect(urls).toEqual(expect.arrayContaining([
+          expect.stringMatching(uploadLocation),
+        ]));
+        expect(destination.files).toHaveBeenCalled();
+        expect(destination.credentials).toHaveBeenCalled();
+        expect(upload).toHaveBeenCalledWith(expect.objectContaining({
+          bucket,
+          credentials,
+          prefix,
+        }));
+      });
+    });
+  });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

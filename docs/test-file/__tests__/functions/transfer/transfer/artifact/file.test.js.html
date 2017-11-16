@@ -32,6 +32,7 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer">transfer</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-handler">handler</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
@@ -49,8 +50,111 @@
 
 import File from &apos;@functions/transfer/transfer/artifact/file&apos;;
 
+import AWS from &apos;aws-sdk-mock&apos;;
+import { Credentials } from &apos;aws-sdk&apos;;
+import Path from &apos;path&apos;;
+import faker from &apos;faker&apos;;
+
 describe(&apos;File&apos;, () =&gt; {
-  test(&apos;TODO&apos;);
+  const path = Path.join(&apos;/&apos;, faker.random.uuid());
+
+  const filename = faker.system.fileName();
+
+  const data = new Buffer(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));
+
+  describe(&apos;#new&apos;, () =&gt; {
+    it(&apos;initialises correctly&apos;, () =&gt; {
+      const file = new File(path, filename, data);
+      const expectedPath = Path.join(&apos;/&apos;, path, filename);
+      expect(file.key).toEqual(expectedPath);
+      expect(file.data).toEqual(data);
+    });
+  });
+
+  describe(&apos;#upload&apos;, () =&gt; {
+    const accessKeyId = faker.random.uuid();
+
+    const secretAccessKey = faker.random.uuid();
+
+    const sessionToken = faker.random.uuid();
+
+    const credentials = new Credentials(accessKeyId, secretAccessKey, sessionToken);
+
+    const bucket = faker.random.uuid();
+
+    const prefix = Path.join(&apos;/&apos;, faker.random.uuid());
+
+    const prefixed = Path.join(&apos;/&apos;, prefix, path, filename);
+
+    describe(&apos;when the upload succeeds&apos;, () =&gt; {
+      beforeEach(() =&gt; {
+        AWS.mock(&apos;S3&apos;, &apos;putObject&apos;, (params, cb) =&gt; {
+          expect(params).toEqual(expect.objectContaining({
+            Bucket: bucket,
+            Key: prefixed,
+            Body: data,
+          }));
+          cb(null, { });
+        });
+      });
+
+      afterEach(() =&gt; {
+        AWS.restore(&apos;S3&apos;, &apos;putObject&apos;);
+      });
+
+      it(&apos;returns the correct fully resolved path&apos;, () =&gt; {
+        const file = new File(path, filename, data);
+        return expect(file.upload({ bucket, credentials, prefix })).resolves.toEqual(
+          expect.stringMatching(`s3://${bucket}${prefixed}`),
+        );
+      });
+    });
+
+    describe(&apos;when there is no prefix&apos;, () =&gt; {
+      const filepath = Path.join(&apos;/&apos;, path, filename);
+
+      beforeEach(() =&gt; {
+        AWS.mock(&apos;S3&apos;, &apos;putObject&apos;, (params, cb) =&gt; {
+          expect(params).toEqual(expect.objectContaining({
+            Bucket: bucket,
+            Key: filepath,
+            Body: data,
+          }));
+          cb(null, { });
+        });
+      });
+
+      afterEach(() =&gt; {
+        AWS.restore(&apos;S3&apos;, &apos;putObject&apos;);
+      });
+
+      it(&apos;returns the correct fully resolved path&apos;, () =&gt; {
+        const file = new File(path, filename, data);
+        return expect(file.upload({ bucket, credentials })).resolves.toEqual(
+          expect.stringMatching(`s3://${bucket}${filepath}`),
+        );
+      });
+    });
+
+    describe(&apos;when the upload fails&apos;, () =&gt; {
+      beforeEach(() =&gt; {
+        AWS.mock(&apos;S3&apos;, &apos;putObject&apos;, (params, cb) =&gt; {
+          cb(new Error(&apos;TEST&apos;), {});
+        });
+      });
+
+      afterEach(() =&gt; {
+        AWS.restore(&apos;S3&apos;, &apos;putObject&apos;);
+      });
+
+      it(&apos;throws a well-formed error&apos;, () =&gt; {
+        const file = new File(path, filename, data);
+        return expect(file.upload({ bucket, credentials, prefix })).rejects.toEqual(
+          expect.any(Error),
+        );
+      });
+    });
+  });
 });
 </code></pre>
 

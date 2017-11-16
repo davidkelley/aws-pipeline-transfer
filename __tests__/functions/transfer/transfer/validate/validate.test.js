@@ -11,7 +11,7 @@ describe('#validate', () => {
         bucket: faker.random.word(),
         prefix: '/some/random/key',
         roleArn: {
-          'Fn::GetArtifactAtt': ['DeployOutput', 'Outputs.json', 'S3BucketKey'],
+          'Fn::GetParam': ['DeployOutput', 'Outputs.json', 'S3BucketKey'],
         },
         src: [
           'BuildOutput::out/**/*.png',

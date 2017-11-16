@@ -32,6 +32,7 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer">transfer</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-handler">handler</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
@@ -45,13 +46,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Destination from &apos;<span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber34">pipeline-transfer/functions/transfer/transfer/destination.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Destination from &apos;<span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber37">pipeline-transfer/functions/transfer/transfer/destination.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber34">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber37">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -131,6 +132,35 @@ method.</p>
   <tbody>
   
   <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html#instance-member-artifacts">artifacts</a></span></span><span class="code" data-ice="signature">: <span>Array[Artifact]</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>An array of <span><a href="class/functions/transfer/transfer/artifact/artifact.js~Artifact.html">Artifact</a></span> (which may not be ready).</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
     <td>
       <span class="access" data-ice="access">public</span>
       
@@ -240,6 +270,36 @@ permissons for the destination S3 Bucket.</p>
         
         
         <div data-ice="description"><p>An array of source files to be found inside one or more input artifacts.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html#instance-member-sts">sts</a></span></span><span class="code" data-ice="signature">: <span>STS</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>The AWS STS client used to assume roles inside the lambda function
+for the appropriate S3 destination.</p>
 </div>
       </div>
     </td>
@@ -366,7 +426,7 @@ defined destinations, prefixed with the appropriate key.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber48">source</a></span></span>
+      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber51">source</a></span></span>
     </span>
   </h3>
 
@@ -458,6 +518,50 @@ defined destinations, prefixed with the appropriate key.</p>
 <div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-artifacts">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">artifacts</span><span class="code" data-ice="signature">: <span>Array[Artifact]</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber64">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>An array of <span><a href="class/functions/transfer/transfer/artifact/artifact.js~Artifact.html">Artifact</a></span> (which may not be ready).</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-member-bucket">
     <span class="access" data-ice="access">public</span>
     
@@ -469,7 +573,7 @@ defined destinations, prefixed with the appropriate key.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber61">source</a></span></span>
+      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber77">source</a></span></span>
     </span>
   </h3>
 
@@ -513,7 +617,7 @@ defined destinations, prefixed with the appropriate key.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber74">source</a></span></span>
+      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber90">source</a></span></span>
     </span>
   </h3>
 
@@ -558,7 +662,7 @@ destination S3 bucket.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber55">source</a></span></span>
+      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber71">source</a></span></span>
     </span>
   </h3>
 
@@ -603,7 +707,7 @@ permissons for the destination S3 Bucket.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber67">source</a></span></span>
+      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber83">source</a></span></span>
     </span>
   </h3>
 
@@ -611,6 +715,51 @@ permissons for the destination S3 Bucket.</p>
   
   
   <div data-ice="description"><p>An array of source files to be found inside one or more input artifacts.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-sts">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">sts</span><span class="code" data-ice="signature">: <span>STS</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber58">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>The AWS STS client used to assume roles inside the lambda function
+for the appropriate S3 destination.</p>
 </div>
 
   
@@ -650,7 +799,7 @@ permissons for the destination S3 Bucket.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber83">source</a></span></span>
+      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber99">source</a></span></span>
     </span>
   </h3>
 
@@ -708,7 +857,7 @@ IAM access to the remote S3 destination.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber106">source</a></span></span>
+      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber127">source</a></span></span>
     </span>
   </h3>
 
@@ -767,7 +916,7 @@ artifacts.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber128">source</a></span></span>
+      <span data-ice="source"><span><a href="file/functions/transfer/transfer/destination.js.html#lineNumber150">source</a></span></span>
     </span>
   </h3>
 

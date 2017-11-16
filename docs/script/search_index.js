@@ -84,6 +84,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "pipeline-transfer/functions/transfer/transfer.js~handler",
+    "function/index.html#static-function-handler",
+    "<span>handler</span> <span class=\"search-result-import-path\">pipeline-transfer/functions/transfer/transfer.js</span>",
+    "function"
+  ],
+  [
     "pipeline-transfer/functions/transfer/transfer/validate/validate.js~validate",
     "function/index.html#static-function-validate",
     "<span>validate</span> <span class=\"search-result-import-path\">pipeline-transfer/functions/transfer/transfer/validate/validate.js</span>",
@@ -433,26 +439,314 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber5",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber7",
     "Attribute",
     "test"
   ],
   [
     "",
-    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber6",
-    "Attribute TODO",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber28",
+    "Attribute #new",
     "test"
   ],
   [
     "",
-    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber5",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber31",
+    "Attribute #new should instantiate correctly",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber38",
+    "Attribute #type",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber39",
+    "Attribute #type when the mapping is a static value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber42",
+    "Attribute #type when the mapping is a static value should return the correct value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber48",
+    "Attribute #type when the mapping is an object",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber53",
+    "Attribute #type when the mapping is an object should return the correct value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber60",
+    "Attribute #value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber61",
+    "Attribute #value when the mapping is a static value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber64",
+    "Attribute #value when the mapping is a static value should return the correct value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber70",
+    "Attribute #value when the mapping is an object",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber93",
+    "Attribute #value when the mapping is an object when the mapping contains an invalid artifact",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber98",
+    "Attribute #value when the mapping is an object when the mapping contains an invalid artifact should return the correct value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber82",
+    "Attribute #value when the mapping is an object when the mapping contains an invalid key",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber87",
+    "Attribute #value when the mapping is an object when the mapping contains an invalid key should return the correct value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber71",
+    "Attribute #value when the mapping is an object when the mapping is an unrecognised key",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber76",
+    "Attribute #value when the mapping is an object when the mapping is an unrecognised key should return the correct value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber104",
+    "Attribute #value when the mapping is an object when the mapping is valid",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html#lineNumber109",
+    "Attribute #value when the mapping is an object when the mapping is valid should return the correct value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber12",
+    "Destination",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber67",
+    "Destination #credentials",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber106",
+    "Destination #credentials when the request is invalid",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber117",
+    "Destination #credentials when the request is invalid returns a correctly instantiated AWS Credentials object",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber68",
+    "Destination #credentials when the request is successful",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber96",
+    "Destination #credentials when the request is successful returns a correctly instantiated AWS Credentials object",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber124",
+    "Destination #files",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber143",
+    "Destination #files when the artifact does not exist",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber148",
+    "Destination #files when the artifact does not exist resolves with an empty array",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber125",
+    "Destination #files when the artifact exists",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber126",
+    "Destination #files when the artifact exists resolves with an array of instantiated files",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber134",
+    "Destination #files when there are no files",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber137",
+    "Destination #files when there are no files resolves with an empty array",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber41",
+    "Destination #new",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber59",
+    "Destination #new .bucket resolution",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber60",
+    "Destination #new .bucket resolution resolves to the correct value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber52",
+    "Destination #new .roleArn resolution",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber53",
+    "Destination #new .roleArn resolution resolves to the correct value",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber42",
+    "Destination #new instantiates correctly",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber155",
+    "Destination #upload",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber156",
+    "Destination #upload when all files can be uploaded successfully",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html#lineNumber173",
+    "Destination #upload when all files can be uploaded successfully resolves with an array of remote locations",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber10",
     "File",
     "test"
   ],
   [
     "",
-    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber6",
-    "File TODO",
+    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber17",
+    "File #new",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber18",
+    "File #new initialises correctly",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber26",
+    "File #upload",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber91",
+    "File #upload when the upload fails",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber102",
+    "File #upload when the upload fails throws a well-formed error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber41",
+    "File #upload when the upload succeeds",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber57",
+    "File #upload when the upload succeeds returns the correct fully resolved path",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber65",
+    "File #upload when there is no prefix",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/artifact/file.test.js.html#lineNumber83",
+    "File #upload when there is no prefix returns the correct fully resolved path",
     "test"
   ],
   [
@@ -481,14 +775,128 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber10",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber11",
     "Uploader",
     "test"
   ],
   [
     "",
-    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber11",
-    "Uploader TODO",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber172",
+    "Uploader #destinations",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber182",
+    "Uploader #destinations when the job is invalid",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber187",
+    "Uploader #destinations when the job is invalid throws an error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber173",
+    "Uploader #destinations when the job is valid",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber174",
+    "Uploader #destinations when the job is valid returns an array of destination objects",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber103",
+    "Uploader #new",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber104",
+    "Uploader #new when the job is valid",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber105",
+    "Uploader #new when the job is valid instantiates correctly",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber115",
+    "Uploader #new when there are no input artifacts",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber127",
+    "Uploader #new when there are no input artifacts throws an error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber195",
+    "Uploader #perform",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber196",
+    "Uploader #perform when the destination can be uploaded",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber205",
+    "Uploader #perform when the destination can be uploaded returns an array of remote locations",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber131",
+    "Uploader #userParameters",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber159",
+    "Uploader #userParameters when data is not valid",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber164",
+    "Uploader #userParameters when data is not valid throws an error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber132",
+    "Uploader #userParameters when data is valid",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber133",
+    "Uploader #userParameters when data is valid returns the correct data object",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber151",
+    "Uploader #userParameters when there is no data",
+    "test"
+  ],
+  [
+    "",
+    "test-file/__tests__/functions/transfer/transfer/uploader.test.js.html#lineNumber152",
+    "Uploader #userParameters when there is no data throws an error",
     "test"
   ],
   [
@@ -513,6 +921,12 @@ window.esdocSearchIndex = [
     "__tests__/functions/transfer/transfer/attribute/attribute.test.js",
     "test-file/__tests__/functions/transfer/transfer/attribute/attribute.test.js.html",
     "__tests__/functions/transfer/transfer/attribute/attribute.test.js",
+    "testFile"
+  ],
+  [
+    "__tests__/functions/transfer/transfer/destination.test.js",
+    "test-file/__tests__/functions/transfer/transfer/destination.test.js.html",
+    "__tests__/functions/transfer/transfer/destination.test.js",
     "testFile"
   ],
   [
@@ -834,6 +1248,12 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
+    "functions/transfer/transfer.js",
+    "file/functions/transfer/transfer.js.html",
+    "functions/transfer/transfer.js",
+    "file"
+  ],
+  [
     "functions/transfer/transfer/artifact/artifact.js",
     "file/functions/transfer/transfer/artifact/artifact.js.html",
     "functions/transfer/transfer/artifact/artifact.js",
@@ -1050,6 +1470,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "functions/transfer/transfer/destination.js~destination#artifacts",
+    "class/functions/transfer/transfer/destination.js~Destination.html#instance-member-artifacts",
+    "functions/transfer/transfer/destination.js~Destination#artifacts",
+    "member"
+  ],
+  [
     "functions/transfer/transfer/destination.js~destination#bucket",
     "class/functions/transfer/transfer/destination.js~Destination.html#instance-member-bucket",
     "functions/transfer/transfer/destination.js~Destination#bucket",
@@ -1089,6 +1515,12 @@ window.esdocSearchIndex = [
     "functions/transfer/transfer/destination.js~destination#sources",
     "class/functions/transfer/transfer/destination.js~Destination.html#instance-member-sources",
     "functions/transfer/transfer/destination.js~Destination#sources",
+    "member"
+  ],
+  [
+    "functions/transfer/transfer/destination.js~destination#sts",
+    "class/functions/transfer/transfer/destination.js~Destination.html#instance-member-sts",
+    "functions/transfer/transfer/destination.js~Destination#sts",
     "member"
   ],
   [

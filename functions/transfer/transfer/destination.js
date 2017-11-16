@@ -1,16 +1,9 @@
 import { STS, Credentials } from 'aws-sdk';
 import typedError from 'error/typed';
+import wrappedError from 'error/wrapped';
 
 import Attribute from './attribute';
 import { FUNCTION_NAME } from './constants';
-
-/**
- * The AWS STS client used to assume roles inside the lambda function
- * for the appropriate S3 destination.
- *
- * @type {STS}
- */
-const sts = new STS();
 
 /**
  * The defined remote artifact does not exist or access has not been granted.
@@ -20,6 +13,16 @@ const sts = new STS();
 const artifactNotFound = typedError({
   message: 'Artifact "{artifactName}" not a valid InputArtifact',
   type: 'pipeline.artifact.not_found',
+});
+
+/**
+ * An error occurred whilst attempting to assume the role that was provided.
+ *
+ * @type {Error}
+ */
+const couldNotAssumeRole = wrappedError({
+  message: 'Failed to assume role: "{roleArn}"',
+  type: 'pipeline.destination.role',
 });
 
 /**
@@ -46,6 +49,19 @@ export default class Destination {
    *  {@link Artifact} instances with the property key being the artifacts name.
    */
   constructor({ roleArn, bucket, src, prefix = '/' }, artifacts) {
+    /**
+     * The AWS STS client used to assume roles inside the lambda function
+     * for the appropriate S3 destination.
+     *
+     * @type {STS}
+     */
+    this.sts = new STS();
+    /**
+     * An array of {@link Artifact} (which may not be ready).
+     *
+     * @type {Array[Artifact]}
+     */
+    this.artifacts = artifacts;
     /**
      * A static or remote reference to a IAM Role which has sufficient
      * permissons for the destination S3 Bucket.
@@ -81,19 +97,24 @@ export default class Destination {
    * @return {Object} an object containing AWS access keys.
    */
   async credentials() {
+    const { sts } = this;
     const roleArn = await this.roleArn.value();
-    const {
-      Credentials: {
-        AccessKeyId,
-        SecretAccessKey,
-        SessionToken,
-      },
-    } = await sts.assumeRole({
-      RoleSessionName: FUNCTION_NAME,
-      ExternalId: FUNCTION_NAME,
-      RoleArn: roleArn,
-    }).promise();
-    return new Credentials(AccessKeyId, SecretAccessKey, SessionToken);
+    try {
+      const {
+        Credentials: {
+          AccessKeyId,
+          SecretAccessKey,
+          SessionToken,
+        },
+      } = await sts.assumeRole({
+        RoleSessionName: FUNCTION_NAME,
+        ExternalId: FUNCTION_NAME,
+        RoleArn: roleArn,
+      }).promise();
+      return new Credentials(AccessKeyId, SecretAccessKey, SessionToken);
+    } catch (err) {
+      throw couldNotAssumeRole(err, { roleArn });
+    }
   }
 
   /**
@@ -114,7 +135,8 @@ export default class Destination {
       await artifact.ready();
       return artifact.match(glob);
     });
-    return await Promise.all(files);
+    const sourceFiles = await Promise.all(files);
+    return [].concat(...sourceFiles);
   }
 
   /**
@@ -130,8 +152,7 @@ export default class Destination {
     const credentials = await this.credentials();
     const bucket = await this.bucket.value();
     const files = await this.files();
-    const uploads = files.map(f => f.upload({ bucket, credentials, prefix }));
-    await Promise.all(uploads);
-    return true;
+    const details = { bucket, credentials, prefix };
+    return await Promise.all(files.map(f => f.upload(details)));
   }
 }

@@ -32,6 +32,7 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer">transfer</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-handler">handler</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
@@ -49,8 +50,117 @@
 
 import Attribute from &apos;@functions/transfer/transfer/attribute&apos;;
 
+import faker from &apos;faker&apos;;
+
 describe(&apos;Attribute&apos;, () =&gt; {
-  test(&apos;TODO&apos;);
+  const key = faker.random.word();
+
+  const value = faker.random.number();
+
+  // const data = JSON.stringify({ [key]: value });
+
+  const artifact = {
+    ready: async () =&gt; true,
+    attribute: async (_, requestedKey) =&gt; {
+      if (requestedKey !== key) {
+        throw new Error(&apos;TEST&apos;);
+      }
+      return value;
+    },
+  };
+
+  const artifactName = faker.random.word();
+
+  const artifacts = { [artifactName]: artifact };
+
+  describe(&apos;#new&apos;, () =&gt; {
+    const mapping = faker.random.word();
+
+    it(&apos;should instantiate correctly&apos;, () =&gt; {
+      const attribute = new Attribute(mapping, artifacts);
+      expect(attribute.mapping).toEqual(mapping);
+      expect(attribute.artifacts).toEqual(artifacts);
+    });
+  });
+
+  describe(&apos;#type&apos;, () =&gt; {
+    describe(&apos;when the mapping is a static value&apos;, () =&gt; {
+      const mapping = faker.random.word();
+
+      it(&apos;should return the correct value&apos;, () =&gt; {
+        const attribute = new Attribute(mapping, artifacts);
+        expect(attribute.type).toEqual(&apos;STATIC&apos;);
+      });
+    });
+
+    describe(&apos;when the mapping is an object&apos;, () =&gt; {
+      const mapping = {
+        &apos;Fn::GetParam&apos;: [artifactName, faker.system.fileName(), key],
+      };
+
+      it(&apos;should return the correct value&apos;, () =&gt; {
+        const attribute = new Attribute(mapping, artifacts);
+        expect(attribute.type).toEqual(&apos;REMOTE&apos;);
+      });
+    });
+  });
+
+  describe(&apos;#value&apos;, () =&gt; {
+    describe(&apos;when the mapping is a static value&apos;, () =&gt; {
+      const mapping = faker.random.word();
+
+      it(&apos;should return the correct value&apos;, () =&gt; {
+        const attribute = new Attribute(mapping, artifacts);
+        return expect(attribute.value()).resolves.toEqual(mapping);
+      });
+    });
+
+    describe(&apos;when the mapping is an object&apos;, () =&gt; {
+      describe(&apos;when the mapping is an unrecognised key&apos;, () =&gt; {
+        const mapping = {
+          [faker.random.uuid()]: faker.random.words(),
+        };
+
+        it(&apos;should return the correct value&apos;, () =&gt; {
+          const attribute = new Attribute(mapping, artifacts);
+          return expect(attribute.value()).rejects.toEqual(expect.any(Error));
+        });
+      });
+
+      describe(&apos;when the mapping contains an invalid key&apos;, () =&gt; {
+        const mapping = {
+          &apos;Fn::GetParam&apos;: [artifactName, faker.system.fileName(), faker.random.uuid()],
+        };
+
+        it(&apos;should return the correct value&apos;, () =&gt; {
+          const attribute = new Attribute(mapping, artifacts);
+          return expect(attribute.value()).rejects.toEqual(expect.any(Error));
+        });
+      });
+
+      describe(&apos;when the mapping contains an invalid artifact&apos;, () =&gt; {
+        const mapping = {
+          &apos;Fn::GetParam&apos;: [faker.random.uuid(), faker.system.fileName(), key],
+        };
+
+        it(&apos;should return the correct value&apos;, () =&gt; {
+          const attribute = new Attribute(mapping, artifacts);
+          return expect(attribute.value()).rejects.toEqual(expect.any(Error));
+        });
+      });
+
+      describe(&apos;when the mapping is valid&apos;, () =&gt; {
+        const mapping = {
+          &apos;Fn::GetParam&apos;: [artifactName, faker.system.fileName(), key],
+        };
+
+        it(&apos;should return the correct value&apos;, () =&gt; {
+          const attribute = new Attribute(mapping, artifacts);
+          return expect(attribute.value()).resolves.toEqual(value);
+        });
+      });
+    });
+  });
 });
 </code></pre>
 

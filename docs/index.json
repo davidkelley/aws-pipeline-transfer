@@ -1360,7 +1360,7 @@
     "__docId__": 84,
     "kind": "file",
     "name": "functions/transfer/transfer/artifact/file.js",
-    "content": "import Path from 'path';\nimport { S3 } from 'aws-sdk';\n\nimport { AWS_REGION } from '../../../globals';\n\n/**\n * Represents a file inside an artifact.\n *\n */\nexport default class File {\n  /**\n   * @param {String} path - the path to the file inside the artifact\n   * @param {String} filename - The name of the file, including the extension name\n   * @param {Buffer} data - A buffer of the files contents.\n   */\n  constructor(path, filename, data) {\n    /**\n     * The S3 key which represents this file (path + filename)\n     *\n     * @type {String}\n     */\n    this.key = Path.join('/', path, filename);\n    /**\n     * The data contained inside the file\n     *\n     * @type {Buffer}\n     */\n    this.data = data;\n  }\n\n  /**\n   * Uploads the file to the specific remote S3 bucket, using the supplied\n   * credentials and an optional prefix.\n   *\n   * @param {Object} opts - An options object\n   * @param {String} opts.bucket - The bucket to upload the file to.\n   * @param {Credentials} opts.credentials - An instantiated AWS.Credentials object.\n   * @param {String} opts.prefix - An optional prefix to apply to this file.\n   */\n  async upload({ bucket: Bucket, credentials, prefix = '' }) {\n    const { data, key } = this;\n    const s3 = new S3({ region: AWS_REGION, credentials });\n    const prefixedKey = Path.join('/', prefix, key);\n    await s3.putObject({ Bucket, Key: prefixedKey, Body: data });\n    return `s3://${Bucket}${prefixedKey}`;\n  }\n}\n",
+    "content": "import Path from 'path';\nimport { S3 } from 'aws-sdk';\nimport wrappedError from 'error/wrapped';\n\nimport { AWS_REGION } from '../../../globals';\n\n/**\n * The JSON key does not exist in the file.\n *\n * @type {Error}\n */\nconst uploadError = wrappedError({\n  message: 'Failed to upload file with key \"{key}\"',\n  type: 'pipeline.artifact.file.upload',\n});\n\n/**\n * Represents a file inside an artifact.\n *\n */\nexport default class File {\n  /**\n   * @param {String} path - the path to the file inside the artifact\n   * @param {String} filename - The name of the file, including the extension name\n   * @param {Buffer} data - A buffer of the files contents.\n   */\n  constructor(path, filename, data) {\n    /**\n     * The S3 key which represents this file (path + filename)\n     *\n     * @type {String}\n     */\n    this.key = Path.join('/', path, filename);\n    /**\n     * The data contained inside the file\n     *\n     * @type {Buffer}\n     */\n    this.data = data;\n  }\n\n  /**\n   * Uploads the file to the specific remote S3 bucket, using the supplied\n   * credentials and an optional prefix.\n   *\n   * @param {Object} opts - An options object\n   * @param {String} opts.bucket - The bucket to upload the file to.\n   * @param {Credentials} opts.credentials - An instantiated AWS.Credentials object.\n   * @param {String} opts.prefix - An optional prefix to apply to this file.\n   */\n  async upload({ bucket: Bucket, credentials, prefix = '' }) {\n    const { data, key } = this;\n    try {\n      const s3 = new S3({ region: AWS_REGION, credentials });\n      const prefixedKey = Path.join('/', prefix, key);\n      await s3.putObject({ Bucket, Key: prefixedKey, Body: data }).promise();\n      return `s3://${Bucket}${prefixedKey}`;\n    } catch (err) {\n      throw uploadError(err, { key });\n    }\n  }\n}\n",
     "static": true,
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/artifact/file.js",
     "access": "public",
@@ -1369,6 +1369,29 @@
   },
   {
     "__docId__": 85,
+    "kind": "variable",
+    "name": "uploadError",
+    "memberof": "functions/transfer/transfer/artifact/file.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/artifact/file.js~uploadError",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/artifact/file.js",
+    "importStyle": null,
+    "description": "The JSON key does not exist in the file.",
+    "lineNumber": 12,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 86,
     "kind": "class",
     "name": "File",
     "memberof": "functions/transfer/transfer/artifact/file.js",
@@ -1379,11 +1402,11 @@
     "importPath": "pipeline-transfer/functions/transfer/transfer/artifact/file.js",
     "importStyle": "File",
     "description": "Represents a file inside an artifact.",
-    "lineNumber": 10,
+    "lineNumber": 21,
     "interface": false
   },
   {
-    "__docId__": 86,
+    "__docId__": 87,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "functions/transfer/transfer/artifact/file.js~File",
@@ -1393,7 +1416,7 @@
     "longname": "functions/transfer/transfer/artifact/file.js~File#constructor",
     "access": "public",
     "description": "",
-    "lineNumber": 16,
+    "lineNumber": 27,
     "params": [
       {
         "nullable": null,
@@ -1428,7 +1451,7 @@
     ]
   },
   {
-    "__docId__": 87,
+    "__docId__": 88,
     "kind": "member",
     "name": "key",
     "memberof": "functions/transfer/transfer/artifact/file.js~File",
@@ -1436,7 +1459,7 @@
     "longname": "functions/transfer/transfer/artifact/file.js~File#key",
     "access": "public",
     "description": "The S3 key which represents this file (path + filename)",
-    "lineNumber": 22,
+    "lineNumber": 33,
     "type": {
       "nullable": null,
       "types": [
@@ -1447,7 +1470,7 @@
     }
   },
   {
-    "__docId__": 88,
+    "__docId__": 89,
     "kind": "member",
     "name": "data",
     "memberof": "functions/transfer/transfer/artifact/file.js~File",
@@ -1455,7 +1478,7 @@
     "longname": "functions/transfer/transfer/artifact/file.js~File#data",
     "access": "public",
     "description": "The data contained inside the file",
-    "lineNumber": 28,
+    "lineNumber": 39,
     "type": {
       "nullable": null,
       "types": [
@@ -1466,7 +1489,7 @@
     }
   },
   {
-    "__docId__": 89,
+    "__docId__": 90,
     "kind": "method",
     "name": "upload",
     "memberof": "functions/transfer/transfer/artifact/file.js~File",
@@ -1476,7 +1499,7 @@
     "longname": "functions/transfer/transfer/artifact/file.js~File#upload",
     "access": "public",
     "description": "Uploads the file to the specific remote S3 bucket, using the supplied\ncredentials and an optional prefix.",
-    "lineNumber": 40,
+    "lineNumber": 51,
     "params": [
       {
         "nullable": null,
@@ -1526,10 +1549,10 @@
     }
   },
   {
-    "__docId__": 90,
+    "__docId__": 91,
     "kind": "file",
     "name": "functions/transfer/transfer/attribute/attribute.js",
-    "content": "import wrappedError from 'error/wrapped';\nimport typedError from 'error/typed';\n\n/**\n * An unsupported parameter value object was encountered.\n *\n * @type {Error}\n */\nconst artifactParameterError = typedError({\n  message: 'Unsupported object key \"{keys}\"',\n  type: 'pipeline.attribute',\n});\n\n/**\n * The remote artifact file did not contain a truthy key value.\n *\n * @type {Error}\n */\nconst remoteArtifactValueError = wrappedError({\n  message: 'Value was null or undefined for \"{path}\"',\n  type: 'pipeline.attribute.artifact.value',\n});\n\n/**\n * The defined remote artifact does not exist or access has not been granted.\n *\n * @type {Error}\n */\nconst artifactNotFound = typedError({\n  message: 'Artifact \"{artifactName}\" was referenced, but is not a valid InputArtifact.',\n  type: 'pipeline.attribute.artifact.not_found',\n});\n\n/**\n * Indicates a remote artifact type\n *\n * @type {String}\n */\nconst REMOTE = 'REMOTE';\n\n/**\n * Indicates a static artifact type\n *\n * @type {String}\n */\nconst STATIC = 'STATIC';\n\n/**\n * Resolves an attribute that has been defined as part of the UserParameters.\n * An attribute can either be a static, hardcoded value or can be a reference\n * to a key, found inside a file present in an input artifact.\n */\nexport default class Attribute {\n  /**\n   * @param {String,Object} mapping - a mapping object, either a hardcoded value\n   *  or a reference to a key, found inside a file present in an input artifact.\n   * @param {Array[Artifact]} artifacts - an array of artifacts that any remote\n   *  attribute value could be found inside.\n   */\n  constructor(mapping, artifacts) {\n    /**\n     * Either a hardcoded value (a string) or an object denoting a remote reference.\n     *\n     * @type {String,Object}\n     */\n    this.mapping = mapping;\n    /**\n     * An object containing {@link Artifact} instances, with the keys denoting\n     * the logical name of the artifact inside CodePipeline.\n     *\n     * @type {Array[Artifact]}\n     */\n    this.artifacts = artifacts;\n  }\n\n  /**\n   * Determine if the type of mapping that has been provided for the attribute\n   * value is either a static value, or needs to be resolved using a remote\n   * input artifact.\n   *\n   * @return {String} the type of attribute mapping provided\n   */\n  get type() {\n    const { mapping } = this;\n    if (typeof mapping !== 'string') {\n      return REMOTE;\n    }\n    return STATIC;\n  }\n\n  /**\n   * Resolves the value for the attribute, either returning the static attribute\n   * value, or the resolved value from inside a remote artifact.\n   *\n   * @return {String} the attribute's value\n   */\n  async value() {\n    const { type, mapping } = this;\n    if (type === STATIC) {\n      return mapping;\n    }\n    const properties = mapping['Fn::GetArtifactAtt'];\n    if (!properties) {\n      const keys = Object.keys(mapping).join(', ');\n      throw artifactParameterError({ keys });\n    }\n    return await this.fetch(...properties);\n  }\n\n  /**\n   * @private\n   *\n   * Fetch the value of a specific parameter using the key found inside a json file\n   * inside the specific artifact.\n   *\n   * @param {String} artifactName - the name of the artifact the file resides in.\n   * @param {String} filename - The name of the JSON file inside the artifact\n   * @param {String} key - The property key inside the JSON file\n   *\n   * @return {String} the value of the key inside the JSON file, inside the artifact.\n   */\n  async fetch(artifactName, filename, key) {\n    const artifact = this.artifacts[artifactName];\n    if (!artifact) {\n      throw artifactNotFound({ artifactName });\n    } else {\n      await artifact.ready();\n      const value = artifact.attribute(filename, key);\n      if (!value) {\n        throw remoteArtifactValueError({\n          path: `${artifactName}::${filename}::${key}`,\n        });\n      } else {\n        return value;\n      }\n    }\n  }\n}\n",
+    "content": "import typedError from 'error/typed';\n\n/**\n * An unsupported parameter value object was encountered.\n *\n * @type {Error}\n */\nconst artifactParameterError = typedError({\n  message: 'Unsupported object key \"{keys}\"',\n  type: 'pipeline.attribute',\n});\n\n/**\n * The defined remote artifact does not exist or access has not been granted.\n *\n * @type {Error}\n */\nconst artifactNotFound = typedError({\n  message: 'Artifact \"{artifactName}\" was referenced, but is not a valid InputArtifact.',\n  type: 'pipeline.attribute.artifact.not_found',\n});\n\n/**\n * Indicates a remote artifact type\n *\n * @type {String}\n */\nconst REMOTE = 'REMOTE';\n\n/**\n * Indicates a static artifact type\n *\n * @type {String}\n */\nconst STATIC = 'STATIC';\n\n/**\n * Resolves an attribute that has been defined as part of the UserParameters.\n * An attribute can either be a static, hardcoded value or can be a reference\n * to a key, found inside a file present in an input artifact.\n */\nexport default class Attribute {\n  /**\n   * @param {String,Object} mapping - a mapping object, either a hardcoded value\n   *  or a reference to a key, found inside a file present in an input artifact.\n   * @param {Array[Artifact]} artifacts - an array of artifacts that any remote\n   *  attribute value could be found inside.\n   */\n  constructor(mapping, artifacts) {\n    /**\n     * Either a hardcoded value (a string) or an object denoting a remote reference.\n     *\n     * @type {String,Object}\n     */\n    this.mapping = mapping;\n    /**\n     * An object containing {@link Artifact} instances, with the keys denoting\n     * the logical name of the artifact inside CodePipeline.\n     *\n     * @type {Array[Artifact]}\n     */\n    this.artifacts = artifacts;\n  }\n\n  /**\n   * Determine if the type of mapping that has been provided for the attribute\n   * value is either a static value, or needs to be resolved using a remote\n   * input artifact.\n   *\n   * @return {String} the type of attribute mapping provided\n   */\n  get type() {\n    const { mapping } = this;\n    if (typeof mapping !== 'string') {\n      return REMOTE;\n    }\n    return STATIC;\n  }\n\n  /**\n   * Resolves the value for the attribute, either returning the static attribute\n   * value, or the resolved value from inside a remote artifact.\n   *\n   * @return {String} the attribute's value\n   */\n  async value() {\n    const { type, mapping } = this;\n    if (type === STATIC) {\n      return mapping;\n    }\n    const properties = mapping['Fn::GetParam'];\n    if (!properties) {\n      const keys = Object.keys(mapping).join(', ');\n      throw artifactParameterError({ keys });\n    }\n    return await this.fetch(...properties);\n  }\n\n  /**\n   * @private\n   *\n   * Fetch the value of a specific parameter using the key found inside a json file\n   * inside the specific artifact.\n   *\n   * @param {String} artifactName - the name of the artifact the file resides in.\n   * @param {String} filename - The name of the JSON file inside the artifact\n   * @param {String} key - The property key inside the JSON file\n   *\n   * @return {String} the value of the key inside the JSON file, inside the artifact.\n   */\n  async fetch(artifactName, filename, key) {\n    const artifact = this.artifacts[artifactName];\n    if (!artifact) {\n      throw artifactNotFound({ artifactName });\n    } else {\n      await artifact.ready();\n      return artifact.attribute(filename, key);\n    }\n  }\n}\n",
     "static": true,
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
     "access": "public",
@@ -1537,7 +1560,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 91,
+    "__docId__": 92,
     "kind": "variable",
     "name": "artifactParameterError",
     "memberof": "functions/transfer/transfer/attribute/attribute.js",
@@ -1548,30 +1571,7 @@
     "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
     "importStyle": null,
     "description": "An unsupported parameter value object was encountered.",
-    "lineNumber": 9,
-    "type": {
-      "nullable": null,
-      "types": [
-        "Error"
-      ],
-      "spread": false,
-      "description": null
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 92,
-    "kind": "variable",
-    "name": "remoteArtifactValueError",
-    "memberof": "functions/transfer/transfer/attribute/attribute.js",
-    "static": true,
-    "longname": "functions/transfer/transfer/attribute/attribute.js~remoteArtifactValueError",
-    "access": "public",
-    "export": false,
-    "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
-    "importStyle": null,
-    "description": "The remote artifact file did not contain a truthy key value.",
-    "lineNumber": 19,
+    "lineNumber": 8,
     "type": {
       "nullable": null,
       "types": [
@@ -1594,7 +1594,7 @@
     "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
     "importStyle": null,
     "description": "The defined remote artifact does not exist or access has not been granted.",
-    "lineNumber": 29,
+    "lineNumber": 18,
     "type": {
       "nullable": null,
       "types": [
@@ -1617,7 +1617,7 @@
     "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
     "importStyle": null,
     "description": "Indicates a remote artifact type",
-    "lineNumber": 39,
+    "lineNumber": 28,
     "type": {
       "nullable": null,
       "types": [
@@ -1640,7 +1640,7 @@
     "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
     "importStyle": null,
     "description": "Indicates a static artifact type",
-    "lineNumber": 46,
+    "lineNumber": 35,
     "type": {
       "nullable": null,
       "types": [
@@ -1663,7 +1663,7 @@
     "importPath": "pipeline-transfer/functions/transfer/transfer/attribute/attribute.js",
     "importStyle": "Attribute",
     "description": "Resolves an attribute that has been defined as part of the UserParameters.\nAn attribute can either be a static, hardcoded value or can be a reference\nto a key, found inside a file present in an input artifact.",
-    "lineNumber": 53,
+    "lineNumber": 42,
     "interface": false
   },
   {
@@ -1677,7 +1677,7 @@
     "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#constructor",
     "access": "public",
     "description": "",
-    "lineNumber": 60,
+    "lineNumber": 49,
     "params": [
       {
         "nullable": null,
@@ -1710,7 +1710,7 @@
     "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#mapping",
     "access": "public",
     "description": "Either a hardcoded value (a string) or an object denoting a remote reference.",
-    "lineNumber": 66,
+    "lineNumber": 55,
     "type": {
       "nullable": null,
       "types": [
@@ -1729,7 +1729,7 @@
     "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#artifacts",
     "access": "public",
     "description": "An object containing {@link Artifact} instances, with the keys denoting\nthe logical name of the artifact inside CodePipeline.",
-    "lineNumber": 73,
+    "lineNumber": 62,
     "type": {
       "nullable": null,
       "types": [
@@ -1750,7 +1750,7 @@
     "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#type",
     "access": "public",
     "description": "Determine if the type of mapping that has been provided for the attribute\nvalue is either a static value, or needs to be resolved using a remote\ninput artifact.",
-    "lineNumber": 83,
+    "lineNumber": 72,
     "return": {
       "nullable": null,
       "types": [
@@ -1776,7 +1776,7 @@
     "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#value",
     "access": "public",
     "description": "Resolves the value for the attribute, either returning the static attribute\nvalue, or the resolved value from inside a remote artifact.",
-    "lineNumber": 97,
+    "lineNumber": 86,
     "return": {
       "nullable": null,
       "types": [
@@ -1798,7 +1798,7 @@
     "longname": "functions/transfer/transfer/attribute/attribute.js~Attribute#fetch",
     "access": "private",
     "description": "",
-    "lineNumber": 122,
+    "lineNumber": 111,
     "params": [
       {
         "nullable": null,
@@ -1877,7 +1877,7 @@
     "__docId__": 105,
     "kind": "file",
     "name": "functions/transfer/transfer/destination.js",
-    "content": "import { STS, Credentials } from 'aws-sdk';\nimport typedError from 'error/typed';\n\nimport Attribute from './attribute';\nimport { FUNCTION_NAME } from './constants';\n\n/**\n * The AWS STS client used to assume roles inside the lambda function\n * for the appropriate S3 destination.\n *\n * @type {STS}\n */\nconst sts = new STS();\n\n/**\n * The defined remote artifact does not exist or access has not been granted.\n *\n * @type {Error}\n */\nconst artifactNotFound = typedError({\n  message: 'Artifact \"{artifactName}\" not a valid InputArtifact',\n  type: 'pipeline.artifact.not_found',\n});\n\n/**\n * This class represents a single, defined destination which the user\n * has specified inside the UserParameters key.\n *\n * Responsible for first resolving any source input artifacts and matching\n * all files found inside the artifact. Then assuming the correct role to\n * access the destination, and uploading them, using the {@link File#upload}\n * method.\n */\nexport default class Destination {\n  /**\n   * @param {Object} destination - a valid src/destination object.\n   * @param {String, Object} destination.roleArn - a static or remote reference\n   *  to a IAM Role which has sufficient permissons for the destination S3 Bucket.\n   * @param {String, Object} destination.bucket - a static or remote reference\n   *  to a destination S3 bucket.\n   * @param {Array[String]} destination.src - An array of source files to be\n   *  found inside one or more input artifacts.\n   * @param {String} destination.prefix - The prefix to apply to all uploaded\n   *  source files in the destination S3 bucket.\n   * @param {Object} artifacts - An object containing all\n   *  {@link Artifact} instances with the property key being the artifacts name.\n   */\n  constructor({ roleArn, bucket, src, prefix = '/' }, artifacts) {\n    /**\n     * A static or remote reference to a IAM Role which has sufficient\n     * permissons for the destination S3 Bucket.\n     *\n     * @type {Attribute}\n     */\n    this.roleArn = new Attribute(roleArn, artifacts);\n    /**\n     * A static or remote reference to a destination S3 bucket.\n     *\n     * @type {Attribute}\n     */\n    this.bucket = new Attribute(bucket, artifacts);\n    /**\n     * An array of source files to be found inside one or more input artifacts.\n     *\n     * @type {Array[String]}\n     */\n    this.sources = src;\n    /**\n     * The prefix to apply to all uploaded source files in the\n     * destination S3 bucket.\n     *\n     * @type {String}\n     */\n    this.prefix = prefix;\n  }\n\n  /**\n   * Retrieves credentials by assuming the defined role, which (should) enable\n   * IAM access to the remote S3 destination.\n   *\n   * @return {Object} an object containing AWS access keys.\n   */\n  async credentials() {\n    const roleArn = await this.roleArn.value();\n    const {\n      Credentials: {\n        AccessKeyId,\n        SecretAccessKey,\n        SessionToken,\n      },\n    } = await sts.assumeRole({\n      RoleSessionName: FUNCTION_NAME,\n      ExternalId: FUNCTION_NAME,\n      RoleArn: roleArn,\n    }).promise();\n    return new Credentials(AccessKeyId, SecretAccessKey, SessionToken);\n  }\n\n  /**\n   * Retrieves all matched file objects from inside the \"src\" definition.\n   * This function will resolve all matched file references, across all input\n   * artifacts.\n   *\n   * @return {Array[File]} an array of file objects ready for upload.\n   */\n  async files() {\n    const { artifacts, sources } = this;\n    const files = sources.map(async (src) => {\n      const [artifactName, glob] = src.split('::');\n      const artifact = artifacts[artifactName];\n      if (!artifact) {\n        throw artifactNotFound({ artifactName });\n      }\n      await artifact.ready();\n      return artifact.match(glob);\n    });\n    return await Promise.all(files);\n  }\n\n  /**\n   * Uploads all matched files from their source input artifacts to the\n   * defined destinations, prefixed with the appropriate key.\n   *\n   * Note that this function first assumes the correct role for this destination.\n   *\n   * @return {Boolean} true if successful, throws otherwise.\n   */\n  async upload() {\n    const { prefix } = this;\n    const credentials = await this.credentials();\n    const bucket = await this.bucket.value();\n    const files = await this.files();\n    const uploads = files.map(f => f.upload({ bucket, credentials, prefix }));\n    await Promise.all(uploads);\n    return true;\n  }\n}\n",
+    "content": "import { STS, Credentials } from 'aws-sdk';\nimport typedError from 'error/typed';\nimport wrappedError from 'error/wrapped';\n\nimport Attribute from './attribute';\nimport { FUNCTION_NAME } from './constants';\n\n/**\n * The defined remote artifact does not exist or access has not been granted.\n *\n * @type {Error}\n */\nconst artifactNotFound = typedError({\n  message: 'Artifact \"{artifactName}\" not a valid InputArtifact',\n  type: 'pipeline.artifact.not_found',\n});\n\n/**\n * An error occurred whilst attempting to assume the role that was provided.\n *\n * @type {Error}\n */\nconst couldNotAssumeRole = wrappedError({\n  message: 'Failed to assume role: \"{roleArn}\"',\n  type: 'pipeline.destination.role',\n});\n\n/**\n * This class represents a single, defined destination which the user\n * has specified inside the UserParameters key.\n *\n * Responsible for first resolving any source input artifacts and matching\n * all files found inside the artifact. Then assuming the correct role to\n * access the destination, and uploading them, using the {@link File#upload}\n * method.\n */\nexport default class Destination {\n  /**\n   * @param {Object} destination - a valid src/destination object.\n   * @param {String, Object} destination.roleArn - a static or remote reference\n   *  to a IAM Role which has sufficient permissons for the destination S3 Bucket.\n   * @param {String, Object} destination.bucket - a static or remote reference\n   *  to a destination S3 bucket.\n   * @param {Array[String]} destination.src - An array of source files to be\n   *  found inside one or more input artifacts.\n   * @param {String} destination.prefix - The prefix to apply to all uploaded\n   *  source files in the destination S3 bucket.\n   * @param {Object} artifacts - An object containing all\n   *  {@link Artifact} instances with the property key being the artifacts name.\n   */\n  constructor({ roleArn, bucket, src, prefix = '/' }, artifacts) {\n    /**\n     * The AWS STS client used to assume roles inside the lambda function\n     * for the appropriate S3 destination.\n     *\n     * @type {STS}\n     */\n    this.sts = new STS();\n    /**\n     * An array of {@link Artifact} (which may not be ready).\n     *\n     * @type {Array[Artifact]}\n     */\n    this.artifacts = artifacts;\n    /**\n     * A static or remote reference to a IAM Role which has sufficient\n     * permissons for the destination S3 Bucket.\n     *\n     * @type {Attribute}\n     */\n    this.roleArn = new Attribute(roleArn, artifacts);\n    /**\n     * A static or remote reference to a destination S3 bucket.\n     *\n     * @type {Attribute}\n     */\n    this.bucket = new Attribute(bucket, artifacts);\n    /**\n     * An array of source files to be found inside one or more input artifacts.\n     *\n     * @type {Array[String]}\n     */\n    this.sources = src;\n    /**\n     * The prefix to apply to all uploaded source files in the\n     * destination S3 bucket.\n     *\n     * @type {String}\n     */\n    this.prefix = prefix;\n  }\n\n  /**\n   * Retrieves credentials by assuming the defined role, which (should) enable\n   * IAM access to the remote S3 destination.\n   *\n   * @return {Object} an object containing AWS access keys.\n   */\n  async credentials() {\n    const { sts } = this;\n    const roleArn = await this.roleArn.value();\n    try {\n      const {\n        Credentials: {\n          AccessKeyId,\n          SecretAccessKey,\n          SessionToken,\n        },\n      } = await sts.assumeRole({\n        RoleSessionName: FUNCTION_NAME,\n        ExternalId: FUNCTION_NAME,\n        RoleArn: roleArn,\n      }).promise();\n      return new Credentials(AccessKeyId, SecretAccessKey, SessionToken);\n    } catch (err) {\n      throw couldNotAssumeRole(err, { roleArn });\n    }\n  }\n\n  /**\n   * Retrieves all matched file objects from inside the \"src\" definition.\n   * This function will resolve all matched file references, across all input\n   * artifacts.\n   *\n   * @return {Array[File]} an array of file objects ready for upload.\n   */\n  async files() {\n    const { artifacts, sources } = this;\n    const files = sources.map(async (src) => {\n      const [artifactName, glob] = src.split('::');\n      const artifact = artifacts[artifactName];\n      if (!artifact) {\n        throw artifactNotFound({ artifactName });\n      }\n      await artifact.ready();\n      return artifact.match(glob);\n    });\n    const sourceFiles = await Promise.all(files);\n    return [].concat(...sourceFiles);\n  }\n\n  /**\n   * Uploads all matched files from their source input artifacts to the\n   * defined destinations, prefixed with the appropriate key.\n   *\n   * Note that this function first assumes the correct role for this destination.\n   *\n   * @return {Boolean} true if successful, throws otherwise.\n   */\n  async upload() {\n    const { prefix } = this;\n    const credentials = await this.credentials();\n    const bucket = await this.bucket.value();\n    const files = await this.files();\n    const details = { bucket, credentials, prefix };\n    return await Promise.all(files.map(f => f.upload(details)));\n  }\n}\n",
     "static": true,
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/destination.js",
     "access": "public",
@@ -1886,29 +1886,6 @@
   },
   {
     "__docId__": 106,
-    "kind": "variable",
-    "name": "sts",
-    "memberof": "functions/transfer/transfer/destination.js",
-    "static": true,
-    "longname": "functions/transfer/transfer/destination.js~sts",
-    "access": "public",
-    "export": false,
-    "importPath": "pipeline-transfer/functions/transfer/transfer/destination.js",
-    "importStyle": null,
-    "description": "The AWS STS client used to assume roles inside the lambda function\nfor the appropriate S3 destination.",
-    "lineNumber": 13,
-    "type": {
-      "nullable": null,
-      "types": [
-        "STS"
-      ],
-      "spread": false,
-      "description": null
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 107,
     "kind": "variable",
     "name": "artifactNotFound",
     "memberof": "functions/transfer/transfer/destination.js",
@@ -1919,7 +1896,30 @@
     "importPath": "pipeline-transfer/functions/transfer/transfer/destination.js",
     "importStyle": null,
     "description": "The defined remote artifact does not exist or access has not been granted.",
-    "lineNumber": 20,
+    "lineNumber": 13,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 107,
+    "kind": "variable",
+    "name": "couldNotAssumeRole",
+    "memberof": "functions/transfer/transfer/destination.js",
+    "static": true,
+    "longname": "functions/transfer/transfer/destination.js~couldNotAssumeRole",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer/destination.js",
+    "importStyle": null,
+    "description": "An error occurred whilst attempting to assume the role that was provided.",
+    "lineNumber": 23,
     "type": {
       "nullable": null,
       "types": [
@@ -1942,7 +1942,7 @@
     "importPath": "pipeline-transfer/functions/transfer/transfer/destination.js",
     "importStyle": "Destination",
     "description": "This class represents a single, defined destination which the user\nhas specified inside the UserParameters key.\n\nResponsible for first resolving any source input artifacts and matching\nall files found inside the artifact. Then assuming the correct role to\naccess the destination, and uploading them, using the {@link File#upload}\nmethod.",
-    "lineNumber": 34,
+    "lineNumber": 37,
     "interface": false
   },
   {
@@ -1956,7 +1956,7 @@
     "longname": "functions/transfer/transfer/destination.js~Destination#constructor",
     "access": "public",
     "description": "",
-    "lineNumber": 48,
+    "lineNumber": 51,
     "params": [
       {
         "nullable": null,
@@ -2023,17 +2023,17 @@
   {
     "__docId__": 110,
     "kind": "member",
-    "name": "roleArn",
+    "name": "sts",
     "memberof": "functions/transfer/transfer/destination.js~Destination",
     "static": false,
-    "longname": "functions/transfer/transfer/destination.js~Destination#roleArn",
+    "longname": "functions/transfer/transfer/destination.js~Destination#sts",
     "access": "public",
-    "description": "A static or remote reference to a IAM Role which has sufficient\npermissons for the destination S3 Bucket.",
-    "lineNumber": 55,
+    "description": "The AWS STS client used to assume roles inside the lambda function\nfor the appropriate S3 destination.",
+    "lineNumber": 58,
     "type": {
       "nullable": null,
       "types": [
-        "Attribute"
+        "STS"
       ],
       "spread": false,
       "description": null
@@ -2042,13 +2042,32 @@
   {
     "__docId__": 111,
     "kind": "member",
-    "name": "bucket",
+    "name": "artifacts",
     "memberof": "functions/transfer/transfer/destination.js~Destination",
     "static": false,
-    "longname": "functions/transfer/transfer/destination.js~Destination#bucket",
+    "longname": "functions/transfer/transfer/destination.js~Destination#artifacts",
     "access": "public",
-    "description": "A static or remote reference to a destination S3 bucket.",
-    "lineNumber": 61,
+    "description": "An array of {@link Artifact} (which may not be ready).",
+    "lineNumber": 64,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Array[Artifact]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 112,
+    "kind": "member",
+    "name": "roleArn",
+    "memberof": "functions/transfer/transfer/destination.js~Destination",
+    "static": false,
+    "longname": "functions/transfer/transfer/destination.js~Destination#roleArn",
+    "access": "public",
+    "description": "A static or remote reference to a IAM Role which has sufficient\npermissons for the destination S3 Bucket.",
+    "lineNumber": 71,
     "type": {
       "nullable": null,
       "types": [
@@ -2059,7 +2078,26 @@
     }
   },
   {
-    "__docId__": 112,
+    "__docId__": 113,
+    "kind": "member",
+    "name": "bucket",
+    "memberof": "functions/transfer/transfer/destination.js~Destination",
+    "static": false,
+    "longname": "functions/transfer/transfer/destination.js~Destination#bucket",
+    "access": "public",
+    "description": "A static or remote reference to a destination S3 bucket.",
+    "lineNumber": 77,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Attribute"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 114,
     "kind": "member",
     "name": "sources",
     "memberof": "functions/transfer/transfer/destination.js~Destination",
@@ -2067,7 +2105,7 @@
     "longname": "functions/transfer/transfer/destination.js~Destination#sources",
     "access": "public",
     "description": "An array of source files to be found inside one or more input artifacts.",
-    "lineNumber": 67,
+    "lineNumber": 83,
     "type": {
       "nullable": null,
       "types": [
@@ -2078,7 +2116,7 @@
     }
   },
   {
-    "__docId__": 113,
+    "__docId__": 115,
     "kind": "member",
     "name": "prefix",
     "memberof": "functions/transfer/transfer/destination.js~Destination",
@@ -2086,7 +2124,7 @@
     "longname": "functions/transfer/transfer/destination.js~Destination#prefix",
     "access": "public",
     "description": "The prefix to apply to all uploaded source files in the\ndestination S3 bucket.",
-    "lineNumber": 74,
+    "lineNumber": 90,
     "type": {
       "nullable": null,
       "types": [
@@ -2097,7 +2135,7 @@
     }
   },
   {
-    "__docId__": 114,
+    "__docId__": 116,
     "kind": "method",
     "name": "credentials",
     "memberof": "functions/transfer/transfer/destination.js~Destination",
@@ -2107,7 +2145,7 @@
     "longname": "functions/transfer/transfer/destination.js~Destination#credentials",
     "access": "public",
     "description": "Retrieves credentials by assuming the defined role, which (should) enable\nIAM access to the remote S3 destination.",
-    "lineNumber": 83,
+    "lineNumber": 99,
     "return": {
       "nullable": null,
       "types": [
@@ -2119,7 +2157,7 @@
     "params": []
   },
   {
-    "__docId__": 115,
+    "__docId__": 117,
     "kind": "method",
     "name": "files",
     "memberof": "functions/transfer/transfer/destination.js~Destination",
@@ -2129,7 +2167,7 @@
     "longname": "functions/transfer/transfer/destination.js~Destination#files",
     "access": "public",
     "description": "Retrieves all matched file objects from inside the \"src\" definition.\nThis function will resolve all matched file references, across all input\nartifacts.",
-    "lineNumber": 106,
+    "lineNumber": 127,
     "return": {
       "nullable": null,
       "types": [
@@ -2141,7 +2179,7 @@
     "params": []
   },
   {
-    "__docId__": 116,
+    "__docId__": 118,
     "kind": "method",
     "name": "upload",
     "memberof": "functions/transfer/transfer/destination.js~Destination",
@@ -2151,7 +2189,7 @@
     "longname": "functions/transfer/transfer/destination.js~Destination#upload",
     "access": "public",
     "description": "Uploads all matched files from their source input artifacts to the\ndefined destinations, prefixed with the appropriate key.\n\nNote that this function first assumes the correct role for this destination.",
-    "lineNumber": 128,
+    "lineNumber": 150,
     "return": {
       "nullable": null,
       "types": [
@@ -2163,10 +2201,10 @@
     "params": []
   },
   {
-    "__docId__": 117,
+    "__docId__": 119,
     "kind": "file",
     "name": "functions/transfer/transfer/uploader.js",
-    "content": "import typedError from 'error/typed';\n\nimport Artifact from './artifact';\nimport Destination from './destination';\nimport validate from './validate';\n\n/**\n * A validation error was encountered\n *\n * @type {Error}\n */\nconst inputArtifactsError = typedError({\n  message: 'No InputArtifacts defined.',\n  type: 'pipeline.start',\n});\n\nexport default class Uploader {\n  /**\n   * Uploads artifacts to a remote S3 bucket defined inside an array of file\n   * globs, of locations inside pipeline input artifacts.\n   *\n   * @example\n   * ```\n   *  {\n   *     \"CodePipeline.job\": {\n   *         \"id\": \"11111111-abcd-1111-abcd-111111abcdef\",\n   *         \"accountId\": \"111111111111\",\n   *         \"data\": {\n   *             \"actionConfiguration\": {\n   *                 \"configuration\": {\n   *                     \"FunctionName\": \"MyLambdaFunctionForAWSCodePipeline\",\n   *                     \"UserParameters\": \"....\"\n   *                 }\n   *             },\n   *             \"inputArtifacts\": [\n   *                 {\n   *                     \"location\": {\n   *                         \"s3Location\": {\n   *                             \"bucketName\": \"codepipeline-us-east-2-1234567890\",\n   *                             \"objectKey\": \"rj90jda90ja90j09tj09jaf.zip\"\n   *                         },\n   *                         \"type\": \"S3\"\n   *                     },\n   *                     \"revision\": null,\n   *                     \"name\": \"ArtifactName\"\n   *                 }\n   *             ],\n   *             \"outputArtifacts\": [],\n   *             \"artifactCredentials\": {\n   *                 \"secretAccessKey\": \"....\",\n   *                 \"sessionToken\": \"....\",\n   *                 \"accessKeyId\": \"....\"\n   *             },\n   *             \"continuationToken\": \"A continuation token if continuing job\"\n   *         }\n   *     }\n   *  }\n   * ```\n   *\n   * @param {Object} data - A CodePipeline data event object.\n   */\n  constructor({ data }) {\n    /**\n     * The data object as received from AWS CodePipeline.\n     *\n     * @type {Object}\n     */\n    this.data = data;\n    /**\n     * The parsed contents of the `UserParameters` string as defined inside the\n     * action in the CodePipeline resource. This should be a valid array of objects,\n     * similar to the example below:\n     *\n     * ```\n     * [\n     * {\n     *   \"roleArn\": {\n     *     \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3BucketTransferRole\"]\n     *   },\n     *   \"bucket\": {\n     *     \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3Bucket\"]\n     *   },\n     *   \"prefix\": \"s3/key/prefix/\",\n     *   \"src\": [\n     *     \"BuildOutput::*.js\"\n     *   ]\n     * }\n     * ]\n     * ```\n     *\n     * @type {Object}\n     */\n    this.parameters = JSON.parse(this.data.actionConfiguration.configuration.UserParameters);\n    const inputs = data.inputArtifacts;\n    if (!inputs || inputs.length === 0) {\n      throw inputArtifactsError({});\n    }\n    const mapper = a => Artifact.toArtifactMapEntry(a, data.artifactCredentials);\n    /**\n     * An array of {@link Artifact} objects which have been made available to\n     * the CodePipeline action definition.\n     *\n     * @type {String}\n     */\n    this.artifacts = inputs.map(mapper).reduce((memo, [key, val]) => {\n      const obj = memo;\n      obj[key] = val;\n      return obj;\n    }, {});\n  }\n\n  /**\n   * Retrieve validated (and defaulted) parameters which have been defined inside\n   * the action in the CodePipeline resource.\n   *\n   * @return {Object} valid parameters to be used to construct the state machine input.\n   */\n  async userParameters() {\n    return await validate(this.parameters);\n  }\n\n  /**\n   * Maps all defined src/dest combinations (from {@link Uploader#userParameters}) to\n   * destination objects ready for upload.\n   *\n   * @return {Array[Destination]} an array of Destination objects\n   */\n  async destinations() {\n    const { artifacts } = this;\n    const params = await this.userParameters();\n    return params.map(p => new Destination(p, artifacts));\n  }\n\n  /**\n   * Performs the intended operation and uploads source files from pipeine\n   * artifacts to remote S3 locations by assuming the provided roles to\n   * provide the correct permission sets.\n   *\n   * The promise resolves successfully after all source files have been uploaded.\n   *\n   * @return {Boolean} true if successful, throws otherwise.\n   */\n  async perform() {\n    const destinations = await this.destinations();\n    await Promise.all(destinations.map(d => d.upload()));\n    return true;\n  }\n}\n",
+    "content": "import typedError from 'error/typed';\n\nimport Artifact from './artifact';\nimport Destination from './destination';\nimport validate from './validate';\n\n/**\n * A validation error was encountered\n *\n * @type {Error}\n */\nconst inputArtifactsError = typedError({\n  message: 'No InputArtifacts defined.',\n  type: 'pipeline.start',\n});\n\nexport default class Uploader {\n  /**\n   * Uploads artifacts to a remote S3 bucket defined inside an array of file\n   * globs, of locations inside pipeline input artifacts.\n   *\n   * @example\n   * ```\n   *  {\n   *     \"CodePipeline.job\": {\n   *         \"id\": \"11111111-abcd-1111-abcd-111111abcdef\",\n   *         \"accountId\": \"111111111111\",\n   *         \"data\": {\n   *             \"actionConfiguration\": {\n   *                 \"configuration\": {\n   *                     \"FunctionName\": \"MyLambdaFunctionForAWSCodePipeline\",\n   *                     \"UserParameters\": \"....\"\n   *                 }\n   *             },\n   *             \"inputArtifacts\": [\n   *                 {\n   *                     \"location\": {\n   *                         \"s3Location\": {\n   *                             \"bucketName\": \"codepipeline-us-east-2-1234567890\",\n   *                             \"objectKey\": \"rj90jda90ja90j09tj09jaf.zip\"\n   *                         },\n   *                         \"type\": \"S3\"\n   *                     },\n   *                     \"revision\": null,\n   *                     \"name\": \"ArtifactName\"\n   *                 }\n   *             ],\n   *             \"outputArtifacts\": [],\n   *             \"artifactCredentials\": {\n   *                 \"secretAccessKey\": \"....\",\n   *                 \"sessionToken\": \"....\",\n   *                 \"accessKeyId\": \"....\"\n   *             },\n   *             \"continuationToken\": \"A continuation token if continuing job\"\n   *         }\n   *     }\n   *  }\n   * ```\n   *\n   * @param {Object} data - A CodePipeline data event object.\n   */\n  constructor({ data }) {\n    /**\n     * The data object as received from AWS CodePipeline.\n     *\n     * @type {Object}\n     */\n    this.data = data;\n    /**\n     * The parsed contents of the `UserParameters` string as defined inside the\n     * action in the CodePipeline resource. This should be a valid array of objects,\n     * similar to the example below:\n     *\n     * ```\n     * [\n     * {\n     *   \"roleArn\": {\n     *     \"Fn::GetParam\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3BucketTransferRole\"]\n     *   },\n     *   \"bucket\": {\n     *     \"Fn::GetParam\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3Bucket\"]\n     *   },\n     *   \"prefix\": \"s3/key/prefix/\",\n     *   \"src\": [\n     *     \"BuildOutput::*.js\"\n     *   ]\n     * }\n     * ]\n     * ```\n     *\n     * @type {Object}\n     */\n    this.parameters = JSON.parse(this.data.actionConfiguration.configuration.UserParameters);\n    const inputs = data.inputArtifacts;\n    if (!inputs || inputs.length === 0) {\n      throw inputArtifactsError({});\n    }\n    const mapper = a => Artifact.toArtifactMapEntry(a, data.artifactCredentials);\n    /**\n     * An array of {@link Artifact} objects which have been made available to\n     * the CodePipeline action definition.\n     *\n     * @type {String}\n     */\n    this.artifacts = inputs.map(mapper).reduce((memo, [key, val]) => {\n      const obj = memo;\n      obj[key] = val;\n      return obj;\n    }, {});\n  }\n\n  /**\n   * Retrieve validated (and defaulted) parameters which have been defined inside\n   * the action in the CodePipeline resource.\n   *\n   * @return {Object} valid parameters to be used to construct the state machine input.\n   */\n  async userParameters() {\n    return await validate(this.parameters);\n  }\n\n  /**\n   * Maps all defined src/dest combinations (from {@link Uploader#userParameters}) to\n   * destination objects ready for upload.\n   *\n   * @return {Array[Destination]} an array of Destination objects\n   */\n  async destinations() {\n    const { artifacts } = this;\n    const params = await this.userParameters();\n    return params.map(p => new Destination(p, artifacts));\n  }\n\n  /**\n   * Performs the intended operation and uploads source files from pipeine\n   * artifacts to remote S3 locations by assuming the provided roles to\n   * provide the correct permission sets.\n   *\n   * The promise resolves successfully after all source files have been uploaded.\n   *\n   * @return {Boolean} true if successful, throws otherwise.\n   */\n  async perform() {\n    const destinations = await this.destinations();\n    return await Promise.all(destinations.map(d => d.upload()));\n  }\n}\n",
     "static": true,
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/uploader.js",
     "access": "public",
@@ -2174,7 +2212,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 118,
+    "__docId__": 120,
     "kind": "variable",
     "name": "inputArtifactsError",
     "memberof": "functions/transfer/transfer/uploader.js",
@@ -2197,7 +2235,7 @@
     "ignore": true
   },
   {
-    "__docId__": 119,
+    "__docId__": 121,
     "kind": "class",
     "name": "Uploader",
     "memberof": "functions/transfer/transfer/uploader.js",
@@ -2213,7 +2251,7 @@
     "interface": false
   },
   {
-    "__docId__": 120,
+    "__docId__": 122,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "functions/transfer/transfer/uploader.js~Uploader",
@@ -2241,7 +2279,7 @@
     ]
   },
   {
-    "__docId__": 121,
+    "__docId__": 123,
     "kind": "member",
     "name": "data",
     "memberof": "functions/transfer/transfer/uploader.js~Uploader",
@@ -2260,14 +2298,14 @@
     }
   },
   {
-    "__docId__": 122,
+    "__docId__": 124,
     "kind": "member",
     "name": "parameters",
     "memberof": "functions/transfer/transfer/uploader.js~Uploader",
     "static": false,
     "longname": "functions/transfer/transfer/uploader.js~Uploader#parameters",
     "access": "public",
-    "description": "The parsed contents of the `UserParameters` string as defined inside the\naction in the CodePipeline resource. This should be a valid array of objects,\nsimilar to the example below:\n\n```\n[\n{\n  \"roleArn\": {\n    \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3BucketTransferRole\"]\n  },\n  \"bucket\": {\n    \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3Bucket\"]\n  },\n  \"prefix\": \"s3/key/prefix/\",\n  \"src\": [\n    \"BuildOutput::*.js\"\n  ]\n}\n]\n```",
+    "description": "The parsed contents of the `UserParameters` string as defined inside the\naction in the CodePipeline resource. This should be a valid array of objects,\nsimilar to the example below:\n\n```\n[\n{\n  \"roleArn\": {\n    \"Fn::GetParam\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3BucketTransferRole\"]\n  },\n  \"bucket\": {\n    \"Fn::GetParam\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3Bucket\"]\n  },\n  \"prefix\": \"s3/key/prefix/\",\n  \"src\": [\n    \"BuildOutput::*.js\"\n  ]\n}\n]\n```",
     "lineNumber": 93,
     "type": {
       "nullable": null,
@@ -2279,7 +2317,7 @@
     }
   },
   {
-    "__docId__": 123,
+    "__docId__": 125,
     "kind": "member",
     "name": "artifacts",
     "memberof": "functions/transfer/transfer/uploader.js~Uploader",
@@ -2298,7 +2336,7 @@
     }
   },
   {
-    "__docId__": 124,
+    "__docId__": 126,
     "kind": "method",
     "name": "userParameters",
     "memberof": "functions/transfer/transfer/uploader.js~Uploader",
@@ -2320,7 +2358,7 @@
     "params": []
   },
   {
-    "__docId__": 125,
+    "__docId__": 127,
     "kind": "method",
     "name": "destinations",
     "memberof": "functions/transfer/transfer/uploader.js~Uploader",
@@ -2342,7 +2380,7 @@
     "params": []
   },
   {
-    "__docId__": 126,
+    "__docId__": 128,
     "kind": "method",
     "name": "perform",
     "memberof": "functions/transfer/transfer/uploader.js~Uploader",
@@ -2364,10 +2402,10 @@
     "params": []
   },
   {
-    "__docId__": 127,
+    "__docId__": 129,
     "kind": "file",
     "name": "functions/transfer/transfer/validate/schema.js",
-    "content": "/**\n * Defines the schema used to retrieve either statically defined values\n * or attributes from inside remote artifacts.\n *\n * @type {Object}\n */\nconst remoteAttribute = {\n  oneOf: [\n    {\n      type: 'string',\n    },\n    {\n      type: 'object',\n      required: [\n        'Fn::GetArtifactAtt',\n      ],\n      properties: {\n        'Fn::GetArtifactAtt': {\n          type: 'array',\n          items: [\n            {\n              type: 'string',\n            },\n            {\n              type: 'string',\n            },\n            {\n              type: 'string',\n            },\n          ],\n        },\n      },\n    },\n  ],\n};\n\n/**\n * This schema defines the keys, properties and valid values that can be included\n * inside the `UserParameters` key when defining the use of this action inside\n * CodePipeline.\n *\n * @type {Object}\n */\nconst Schema = {\n  type: 'array',\n  minItems: 1,\n  uniqueItems: true,\n  items: {\n    type: 'object',\n    required: [\n      'roleArn',\n      'bucket',\n      'src',\n    ],\n    properties: {\n      roleArn: remoteAttribute,\n      bucket: remoteAttribute,\n      prefix: {\n        type: 'string',\n        default: '/',\n      },\n      src: {\n        type: 'array',\n        minItems: 1,\n        uniqueItems: true,\n        items: {\n          type: 'string',\n          pattern: '^.+::.+$',\n        },\n      },\n    },\n  },\n};\n\nexport default Schema;\n",
+    "content": "/**\n * Defines the schema used to retrieve either statically defined values\n * or attributes from inside remote artifacts.\n *\n * @type {Object}\n */\nconst remoteAttribute = {\n  oneOf: [\n    {\n      type: 'string',\n    },\n    {\n      type: 'object',\n      required: [\n        'Fn::GetParam',\n      ],\n      properties: {\n        'Fn::GetParam': {\n          type: 'array',\n          items: [\n            {\n              type: 'string',\n            },\n            {\n              type: 'string',\n            },\n            {\n              type: 'string',\n            },\n          ],\n        },\n      },\n    },\n  ],\n};\n\n/**\n * This schema defines the keys, properties and valid values that can be included\n * inside the `UserParameters` key when defining the use of this action inside\n * CodePipeline.\n *\n * @type {Object}\n */\nconst Schema = {\n  type: 'array',\n  minItems: 1,\n  uniqueItems: true,\n  items: {\n    type: 'object',\n    required: [\n      'roleArn',\n      'bucket',\n      'src',\n    ],\n    properties: {\n      roleArn: remoteAttribute,\n      bucket: remoteAttribute,\n      prefix: {\n        type: 'string',\n        default: '/',\n      },\n      src: {\n        type: 'array',\n        minItems: 1,\n        uniqueItems: true,\n        items: {\n          type: 'string',\n          pattern: '^.+::.+$',\n        },\n      },\n    },\n  },\n};\n\nexport default Schema;\n",
     "static": true,
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer/validate/schema.js",
     "access": "public",
@@ -2375,7 +2413,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 128,
+    "__docId__": 130,
     "kind": "variable",
     "name": "remoteAttribute",
     "memberof": "functions/transfer/transfer/validate/schema.js",
@@ -2398,7 +2436,7 @@
     "ignore": true
   },
   {
-    "__docId__": 129,
+    "__docId__": 131,
     "kind": "variable",
     "name": "Schema",
     "memberof": "functions/transfer/transfer/validate/schema.js",
@@ -2420,7 +2458,7 @@
     }
   },
   {
-    "__docId__": 130,
+    "__docId__": 132,
     "kind": "file",
     "name": "functions/transfer/transfer/validate/validate.js",
     "content": "import Ajv from 'ajv';\nimport typedError from 'error/typed';\n\nimport Schema from './schema';\n\n/**\n * A validation error was encountered\n *\n * @type {Error}\n */\nconst validationError = typedError({\n  message: 'Invalid data: {messages}',\n  type: 'pipeline.validation',\n});\n\n/**\n * Build a new AJV validator isntance, ensuring that all errors are returned\n * if the data does not match the defined schema and any defined defaults are also\n * assigned to the returned data.\n */\nconst ajv = new Ajv({ useDefaults: true, allErrors: true });\n\n/**\n * Compiles the raw schema object, providing a method which can be used\n * to validate against a basic javascript object.\n */\nconst validate = ajv.compile(Schema);\n\n/**\n * Wraps the AJV library to provide a helper function which validates the\n * passed data object against the imported schema file.\n *\n * If the schema fails to validate, an array of error messages are generated.\n *\n * @return {Object} a mutated data object, containing any defaulted properties\n *  where defined in the schema.\n */\nexport default function (data) {\n  return new Promise((resolve, reject) => {\n    const valid = validate(data);\n    if (!valid) {\n      const messages = validate.errors.map(e => `Schema ${e.message}`).join('. ');\n      reject(validationError({ messages }));\n    } else {\n      resolve(data);\n    }\n  });\n}\n",
@@ -2431,7 +2469,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 131,
+    "__docId__": 133,
     "kind": "variable",
     "name": "validationError",
     "memberof": "functions/transfer/transfer/validate/validate.js",
@@ -2454,7 +2492,7 @@
     "ignore": true
   },
   {
-    "__docId__": 132,
+    "__docId__": 134,
     "kind": "variable",
     "name": "ajv",
     "memberof": "functions/transfer/transfer/validate/validate.js",
@@ -2474,7 +2512,7 @@
     "ignore": true
   },
   {
-    "__docId__": 133,
+    "__docId__": 135,
     "kind": "variable",
     "name": "validate",
     "memberof": "functions/transfer/transfer/validate/validate.js",
@@ -2494,7 +2532,7 @@
     "ignore": true
   },
   {
-    "__docId__": 134,
+    "__docId__": 136,
     "kind": "function",
     "name": "validate",
     "memberof": "functions/transfer/transfer/validate/validate.js",
@@ -2526,8 +2564,82 @@
     ]
   },
   {
+    "__docId__": 137,
+    "kind": "file",
+    "name": "functions/transfer/transfer.js",
+    "content": "import { CodePipeline } from 'aws-sdk';\n\nimport { AWS_REGION } from '../globals';\n\nimport Logger from '../logger';\nimport Uploader from './transfer/uploader';\n\nconst client = new CodePipeline({ region: AWS_REGION });\n\nexport async function handler(event, context, cb) {\n  const pipeline = event['CodePipeline.job'];\n  const { id } = pipeline;\n  const result = { jobId: id };\n  try {\n    const urls = await new Uploader(pipeline).perform();\n    urls.forEach(url => Logger.info(`Uploaded: ${url}`));\n    await client.putJobSuccessResult(result).promise();\n    cb(null, result);\n  } catch (err) {\n    Logger.error(err);\n    result.failureDetails = {\n      message: err.message,\n      type: 'JobFailed',\n    };\n    await client.putJobFailureResult(result).promise();\n    cb(err);\n  }\n  return result;\n}\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/functions/transfer/transfer.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 138,
+    "kind": "variable",
+    "name": "client",
+    "memberof": "functions/transfer/transfer.js",
+    "static": true,
+    "longname": "functions/transfer/transfer.js~client",
+    "access": "public",
+    "export": false,
+    "importPath": "pipeline-transfer/functions/transfer/transfer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 139,
+    "kind": "function",
+    "name": "handler",
+    "memberof": "functions/transfer/transfer.js",
+    "generator": false,
+    "async": true,
+    "static": true,
+    "longname": "functions/transfer/transfer.js~handler",
+    "access": "public",
+    "export": true,
+    "importPath": "pipeline-transfer/functions/transfer/transfer.js",
+    "importStyle": "{handler}",
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "params": [
+      {
+        "name": "event",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "context",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "cb",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
     "kind": "index",
-    "content": "# CodePipeline S3 File Transfer Action\n\nThis project enables a custom CodePipeline action that allows you to specify files from pipeline artifacts, to be transferred to S3 buckets (see example below). Each transfer must contain a destination bucket, an optional key prefix to apply to all transfers and a source (`src`) key, which defines in a glob fashion the files to be uploaded.\n\nThe role provided to each transfer enables fine-grained access control, as the deployed function does not have sufficient permissions. Sample IAM policies are detailed below.\n\nIn-order to ensure your Pipeline has necessary permissions to invoke a Lambda function, follow the [setup steps here](http://docs.aws.amazon.com/codepipeline/latest/userguide/actions-invoke-lambda-function.html).\n\nAn example action definition inside a CodePipeline CloudFormation resource definition:\n\n```yaml\n- Name: Transfer\n  Actions:\n    - Name: S3\n      RunOrder: 1\n      InputArtifacts:\n        - Name: BuildOutput\n        - Name: DeployOutput\n      ActionTypeId:\n        Category: Invoke\n        Owner: AWS\n        Version: 1\n        Provider: Lambda\n      Configuration:\n        FunctionName: !ImportValue TransferFunctionName\n        UserParameters: !Sub |\n          [\n            {\n              \"roleArn\": {\n                \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3BucketTransferRole\"]\n              },\n              \"bucket\": {\n                \"Fn::GetArtifactAtt\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3Bucket\"]\n              },\n              \"prefix\": \"s3/key/prefix/\",\n              \"src\": [\n                \"BuildOutput::*.js\"\n              ]\n            },\n            {\n              \"roleArn\": \"arn:aws:iam::123456789012:role/image-s3-bucket-permissions\",\n              \"bucket\": \"pre-created-s3-bucket\",\n              \"prefix\": \"s3/images/prefix/\",\n              \"src\": [\n                \"BuildOutput::images/*\"\n              ]\n            }\n          ]\n```\n\nAn example IAM policy for granting the Transfer function permissions to your assets bucket:\n\n```yaml\nAssetS3BucketTransferRole:\n  Type: AWS::IAM::Role\n  Properties:\n    Path: !Sub \"/${Name}/\"\n    AssumeRolePolicyDocument:\n      Version: \"2012-10-17\"\n      Statement:\n        - Effect: Allow\n          Principal:\n            AWS: !ImportValue TransferFunctionRoleArn\n          Condition:\n            StringEquals:\n              sts:ExternalId: !ImportValue TransferFunction\n          Action: sts:AssumeRole\n    Policies:\n      - PolicyName: UploadAssetsPermission\n        PolicyDocument:\n          Version: 2012-10-17\n          Statement:\n            - Effect: Allow\n              Action:\n                - s3:PutObject\n              Resource:\n                - !Sub \"${AssetS3Bucket}/*\"\n```\n\nFor a full definition of what you can define inside the `UserParameters` key, see [the JSON Schema file](/functions/transfer/transfer/validate/schema.js).\n",
+    "content": "# CodePipeline S3 File Transfer Action\n\nThis project enables a custom CodePipeline action that allows you to specify files from pipeline artifacts, to be transferred to S3 buckets (see example below). Each transfer must contain a destination bucket, an optional key prefix to apply to all transfers and a source (`src`) key, which defines in a glob fashion the files to be uploaded.\n\nThe role provided to each transfer enables fine-grained access control, as the deployed function does not have sufficient permissions. Sample IAM policies are detailed below.\n\nIn-order to ensure your Pipeline has necessary permissions to invoke a Lambda function, follow the [setup steps here](http://docs.aws.amazon.com/codepipeline/latest/userguide/actions-invoke-lambda-function.html).\n\nAn example action definition inside a CodePipeline CloudFormation resource definition:\n\n```yaml\n- Name: Transfer\n  Actions:\n    - Name: S3\n      RunOrder: 1\n      InputArtifacts:\n        - Name: BuildOutput\n        - Name: DeployOutput\n      ActionTypeId:\n        Category: Invoke\n        Owner: AWS\n        Version: 1\n        Provider: Lambda\n      Configuration:\n        FunctionName: !ImportValue TransferFunctionName\n        UserParameters: !Sub |\n          [\n            {\n              \"roleArn\": {\n                \"Fn::GetParam\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3BucketTransferRole\"]\n              },\n              \"bucket\": {\n                \"Fn::GetParam\": [\"DeployOutput\", \"Outputs.json\", \"AssetS3Bucket\"]\n              },\n              \"prefix\": \"s3/key/prefix/\",\n              \"src\": [\n                \"BuildOutput::*.js\"\n              ]\n            },\n            {\n              \"roleArn\": \"arn:aws:iam::123456789012:role/image-s3-bucket-permissions\",\n              \"bucket\": \"pre-created-s3-bucket\",\n              \"prefix\": \"s3/images/prefix/\",\n              \"src\": [\n                \"BuildOutput::images/*\"\n              ]\n            }\n          ]\n```\n\nAn example IAM policy for granting the Transfer function permissions to your assets bucket:\n\n```yaml\nAssetS3BucketTransferRole:\n  Type: AWS::IAM::Role\n  Properties:\n    Path: !Sub \"/${Name}/\"\n    AssumeRolePolicyDocument:\n      Version: \"2012-10-17\"\n      Statement:\n        - Effect: Allow\n          Principal:\n            AWS: !ImportValue TransferFunctionRoleArn\n          Condition:\n            StringEquals:\n              sts:ExternalId: !ImportValue TransferFunction\n          Action: sts:AssumeRole\n    Policies:\n      - PolicyName: UploadAssetsPermission\n        PolicyDocument:\n          Version: 2012-10-17\n          Statement:\n            - Effect: Allow\n              Action:\n                - s3:PutObject\n              Resource:\n                - !Sub \"${AssetS3Bucket}/*\"\n```\n\nFor a full definition of what you can define inside the `UserParameters` key, see [the JSON Schema file](/functions/transfer/transfer/validate/schema.js).\n",
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/README.md",
     "name": "./README.md",
     "static": true,
@@ -2535,14 +2647,14 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"pipeline-transfer\",\n  \"version\": \"0.0.1\",\n  \"private\": true,\n  \"engines\": {\n    \"node\": \">=4.3\"\n  },\n  \"dependencies\": {\n    \"ajv\": \"^5.3.0\",\n    \"babel-runtime\": \"6.11.6\",\n    \"bunyan\": \"^1.8.12\",\n    \"error\": \"^7.0.2\",\n    \"extract-zip\": \"^1.6.6\",\n    \"node-glob\": \"^1.2.0\",\n    \"node-zip\": \"^1.1.1\",\n    \"uuid\": \"^3.1.0\"\n  },\n  \"devDependencies\": {\n    \"aws-sdk\": \"^2.6.7\",\n    \"aws-sdk-mock\": \"~1.6.1\",\n    \"babel-eslint\": \"^7.2.3\",\n    \"babel-jest\": \"^20.0.3\",\n    \"babel-loader\": \"^7.0.0\",\n    \"babel-polyfill\": \"^6.23.0\",\n    \"babel-preset-env\": \"^1.4.0\",\n    \"esdoc\": \"^1.0.2\",\n    \"esdoc-coverage-plugin\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^3.1.1\",\n    \"eslint-config-airbnb\": \"^9.0.1\",\n    \"eslint-plugin-import\": \"^1.11.1\",\n    \"eslint-plugin-jsx-a11y\": \"^2.0.1\",\n    \"eslint-plugin-react\": \"^5.2.2\",\n    \"faker\": \"~3.1.0\",\n    \"ignore-loader\": \"^0.1.2\",\n    \"jest\": \"^20.0\",\n    \"json-loader\": \"^0.5.4\",\n    \"lambda-wrapper\": \"^0.1.2\",\n    \"nock\": \"^9.0.14\",\n    \"node-zip\": \"^1.1.1\",\n    \"path-to-regexp\": \"^1.5.3\",\n    \"serverless-jest-plugin\": \"^0.1.3\",\n    \"sinon\": \"~1.17\",\n    \"uglifyjs-webpack-plugin\": \"^1.0.1\",\n    \"webpack\": \"^2.4.1\"\n  },\n  \"babel\": {\n    \"presets\": [\n      [\n        \"env\",\n        {\n          \"targets\": {\n            \"node\": \"6.1\"\n          }\n        }\n      ]\n    ]\n  },\n  \"jest\": {\n    \"transform\": {\n      \"\\\\.(js|jsx)$\": \"babel-jest\",\n      \"\\\\.(json)$\": \"<rootDir>/__tests__/__utils__/fileTransformer.js\"\n    },\n    \"moduleNameMapper\": {\n      \"^@functions/(.+)\": \"<rootDir>/functions/$1\"\n    },\n    \"setupTestFrameworkScriptFile\": \"<rootDir>/__tests__/__utils__/setup.js\"\n  },\n  \"eslintConfig\": {\n    \"parser\": \"babel-eslint\",\n    \"extends\": \"airbnb\",\n    \"env\": {\n      \"jest\": true\n    }\n  },\n  \"scripts\": {\n    \"build\": \"webpack --progress --colors\",\n    \"build:doc\": \"esdoc\",\n    \"lint\": \"eslint events __tests__ functions pages test handler.js webpack.config.js\",\n    \"lint:fix\": \"eslint --fix $1\",\n    \"test\": \"NODE_ENV=test jest __tests__/.+/*.test.js --coverage --notify\",\n    \"test:watch\": \"npm run test -- --watch\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"pipeline-transfer\",\n  \"version\": \"0.0.1\",\n  \"private\": true,\n  \"engines\": {\n    \"node\": \">=4.3\"\n  },\n  \"dependencies\": {\n    \"ajv\": \"^5.3.0\",\n    \"babel-runtime\": \"6.11.6\",\n    \"bunyan\": \"^1.8.12\",\n    \"error\": \"^7.0.2\",\n    \"extract-zip\": \"^1.6.6\",\n    \"node-glob\": \"^1.2.0\",\n    \"node-zip\": \"^1.1.1\",\n    \"uuid\": \"^3.1.0\"\n  },\n  \"devDependencies\": {\n    \"aws-sdk\": \"^2.6.7\",\n    \"aws-sdk-mock\": \"~1.6.1\",\n    \"babel-eslint\": \"^7.2.3\",\n    \"babel-jest\": \"^20.0.3\",\n    \"babel-loader\": \"^7.0.0\",\n    \"babel-polyfill\": \"^6.23.0\",\n    \"babel-preset-env\": \"^1.4.0\",\n    \"esdoc\": \"^1.0.2\",\n    \"esdoc-coverage-plugin\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^3.1.1\",\n    \"eslint-config-airbnb\": \"^9.0.1\",\n    \"eslint-plugin-import\": \"^1.11.1\",\n    \"eslint-plugin-jsx-a11y\": \"^2.0.1\",\n    \"eslint-plugin-react\": \"^5.2.2\",\n    \"faker\": \"~4.1.0\",\n    \"ignore-loader\": \"^0.1.2\",\n    \"jest\": \"^20.0\",\n    \"json-loader\": \"^0.5.4\",\n    \"lambda-wrapper\": \"^0.1.2\",\n    \"nock\": \"^9.0.14\",\n    \"node-zip\": \"^1.1.1\",\n    \"path-to-regexp\": \"^1.5.3\",\n    \"serverless-jest-plugin\": \"^0.1.3\",\n    \"sinon\": \"~1.17\",\n    \"uglifyjs-webpack-plugin\": \"^1.0.1\",\n    \"webpack\": \"^2.4.1\"\n  },\n  \"babel\": {\n    \"presets\": [\n      [\n        \"env\",\n        {\n          \"targets\": {\n            \"node\": \"6.1\"\n          }\n        }\n      ]\n    ]\n  },\n  \"jest\": {\n    \"transform\": {\n      \"\\\\.(js|jsx)$\": \"babel-jest\",\n      \"\\\\.(json)$\": \"<rootDir>/__tests__/__utils__/fileTransformer.js\"\n    },\n    \"moduleNameMapper\": {\n      \"^@functions/(.+)\": \"<rootDir>/functions/$1\"\n    },\n    \"setupTestFrameworkScriptFile\": \"<rootDir>/__tests__/__utils__/setup.js\"\n  },\n  \"eslintConfig\": {\n    \"parser\": \"babel-eslint\",\n    \"extends\": \"airbnb\",\n    \"env\": {\n      \"jest\": true\n    }\n  },\n  \"scripts\": {\n    \"build\": \"webpack --progress --colors\",\n    \"build:doc\": \"esdoc\",\n    \"lint\": \"eslint events __tests__ functions pages test handler.js webpack.config.js\",\n    \"lint:fix\": \"eslint --fix $1\",\n    \"test\": \"NODE_ENV=test jest __tests__/.+/*.test.js --coverage --notify\",\n    \"test:watch\": \"npm run test -- --watch\"\n  }\n}\n",
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/package.json",
     "name": "package.json",
     "static": true,
     "access": "public"
   },
   {
-    "__docId__": 135,
+    "__docId__": 140,
     "kind": "testFile",
     "name": "__tests__/functions/transfer/transfer/artifact/artifact.test.js",
     "content": "/* eslint-disable import/no-unresolved */\n\nimport Artifact from '@functions/transfer/transfer/artifact';\n\nimport S3 from 'aws-sdk/clients/s3';\nimport AWS from 'aws-sdk-mock';\nimport faker from 'faker';\nimport Zip from 'node-zip';\nimport fs from 'fs';\n\ndescribe('Artifact', () => {\n  const bucketName = faker.random.uuid();\n\n  const objectKey = faker.random.uuid();\n\n  const secretAccessKey = faker.random.uuid();\n\n  const sessionToken = faker.random.uuid();\n\n  const accessKeyId = faker.random.uuid();\n\n  const credentials = { secretAccessKey, sessionToken, accessKeyId };\n\n  const location = { bucketName, objectKey };\n\n  describe('#id', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.id).toEqual(expect.stringMatching(/^[-a-zA-Z0-9]+$/));\n    });\n  });\n\n  describe('#filename', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.filename).toEqual(`${artifact.id}.zip`);\n    });\n  });\n\n  describe('#filepath', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.filepath).toEqual(`/tmp/${artifact.id}.zip`);\n    });\n  });\n\n  describe('#dir', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.dir).toEqual(expect.stringMatching(/^\\/tmp\\/[-a-zA-Z0-9]+$/));\n    });\n  });\n\n  describe('#bucketName', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.bucketName).toEqual(bucketName);\n    });\n  });\n\n  describe('#objectKey', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.objectKey).toEqual(objectKey);\n    });\n  });\n\n  describe('#secretAccessKey', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.secretAccessKey).toEqual(secretAccessKey);\n    });\n  });\n\n  describe('#sessionToken', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.sessionToken).toEqual(sessionToken);\n    });\n  });\n\n  describe('#accessKeyId', () => {\n    it('returns the correct value', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.accessKeyId).toEqual(accessKeyId);\n    });\n  });\n\n  describe('#ready', () => {\n    const artifact = new Artifact(location, credentials);\n\n    const { dir, filepath } = artifact;\n\n    const key = faker.random.word();\n\n    const value = faker.random.number();\n\n    const jsonFile = `${faker.random.uuid()}.json`;\n\n    const data = JSON.stringify({ [key]: value });\n\n    describe('when the artifact readys successfully', () => {\n      beforeEach(() => {\n        const zipFile = new Zip();\n        zipFile.file(jsonFile, data);\n        const zipped = zipFile.generate({ base64: false, compression: 'DEFLATE' });\n        AWS.mock('S3', 'getObject', (params, cb) => {\n          expect(params).toEqual(expect.objectContaining({\n            Bucket: bucketName,\n            Key: objectKey,\n          }));\n          cb(null, { Body: new Buffer(zipped, 'binary') });\n        });\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(filepath);\n        fs.unlinkSync(`${dir}/${jsonFile}`);\n        fs.rmdirSync(dir);\n        AWS.restore('S3', 'getObject');\n      });\n\n      it('fetches, loads and unzips correctly', () =>\n        expect(artifact.ready()).resolves.toBe(true));\n    });\n\n    describe('when the artifact fails to ready', () => {\n      const invalidArtifact = new Artifact({}, credentials);\n\n      it('rejects with an error', () =>\n        expect(invalidArtifact.ready()).rejects.toEqual(expect.any(Error)));\n    });\n  });\n\n  describe('#match', () => {\n    describe('when files are matched', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const relativePath = 'output';\n\n      const path = `${dir}/${relativePath}`;\n\n      const filename = faker.system.fileName();\n\n      const selector = '**/*';\n\n      const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n        fs.mkdirSync(path);\n        fs.writeFileSync(`${path}/${filename}`, data, { encoding: 'utf8' });\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(`${path}/${filename}`);\n        fs.rmdirSync(path);\n        fs.rmdirSync(dir);\n      });\n\n      it('should return the correct files', async () => {\n        const [file] = await artifact.match(selector);\n        expect(file.key).toEqual(`/${relativePath}/${filename}`);\n        expect(file.data).toEqual(new Buffer(data).toString('binary'));\n      });\n    });\n  });\n\n  describe('#get', () => {\n    describe('when the file exists', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const filename = faker.random.uuid();\n\n      const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n        fs.writeFileSync(`${dir}/${filename}`, data, { encoding: 'utf8' });\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(`${dir}/${filename}`);\n        fs.rmdirSync(dir);\n      });\n\n      it('should return the file', () => {\n        expect(artifact.get(filename)).toEqual(data);\n      });\n    });\n\n    describe('when the file does not exist', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const filename = faker.random.uuid();\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n      });\n\n      afterEach(() => {\n        fs.rmdirSync(dir);\n      });\n\n      it('throws an error', () => {\n        expect(() => artifact.get(filename)).toThrow(Error);\n      });\n    });\n  });\n\n  describe('#attribute', () => {\n    describe('when the file and key exists', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const filename = faker.random.uuid();\n\n      const key = faker.random.word();\n\n      const value = faker.random.number();\n\n      const data = JSON.stringify({ [key]: value });\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n        fs.writeFileSync(`${dir}/${filename}`, data, { encoding: 'utf8' });\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(`${dir}/${filename}`);\n        fs.rmdirSync(dir);\n      });\n\n      it('should return the file', () => {\n        expect(artifact.attribute(filename, key)).toEqual(value);\n      });\n    });\n\n    describe('when the files does not exist', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const filename = faker.random.uuid();\n\n      const key = faker.random.word();\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n      });\n\n      afterEach(() => {\n        fs.rmdirSync(dir);\n      });\n\n      it('should throw an error', () => {\n        expect(() => artifact.attribute(filename, key)).toThrow(Error);\n      });\n    });\n\n    describe('when the key is not present', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { dir } = artifact;\n\n      const filename = faker.random.uuid();\n\n      const key = faker.random.word();\n\n      const data = JSON.stringify({});\n\n      beforeEach(() => {\n        fs.mkdirSync(dir);\n        fs.writeFileSync(`${dir}/${filename}`, data, { encoding: 'utf8' });\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(`${dir}/${filename}`);\n        fs.rmdirSync(dir);\n      });\n\n      it('should throw an error', () => {\n        expect(() => artifact.attribute(filename, key)).toThrow(Error);\n      });\n    });\n  });\n\n  describe('#unzip', () => {\n    describe('when the artifact can be unzipped', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { filepath } = artifact;\n\n      const key = `${faker.random.uuid()}.json`;\n\n      const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });\n\n      beforeEach(() => {\n        const zipFile = new Zip();\n        zipFile.file(key, data);\n        const zipped = zipFile.generate({ base64: false, compression: 'DEFLATE' });\n        fs.writeFileSync(filepath, zipped, 'binary');\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(filepath);\n      });\n\n      it('should unzip the file', async () => {\n        const success = await artifact.unzip();\n        expect(success).toBe(true);\n        expect(artifact.get(key)).toEqual(data);\n      });\n    });\n\n    describe('when the artifact cannot be unzipped', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const { filepath } = artifact;\n\n      beforeEach(() => {\n        fs.writeFileSync(filepath, '', 'utf8');\n      });\n\n      afterEach(() => {\n        fs.unlinkSync(filepath);\n      });\n\n      it('reject with an error', async () =>\n        expect(artifact.unzip()).rejects.toEqual(expect.any(Error)));\n    });\n  });\n\n  describe('#write', () => {\n    const artifact = new Artifact(location, credentials);\n\n    const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });\n\n    it('writes a file to the correct location', () =>\n      expect(artifact.write(data)).resolves.toEqual(true));\n\n    afterEach(() => {\n      fs.unlinkSync(artifact.filepath);\n    });\n  });\n\n  describe('#fetch', () => {\n    describe('when the artifact can be retrieved', () => {\n      const artifact = new Artifact(location, credentials);\n\n      const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });\n\n      beforeEach(() => {\n        AWS.mock('S3', 'getObject', (params, cb) => {\n          expect(params).toEqual(expect.objectContaining({\n            Bucket: bucketName,\n            Key: objectKey,\n          }));\n          cb(null, { Body: new Buffer(data) });\n        });\n      });\n\n      afterEach(() => {\n        AWS.restore('S3', 'getObject');\n      });\n\n      it('should retrieve the correct data', () =>\n        expect(artifact.fetch()).resolves.toEqual(new Buffer(data)));\n    });\n\n    describe('when the artifact cannot be retrieved', () => {\n      const artifact = new Artifact(location, credentials);\n\n      beforeEach(() => {\n        AWS.mock('S3', 'getObject', (params, cb) => {\n          cb(new Error('TEST'));\n        });\n      });\n\n      afterEach(() => {\n        AWS.restore('S3', 'getObject');\n      });\n\n      it('should reject with an error', () =>\n        expect(artifact.fetch()).rejects.toEqual(expect.any(Error)));\n    });\n  });\n\n  describe('#client', () => {\n    it('returns an S3 client', () => {\n      const artifact = new Artifact(location, credentials);\n      expect(artifact.client).toBeInstanceOf(S3);\n    });\n  });\n});\n\ndescribe('Artifact#toArtifact', () => {\n  const bucketName = faker.random.uuid();\n\n  const objectKey = faker.random.uuid();\n\n  const secretAccessKey = faker.random.uuid();\n\n  const sessionToken = faker.random.uuid();\n\n  const accessKeyId = faker.random.uuid();\n\n  const credentials = { secretAccessKey, sessionToken, accessKeyId };\n\n  const name = faker.random.word();\n\n  const artifact = { name, location: { s3Location: { bucketName, objectKey } } };\n\n  it('correctly builds an artifact instance', () => {\n    const obj = Artifact.toArtifact(artifact, credentials);\n    expect(obj).toBeInstanceOf(Artifact);\n    expect(obj.bucketName).toEqual(bucketName);\n    expect(obj.objectKey).toEqual(objectKey);\n    expect(obj.secretAccessKey).toEqual(secretAccessKey);\n    expect(obj.sessionToken).toEqual(sessionToken);\n    expect(obj.accessKeyId).toEqual(accessKeyId);\n  });\n});\n\ndescribe('Artifact#toArtifactMapEntry', () => {\n  const bucketName = faker.random.uuid();\n\n  const objectKey = faker.random.uuid();\n\n  const secretAccessKey = faker.random.uuid();\n\n  const sessionToken = faker.random.uuid();\n\n  const accessKeyId = faker.random.uuid();\n\n  const credentials = { secretAccessKey, sessionToken, accessKeyId };\n\n  const name = faker.random.word();\n\n  const artifact = { name, location: { s3Location: { bucketName, objectKey } } };\n\n  it('correctly builds an artifact instance', () => {\n    const arr = Artifact.toArtifactMapEntry(artifact, credentials);\n    expect(arr[0]).toEqual(name);\n    expect(arr[1]).toBeInstanceOf(Artifact);\n  });\n});\n",
@@ -2553,7 +2665,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 136,
+    "__docId__": 141,
     "kind": "test",
     "name": "describe0",
     "testId": 0,
@@ -2566,7 +2678,7 @@
     "lineNumber": 11
   },
   {
-    "__docId__": 137,
+    "__docId__": 142,
     "kind": "test",
     "name": "describe1",
     "testId": 1,
@@ -2579,7 +2691,7 @@
     "lineNumber": 26
   },
   {
-    "__docId__": 138,
+    "__docId__": 143,
     "kind": "test",
     "name": "it2",
     "testId": 2,
@@ -2592,7 +2704,7 @@
     "lineNumber": 27
   },
   {
-    "__docId__": 139,
+    "__docId__": 144,
     "kind": "test",
     "name": "describe3",
     "testId": 3,
@@ -2605,7 +2717,7 @@
     "lineNumber": 33
   },
   {
-    "__docId__": 140,
+    "__docId__": 145,
     "kind": "test",
     "name": "it4",
     "testId": 4,
@@ -2618,7 +2730,7 @@
     "lineNumber": 34
   },
   {
-    "__docId__": 141,
+    "__docId__": 146,
     "kind": "test",
     "name": "describe5",
     "testId": 5,
@@ -2631,7 +2743,7 @@
     "lineNumber": 40
   },
   {
-    "__docId__": 142,
+    "__docId__": 147,
     "kind": "test",
     "name": "it6",
     "testId": 6,
@@ -2644,7 +2756,7 @@
     "lineNumber": 41
   },
   {
-    "__docId__": 143,
+    "__docId__": 148,
     "kind": "test",
     "name": "describe7",
     "testId": 7,
@@ -2657,7 +2769,7 @@
     "lineNumber": 47
   },
   {
-    "__docId__": 144,
+    "__docId__": 149,
     "kind": "test",
     "name": "it8",
     "testId": 8,
@@ -2670,7 +2782,7 @@
     "lineNumber": 48
   },
   {
-    "__docId__": 145,
+    "__docId__": 150,
     "kind": "test",
     "name": "describe9",
     "testId": 9,
@@ -2683,7 +2795,7 @@
     "lineNumber": 54
   },
   {
-    "__docId__": 146,
+    "__docId__": 151,
     "kind": "test",
     "name": "it10",
     "testId": 10,
@@ -2696,7 +2808,7 @@
     "lineNumber": 55
   },
   {
-    "__docId__": 147,
+    "__docId__": 152,
     "kind": "test",
     "name": "describe11",
     "testId": 11,
@@ -2709,7 +2821,7 @@
     "lineNumber": 61
   },
   {
-    "__docId__": 148,
+    "__docId__": 153,
     "kind": "test",
     "name": "it12",
     "testId": 12,
@@ -2722,7 +2834,7 @@
     "lineNumber": 62
   },
   {
-    "__docId__": 149,
+    "__docId__": 154,
     "kind": "test",
     "name": "describe13",
     "testId": 13,
@@ -2735,7 +2847,7 @@
     "lineNumber": 68
   },
   {
-    "__docId__": 150,
+    "__docId__": 155,
     "kind": "test",
     "name": "it14",
     "testId": 14,
@@ -2748,7 +2860,7 @@
     "lineNumber": 69
   },
   {
-    "__docId__": 151,
+    "__docId__": 156,
     "kind": "test",
     "name": "describe15",
     "testId": 15,
@@ -2761,7 +2873,7 @@
     "lineNumber": 75
   },
   {
-    "__docId__": 152,
+    "__docId__": 157,
     "kind": "test",
     "name": "it16",
     "testId": 16,
@@ -2774,7 +2886,7 @@
     "lineNumber": 76
   },
   {
-    "__docId__": 153,
+    "__docId__": 158,
     "kind": "test",
     "name": "describe17",
     "testId": 17,
@@ -2787,7 +2899,7 @@
     "lineNumber": 82
   },
   {
-    "__docId__": 154,
+    "__docId__": 159,
     "kind": "test",
     "name": "it18",
     "testId": 18,
@@ -2800,7 +2912,7 @@
     "lineNumber": 83
   },
   {
-    "__docId__": 155,
+    "__docId__": 160,
     "kind": "test",
     "name": "describe19",
     "testId": 19,
@@ -2813,7 +2925,7 @@
     "lineNumber": 89
   },
   {
-    "__docId__": 156,
+    "__docId__": 161,
     "kind": "test",
     "name": "describe20",
     "testId": 20,
@@ -2826,7 +2938,7 @@
     "lineNumber": 102
   },
   {
-    "__docId__": 157,
+    "__docId__": 162,
     "kind": "test",
     "name": "it21",
     "testId": 21,
@@ -2839,7 +2951,7 @@
     "lineNumber": 123
   },
   {
-    "__docId__": 158,
+    "__docId__": 163,
     "kind": "test",
     "name": "describe22",
     "testId": 22,
@@ -2852,7 +2964,7 @@
     "lineNumber": 127
   },
   {
-    "__docId__": 159,
+    "__docId__": 164,
     "kind": "test",
     "name": "it23",
     "testId": 23,
@@ -2865,7 +2977,7 @@
     "lineNumber": 130
   },
   {
-    "__docId__": 160,
+    "__docId__": 165,
     "kind": "test",
     "name": "describe24",
     "testId": 24,
@@ -2878,7 +2990,7 @@
     "lineNumber": 135
   },
   {
-    "__docId__": 161,
+    "__docId__": 166,
     "kind": "test",
     "name": "describe25",
     "testId": 25,
@@ -2891,7 +3003,7 @@
     "lineNumber": 136
   },
   {
-    "__docId__": 162,
+    "__docId__": 167,
     "kind": "test",
     "name": "it26",
     "testId": 26,
@@ -2904,7 +3016,7 @@
     "lineNumber": 163
   },
   {
-    "__docId__": 163,
+    "__docId__": 168,
     "kind": "test",
     "name": "describe27",
     "testId": 27,
@@ -2917,7 +3029,7 @@
     "lineNumber": 171
   },
   {
-    "__docId__": 164,
+    "__docId__": 169,
     "kind": "test",
     "name": "describe28",
     "testId": 28,
@@ -2930,7 +3042,7 @@
     "lineNumber": 172
   },
   {
-    "__docId__": 165,
+    "__docId__": 170,
     "kind": "test",
     "name": "it29",
     "testId": 29,
@@ -2943,7 +3055,7 @@
     "lineNumber": 191
   },
   {
-    "__docId__": 166,
+    "__docId__": 171,
     "kind": "test",
     "name": "describe30",
     "testId": 30,
@@ -2956,7 +3068,7 @@
     "lineNumber": 196
   },
   {
-    "__docId__": 167,
+    "__docId__": 172,
     "kind": "test",
     "name": "it31",
     "testId": 31,
@@ -2969,7 +3081,7 @@
     "lineNumber": 211
   },
   {
-    "__docId__": 168,
+    "__docId__": 173,
     "kind": "test",
     "name": "describe32",
     "testId": 32,
@@ -2982,7 +3094,7 @@
     "lineNumber": 217
   },
   {
-    "__docId__": 169,
+    "__docId__": 174,
     "kind": "test",
     "name": "describe33",
     "testId": 33,
@@ -2995,7 +3107,7 @@
     "lineNumber": 218
   },
   {
-    "__docId__": 170,
+    "__docId__": 175,
     "kind": "test",
     "name": "it34",
     "testId": 34,
@@ -3008,7 +3120,7 @@
     "lineNumber": 241
   },
   {
-    "__docId__": 171,
+    "__docId__": 176,
     "kind": "test",
     "name": "describe35",
     "testId": 35,
@@ -3021,7 +3133,7 @@
     "lineNumber": 246
   },
   {
-    "__docId__": 172,
+    "__docId__": 177,
     "kind": "test",
     "name": "it36",
     "testId": 36,
@@ -3034,7 +3146,7 @@
     "lineNumber": 263
   },
   {
-    "__docId__": 173,
+    "__docId__": 178,
     "kind": "test",
     "name": "describe37",
     "testId": 37,
@@ -3047,7 +3159,7 @@
     "lineNumber": 268
   },
   {
-    "__docId__": 174,
+    "__docId__": 179,
     "kind": "test",
     "name": "it38",
     "testId": 38,
@@ -3060,7 +3172,7 @@
     "lineNumber": 289
   },
   {
-    "__docId__": 175,
+    "__docId__": 180,
     "kind": "test",
     "name": "describe39",
     "testId": 39,
@@ -3073,7 +3185,7 @@
     "lineNumber": 295
   },
   {
-    "__docId__": 176,
+    "__docId__": 181,
     "kind": "test",
     "name": "describe40",
     "testId": 40,
@@ -3086,7 +3198,7 @@
     "lineNumber": 296
   },
   {
-    "__docId__": 177,
+    "__docId__": 182,
     "kind": "test",
     "name": "it41",
     "testId": 41,
@@ -3099,7 +3211,7 @@
     "lineNumber": 316
   },
   {
-    "__docId__": 178,
+    "__docId__": 183,
     "kind": "test",
     "name": "describe42",
     "testId": 42,
@@ -3112,7 +3224,7 @@
     "lineNumber": 323
   },
   {
-    "__docId__": 179,
+    "__docId__": 184,
     "kind": "test",
     "name": "it43",
     "testId": 43,
@@ -3125,7 +3237,7 @@
     "lineNumber": 336
   },
   {
-    "__docId__": 180,
+    "__docId__": 185,
     "kind": "test",
     "name": "describe44",
     "testId": 44,
@@ -3138,7 +3250,7 @@
     "lineNumber": 341
   },
   {
-    "__docId__": 181,
+    "__docId__": 186,
     "kind": "test",
     "name": "it45",
     "testId": 45,
@@ -3151,7 +3263,7 @@
     "lineNumber": 346
   },
   {
-    "__docId__": 182,
+    "__docId__": 187,
     "kind": "test",
     "name": "describe46",
     "testId": 46,
@@ -3164,7 +3276,7 @@
     "lineNumber": 354
   },
   {
-    "__docId__": 183,
+    "__docId__": 188,
     "kind": "test",
     "name": "describe47",
     "testId": 47,
@@ -3177,7 +3289,7 @@
     "lineNumber": 355
   },
   {
-    "__docId__": 184,
+    "__docId__": 189,
     "kind": "test",
     "name": "it48",
     "testId": 48,
@@ -3190,7 +3302,7 @@
     "lineNumber": 374
   },
   {
-    "__docId__": 185,
+    "__docId__": 190,
     "kind": "test",
     "name": "describe49",
     "testId": 49,
@@ -3203,7 +3315,7 @@
     "lineNumber": 378
   },
   {
-    "__docId__": 186,
+    "__docId__": 191,
     "kind": "test",
     "name": "it50",
     "testId": 50,
@@ -3216,7 +3328,7 @@
     "lineNumber": 391
   },
   {
-    "__docId__": 187,
+    "__docId__": 192,
     "kind": "test",
     "name": "describe51",
     "testId": 51,
@@ -3229,7 +3341,7 @@
     "lineNumber": 396
   },
   {
-    "__docId__": 188,
+    "__docId__": 193,
     "kind": "test",
     "name": "it52",
     "testId": 52,
@@ -3242,7 +3354,7 @@
     "lineNumber": 397
   },
   {
-    "__docId__": 189,
+    "__docId__": 194,
     "kind": "test",
     "name": "describe53",
     "testId": 53,
@@ -3255,7 +3367,7 @@
     "lineNumber": 404
   },
   {
-    "__docId__": 190,
+    "__docId__": 195,
     "kind": "test",
     "name": "it54",
     "testId": 54,
@@ -3268,7 +3380,7 @@
     "lineNumber": 421
   },
   {
-    "__docId__": 191,
+    "__docId__": 196,
     "kind": "test",
     "name": "describe55",
     "testId": 55,
@@ -3281,7 +3393,7 @@
     "lineNumber": 432
   },
   {
-    "__docId__": 192,
+    "__docId__": 197,
     "kind": "test",
     "name": "it56",
     "testId": 56,
@@ -3294,10 +3406,10 @@
     "lineNumber": 449
   },
   {
-    "__docId__": 193,
+    "__docId__": 198,
     "kind": "testFile",
     "name": "__tests__/functions/transfer/transfer/artifact/file.test.js",
-    "content": "/* eslint-disable import/no-unresolved */\n\nimport File from '@functions/transfer/transfer/artifact/file';\n\ndescribe('File', () => {\n  test('TODO');\n});\n",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport File from '@functions/transfer/transfer/artifact/file';\n\nimport AWS from 'aws-sdk-mock';\nimport { Credentials } from 'aws-sdk';\nimport Path from 'path';\nimport faker from 'faker';\n\ndescribe('File', () => {\n  const path = Path.join('/', faker.random.uuid());\n\n  const filename = faker.system.fileName();\n\n  const data = new Buffer(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));\n\n  describe('#new', () => {\n    it('initialises correctly', () => {\n      const file = new File(path, filename, data);\n      const expectedPath = Path.join('/', path, filename);\n      expect(file.key).toEqual(expectedPath);\n      expect(file.data).toEqual(data);\n    });\n  });\n\n  describe('#upload', () => {\n    const accessKeyId = faker.random.uuid();\n\n    const secretAccessKey = faker.random.uuid();\n\n    const sessionToken = faker.random.uuid();\n\n    const credentials = new Credentials(accessKeyId, secretAccessKey, sessionToken);\n\n    const bucket = faker.random.uuid();\n\n    const prefix = Path.join('/', faker.random.uuid());\n\n    const prefixed = Path.join('/', prefix, path, filename);\n\n    describe('when the upload succeeds', () => {\n      beforeEach(() => {\n        AWS.mock('S3', 'putObject', (params, cb) => {\n          expect(params).toEqual(expect.objectContaining({\n            Bucket: bucket,\n            Key: prefixed,\n            Body: data,\n          }));\n          cb(null, { });\n        });\n      });\n\n      afterEach(() => {\n        AWS.restore('S3', 'putObject');\n      });\n\n      it('returns the correct fully resolved path', () => {\n        const file = new File(path, filename, data);\n        return expect(file.upload({ bucket, credentials, prefix })).resolves.toEqual(\n          expect.stringMatching(`s3://${bucket}${prefixed}`),\n        );\n      });\n    });\n\n    describe('when there is no prefix', () => {\n      const filepath = Path.join('/', path, filename);\n\n      beforeEach(() => {\n        AWS.mock('S3', 'putObject', (params, cb) => {\n          expect(params).toEqual(expect.objectContaining({\n            Bucket: bucket,\n            Key: filepath,\n            Body: data,\n          }));\n          cb(null, { });\n        });\n      });\n\n      afterEach(() => {\n        AWS.restore('S3', 'putObject');\n      });\n\n      it('returns the correct fully resolved path', () => {\n        const file = new File(path, filename, data);\n        return expect(file.upload({ bucket, credentials })).resolves.toEqual(\n          expect.stringMatching(`s3://${bucket}${filepath}`),\n        );\n      });\n    });\n\n    describe('when the upload fails', () => {\n      beforeEach(() => {\n        AWS.mock('S3', 'putObject', (params, cb) => {\n          cb(new Error('TEST'), {});\n        });\n      });\n\n      afterEach(() => {\n        AWS.restore('S3', 'putObject');\n      });\n\n      it('throws a well-formed error', () => {\n        const file = new File(path, filename, data);\n        return expect(file.upload({ bucket, credentials, prefix })).rejects.toEqual(\n          expect.any(Error),\n        );\n      });\n    });\n  });\n});\n",
     "static": true,
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/artifact/file.test.js",
     "access": null,
@@ -3305,7 +3417,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 194,
+    "__docId__": 199,
     "kind": "test",
     "name": "describe57",
     "testId": 57,
@@ -3315,26 +3427,130 @@
     "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57",
     "access": null,
     "description": "File",
-    "lineNumber": 5
+    "lineNumber": 10
   },
   {
-    "__docId__": 195,
+    "__docId__": 200,
     "kind": "test",
-    "name": "test58",
+    "name": "describe58",
     "testId": 58,
     "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57",
     "testDepth": 1,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.test58",
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe58",
     "access": null,
-    "description": "TODO",
-    "lineNumber": 6
+    "description": "#new",
+    "lineNumber": 17
   },
   {
-    "__docId__": 196,
+    "__docId__": 201,
+    "kind": "test",
+    "name": "it59",
+    "testId": 59,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe58",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe58.it59",
+    "access": null,
+    "description": "initialises correctly",
+    "lineNumber": 18
+  },
+  {
+    "__docId__": 202,
+    "kind": "test",
+    "name": "describe60",
+    "testId": 60,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60",
+    "access": null,
+    "description": "#upload",
+    "lineNumber": 26
+  },
+  {
+    "__docId__": 203,
+    "kind": "test",
+    "name": "describe61",
+    "testId": 61,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60.describe61",
+    "access": null,
+    "description": "when the upload succeeds",
+    "lineNumber": 41
+  },
+  {
+    "__docId__": 204,
+    "kind": "test",
+    "name": "it62",
+    "testId": 62,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60.describe61",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60.describe61.it62",
+    "access": null,
+    "description": "returns the correct fully resolved path",
+    "lineNumber": 57
+  },
+  {
+    "__docId__": 205,
+    "kind": "test",
+    "name": "describe63",
+    "testId": 63,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60.describe63",
+    "access": null,
+    "description": "when there is no prefix",
+    "lineNumber": 65
+  },
+  {
+    "__docId__": 206,
+    "kind": "test",
+    "name": "it64",
+    "testId": 64,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60.describe63",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60.describe63.it64",
+    "access": null,
+    "description": "returns the correct fully resolved path",
+    "lineNumber": 83
+  },
+  {
+    "__docId__": 207,
+    "kind": "test",
+    "name": "describe65",
+    "testId": 65,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60.describe65",
+    "access": null,
+    "description": "when the upload fails",
+    "lineNumber": 91
+  },
+  {
+    "__docId__": 208,
+    "kind": "test",
+    "name": "it66",
+    "testId": 66,
+    "memberof": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60.describe65",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/artifact/file.test.js~describe57.describe60.describe65.it66",
+    "access": null,
+    "description": "throws a well-formed error",
+    "lineNumber": 102
+  },
+  {
+    "__docId__": 209,
     "kind": "testFile",
     "name": "__tests__/functions/transfer/transfer/attribute/attribute.test.js",
-    "content": "/* eslint-disable import/no-unresolved */\n\nimport Attribute from '@functions/transfer/transfer/attribute';\n\ndescribe('Attribute', () => {\n  test('TODO');\n});\n",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport Attribute from '@functions/transfer/transfer/attribute';\n\nimport faker from 'faker';\n\ndescribe('Attribute', () => {\n  const key = faker.random.word();\n\n  const value = faker.random.number();\n\n  // const data = JSON.stringify({ [key]: value });\n\n  const artifact = {\n    ready: async () => true,\n    attribute: async (_, requestedKey) => {\n      if (requestedKey !== key) {\n        throw new Error('TEST');\n      }\n      return value;\n    },\n  };\n\n  const artifactName = faker.random.word();\n\n  const artifacts = { [artifactName]: artifact };\n\n  describe('#new', () => {\n    const mapping = faker.random.word();\n\n    it('should instantiate correctly', () => {\n      const attribute = new Attribute(mapping, artifacts);\n      expect(attribute.mapping).toEqual(mapping);\n      expect(attribute.artifacts).toEqual(artifacts);\n    });\n  });\n\n  describe('#type', () => {\n    describe('when the mapping is a static value', () => {\n      const mapping = faker.random.word();\n\n      it('should return the correct value', () => {\n        const attribute = new Attribute(mapping, artifacts);\n        expect(attribute.type).toEqual('STATIC');\n      });\n    });\n\n    describe('when the mapping is an object', () => {\n      const mapping = {\n        'Fn::GetParam': [artifactName, faker.system.fileName(), key],\n      };\n\n      it('should return the correct value', () => {\n        const attribute = new Attribute(mapping, artifacts);\n        expect(attribute.type).toEqual('REMOTE');\n      });\n    });\n  });\n\n  describe('#value', () => {\n    describe('when the mapping is a static value', () => {\n      const mapping = faker.random.word();\n\n      it('should return the correct value', () => {\n        const attribute = new Attribute(mapping, artifacts);\n        return expect(attribute.value()).resolves.toEqual(mapping);\n      });\n    });\n\n    describe('when the mapping is an object', () => {\n      describe('when the mapping is an unrecognised key', () => {\n        const mapping = {\n          [faker.random.uuid()]: faker.random.words(),\n        };\n\n        it('should return the correct value', () => {\n          const attribute = new Attribute(mapping, artifacts);\n          return expect(attribute.value()).rejects.toEqual(expect.any(Error));\n        });\n      });\n\n      describe('when the mapping contains an invalid key', () => {\n        const mapping = {\n          'Fn::GetParam': [artifactName, faker.system.fileName(), faker.random.uuid()],\n        };\n\n        it('should return the correct value', () => {\n          const attribute = new Attribute(mapping, artifacts);\n          return expect(attribute.value()).rejects.toEqual(expect.any(Error));\n        });\n      });\n\n      describe('when the mapping contains an invalid artifact', () => {\n        const mapping = {\n          'Fn::GetParam': [faker.random.uuid(), faker.system.fileName(), key],\n        };\n\n        it('should return the correct value', () => {\n          const attribute = new Attribute(mapping, artifacts);\n          return expect(attribute.value()).rejects.toEqual(expect.any(Error));\n        });\n      });\n\n      describe('when the mapping is valid', () => {\n        const mapping = {\n          'Fn::GetParam': [artifactName, faker.system.fileName(), key],\n        };\n\n        it('should return the correct value', () => {\n          const attribute = new Attribute(mapping, artifacts);\n          return expect(attribute.value()).resolves.toEqual(value);\n        });\n      });\n    });\n  });\n});\n",
     "static": true,
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/attribute/attribute.test.js",
     "access": null,
@@ -3342,36 +3558,567 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 197,
+    "__docId__": 210,
     "kind": "test",
-    "name": "describe59",
-    "testId": 59,
+    "name": "describe67",
+    "testId": 67,
     "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe59",
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67",
     "access": null,
     "description": "Attribute",
-    "lineNumber": 5
+    "lineNumber": 7
   },
   {
-    "__docId__": 198,
+    "__docId__": 211,
     "kind": "test",
-    "name": "test60",
-    "testId": 60,
-    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe59",
+    "name": "describe68",
+    "testId": 68,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67",
     "testDepth": 1,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe59.test60",
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe68",
     "access": null,
-    "description": "TODO",
-    "lineNumber": 6
+    "description": "#new",
+    "lineNumber": 28
   },
   {
-    "__docId__": 199,
+    "__docId__": 212,
+    "kind": "test",
+    "name": "it69",
+    "testId": 69,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe68",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe68.it69",
+    "access": null,
+    "description": "should instantiate correctly",
+    "lineNumber": 31
+  },
+  {
+    "__docId__": 213,
+    "kind": "test",
+    "name": "describe70",
+    "testId": 70,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe70",
+    "access": null,
+    "description": "#type",
+    "lineNumber": 38
+  },
+  {
+    "__docId__": 214,
+    "kind": "test",
+    "name": "describe71",
+    "testId": 71,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe70",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe70.describe71",
+    "access": null,
+    "description": "when the mapping is a static value",
+    "lineNumber": 39
+  },
+  {
+    "__docId__": 215,
+    "kind": "test",
+    "name": "it72",
+    "testId": 72,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe70.describe71",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe70.describe71.it72",
+    "access": null,
+    "description": "should return the correct value",
+    "lineNumber": 42
+  },
+  {
+    "__docId__": 216,
+    "kind": "test",
+    "name": "describe73",
+    "testId": 73,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe70",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe70.describe73",
+    "access": null,
+    "description": "when the mapping is an object",
+    "lineNumber": 48
+  },
+  {
+    "__docId__": 217,
+    "kind": "test",
+    "name": "it74",
+    "testId": 74,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe70.describe73",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe70.describe73.it74",
+    "access": null,
+    "description": "should return the correct value",
+    "lineNumber": 53
+  },
+  {
+    "__docId__": 218,
+    "kind": "test",
+    "name": "describe75",
+    "testId": 75,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75",
+    "access": null,
+    "description": "#value",
+    "lineNumber": 60
+  },
+  {
+    "__docId__": 219,
+    "kind": "test",
+    "name": "describe76",
+    "testId": 76,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe76",
+    "access": null,
+    "description": "when the mapping is a static value",
+    "lineNumber": 61
+  },
+  {
+    "__docId__": 220,
+    "kind": "test",
+    "name": "it77",
+    "testId": 77,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe76",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe76.it77",
+    "access": null,
+    "description": "should return the correct value",
+    "lineNumber": 64
+  },
+  {
+    "__docId__": 221,
+    "kind": "test",
+    "name": "describe78",
+    "testId": 78,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78",
+    "access": null,
+    "description": "when the mapping is an object",
+    "lineNumber": 70
+  },
+  {
+    "__docId__": 222,
+    "kind": "test",
+    "name": "describe79",
+    "testId": 79,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe79",
+    "access": null,
+    "description": "when the mapping is an unrecognised key",
+    "lineNumber": 71
+  },
+  {
+    "__docId__": 223,
+    "kind": "test",
+    "name": "it80",
+    "testId": 80,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe79",
+    "testDepth": 4,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe79.it80",
+    "access": null,
+    "description": "should return the correct value",
+    "lineNumber": 76
+  },
+  {
+    "__docId__": 224,
+    "kind": "test",
+    "name": "describe81",
+    "testId": 81,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe81",
+    "access": null,
+    "description": "when the mapping contains an invalid key",
+    "lineNumber": 82
+  },
+  {
+    "__docId__": 225,
+    "kind": "test",
+    "name": "it82",
+    "testId": 82,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe81",
+    "testDepth": 4,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe81.it82",
+    "access": null,
+    "description": "should return the correct value",
+    "lineNumber": 87
+  },
+  {
+    "__docId__": 226,
+    "kind": "test",
+    "name": "describe83",
+    "testId": 83,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe83",
+    "access": null,
+    "description": "when the mapping contains an invalid artifact",
+    "lineNumber": 93
+  },
+  {
+    "__docId__": 227,
+    "kind": "test",
+    "name": "it84",
+    "testId": 84,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe83",
+    "testDepth": 4,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe83.it84",
+    "access": null,
+    "description": "should return the correct value",
+    "lineNumber": 98
+  },
+  {
+    "__docId__": 228,
+    "kind": "test",
+    "name": "describe85",
+    "testId": 85,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe85",
+    "access": null,
+    "description": "when the mapping is valid",
+    "lineNumber": 104
+  },
+  {
+    "__docId__": 229,
+    "kind": "test",
+    "name": "it86",
+    "testId": 86,
+    "memberof": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe85",
+    "testDepth": 4,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/attribute/attribute.test.js~describe67.describe75.describe78.describe85.it86",
+    "access": null,
+    "description": "should return the correct value",
+    "lineNumber": 109
+  },
+  {
+    "__docId__": 230,
+    "kind": "testFile",
+    "name": "__tests__/functions/transfer/transfer/destination.test.js",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport Destination from '@functions/transfer/transfer/destination';\nimport Attribute from '@functions/transfer/transfer/attribute';\nimport File from '@functions/transfer/transfer/artifact/file';\n\nimport faker from 'faker';\nimport Path from 'path';\nimport { Credentials, STS } from 'aws-sdk';\nimport AWS from 'aws-sdk-mock';\n\ndescribe('Destination', () => {\n  const roleArn = faker.random.uuid();\n\n  const bucket = faker.random.word();\n\n  const artifact = {\n    ready: async () => true,\n    match: async () => {\n      const path = Path.join('/', faker.random.uuid());\n      const filename = faker.system.fileName();\n      const data = new Buffer(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));\n      return [\n        new File(path, filename, data),\n      ];\n    },\n  };\n\n  const artifactName = faker.random.word();\n\n  const artifacts = { [artifactName]: artifact };\n\n  const sources = [\n    `${artifactName}::**/*`,\n  ];\n\n  const prefix = Path.join('/', faker.random.uuid());\n\n  const properties = { roleArn, bucket, src: sources, prefix };\n\n  describe('#new', () => {\n    it('instantiates correctly', () => {\n      const destination = new Destination(properties, artifacts);\n      expect(destination.artifacts).toEqual(artifacts);\n      expect(destination.roleArn).toEqual(expect.any(Attribute));\n      expect(destination.bucket).toEqual(expect.any(Attribute));\n      expect(destination.sources).toEqual(sources);\n      expect(destination.prefix).toEqual(prefix);\n      expect(destination.sts).toEqual(expect.any(STS));\n    });\n\n    describe('.roleArn resolution', () => {\n      it('resolves to the correct value', () => {\n        const destination = new Destination(properties, artifacts);\n        expect(destination.roleArn.value()).resolves.toEqual(roleArn);\n      });\n    });\n\n    describe('.bucket resolution', () => {\n      it('resolves to the correct value', () => {\n        const destination = new Destination(properties, artifacts);\n        expect(destination.bucket.value()).resolves.toEqual(bucket);\n      });\n    });\n  });\n\n  describe('#credentials', () => {\n    describe('when the request is successful', () => {\n      const accessKeyId = faker.random.uuid();\n\n      const secretAccessKey = faker.random.uuid();\n\n      const sessionToken = faker.random.uuid();\n\n      const credentials = {\n        AccessKeyId: accessKeyId,\n        SecretAccessKey: secretAccessKey,\n        SessionToken: sessionToken,\n      };\n\n      beforeEach(() => {\n        AWS.mock('STS', 'assumeRole', (params, cb) => {\n          expect(params).toEqual(expect.objectContaining({\n            RoleSessionName: process.env.AWS_LAMBDA_FUNCTION_NAME,\n            ExternalId: process.env.AWS_LAMBDA_FUNCTION_NAME,\n            RoleArn: roleArn,\n          }));\n          cb(null, { Credentials: credentials });\n        });\n      });\n\n      afterEach(() => {\n        AWS.restore('STS', 'assumeRole');\n      });\n\n      it('returns a correctly instantiated AWS Credentials object', async () => {\n        const destination = new Destination(properties, artifacts);\n        const assumed = await destination.credentials();\n        expect(assumed).toEqual(expect.any(Credentials));\n        expect(assumed.accessKeyId).toEqual(accessKeyId);\n        expect(assumed.secretAccessKey).toEqual(secretAccessKey);\n        expect(assumed.sessionToken).toEqual(sessionToken);\n      });\n    });\n\n    describe('when the request is invalid', () => {\n      beforeEach(() => {\n        AWS.mock('STS', 'assumeRole', (params, cb) => {\n          cb(new Error('TEST'), {});\n        });\n      });\n\n      afterEach(() => {\n        AWS.restore('STS', 'assumeRole');\n      });\n\n      it('returns a correctly instantiated AWS Credentials object', () => {\n        const destination = new Destination(properties, artifacts);\n        return expect(destination.credentials()).rejects.toEqual(expect.any(Error));\n      });\n    });\n  });\n\n  describe('#files', () => {\n    describe('when the artifact exists', () => {\n      it('resolves with an array of instantiated files', () => {\n        const destination = new Destination(properties, artifacts);\n        return expect(destination.files()).resolves.toEqual(expect.arrayContaining([\n          expect.any(File),\n        ]));\n      });\n    });\n\n    describe('when there are no files', () => {\n      const noFileProperties = { roleArn, bucket, src: [], prefix };\n\n      it('resolves with an empty array', () => {\n        const destination = new Destination(noFileProperties, artifacts);\n        return expect(destination.files()).resolves.toEqual([]);\n      });\n    });\n\n    describe('when the artifact does not exist', () => {\n      const invalidFileProperties = { roleArn, bucket, src: [\n        `${faker.random.uuid()}::${faker.system.fileName()}`,\n      ], prefix };\n\n      it('resolves with an empty array', () => {\n        const destination = new Destination(invalidFileProperties, artifacts);\n        return expect(destination.files()).rejects.toEqual(expect.any(Error));\n      });\n    });\n  });\n\n  describe('#upload', () => {\n    describe('when all files can be uploaded successfully', () => {\n      const destination = new Destination(properties, artifacts);\n\n      const uploadLocation = `s3://${faker.random.uuid()}/${faker.system.fileName()}`;\n\n      const upload = jest.fn().mockImplementation(async () => uploadLocation);\n\n      const credentials = new Credentials(\n        faker.random.uuid(),\n        faker.random.uuid(),\n        faker.random.uuid()\n      );\n\n      jest.spyOn(destination, 'files').mockImplementation(async () => ([{ upload }]));\n\n      jest.spyOn(destination, 'credentials').mockImplementation(async () => credentials);\n\n      it('resolves with an array of remote locations', async () => {\n        const urls = await destination.upload();\n        expect(urls).toEqual(expect.arrayContaining([\n          expect.stringMatching(uploadLocation),\n        ]));\n        expect(destination.files).toHaveBeenCalled();\n        expect(destination.credentials).toHaveBeenCalled();\n        expect(upload).toHaveBeenCalledWith(expect.objectContaining({\n          bucket,\n          credentials,\n          prefix,\n        }));\n      });\n    });\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/destination.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 231,
+    "kind": "test",
+    "name": "describe87",
+    "testId": 87,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87",
+    "access": null,
+    "description": "Destination",
+    "lineNumber": 12
+  },
+  {
+    "__docId__": 232,
+    "kind": "test",
+    "name": "describe88",
+    "testId": 88,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88",
+    "access": null,
+    "description": "#new",
+    "lineNumber": 41
+  },
+  {
+    "__docId__": 233,
+    "kind": "test",
+    "name": "it89",
+    "testId": 89,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88.it89",
+    "access": null,
+    "description": "instantiates correctly",
+    "lineNumber": 42
+  },
+  {
+    "__docId__": 234,
+    "kind": "test",
+    "name": "describe90",
+    "testId": 90,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88.describe90",
+    "access": null,
+    "description": ".roleArn resolution",
+    "lineNumber": 52
+  },
+  {
+    "__docId__": 235,
+    "kind": "test",
+    "name": "it91",
+    "testId": 91,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88.describe90",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88.describe90.it91",
+    "access": null,
+    "description": "resolves to the correct value",
+    "lineNumber": 53
+  },
+  {
+    "__docId__": 236,
+    "kind": "test",
+    "name": "describe92",
+    "testId": 92,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88.describe92",
+    "access": null,
+    "description": ".bucket resolution",
+    "lineNumber": 59
+  },
+  {
+    "__docId__": 237,
+    "kind": "test",
+    "name": "it93",
+    "testId": 93,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88.describe92",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe88.describe92.it93",
+    "access": null,
+    "description": "resolves to the correct value",
+    "lineNumber": 60
+  },
+  {
+    "__docId__": 238,
+    "kind": "test",
+    "name": "describe94",
+    "testId": 94,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe94",
+    "access": null,
+    "description": "#credentials",
+    "lineNumber": 67
+  },
+  {
+    "__docId__": 239,
+    "kind": "test",
+    "name": "describe95",
+    "testId": 95,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe94",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe94.describe95",
+    "access": null,
+    "description": "when the request is successful",
+    "lineNumber": 68
+  },
+  {
+    "__docId__": 240,
+    "kind": "test",
+    "name": "it96",
+    "testId": 96,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe94.describe95",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe94.describe95.it96",
+    "access": null,
+    "description": "returns a correctly instantiated AWS Credentials object",
+    "lineNumber": 96
+  },
+  {
+    "__docId__": 241,
+    "kind": "test",
+    "name": "describe97",
+    "testId": 97,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe94",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe94.describe97",
+    "access": null,
+    "description": "when the request is invalid",
+    "lineNumber": 106
+  },
+  {
+    "__docId__": 242,
+    "kind": "test",
+    "name": "it98",
+    "testId": 98,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe94.describe97",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe94.describe97.it98",
+    "access": null,
+    "description": "returns a correctly instantiated AWS Credentials object",
+    "lineNumber": 117
+  },
+  {
+    "__docId__": 243,
+    "kind": "test",
+    "name": "describe99",
+    "testId": 99,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99",
+    "access": null,
+    "description": "#files",
+    "lineNumber": 124
+  },
+  {
+    "__docId__": 244,
+    "kind": "test",
+    "name": "describe100",
+    "testId": 100,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99.describe100",
+    "access": null,
+    "description": "when the artifact exists",
+    "lineNumber": 125
+  },
+  {
+    "__docId__": 245,
+    "kind": "test",
+    "name": "it101",
+    "testId": 101,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99.describe100",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99.describe100.it101",
+    "access": null,
+    "description": "resolves with an array of instantiated files",
+    "lineNumber": 126
+  },
+  {
+    "__docId__": 246,
+    "kind": "test",
+    "name": "describe102",
+    "testId": 102,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99.describe102",
+    "access": null,
+    "description": "when there are no files",
+    "lineNumber": 134
+  },
+  {
+    "__docId__": 247,
+    "kind": "test",
+    "name": "it103",
+    "testId": 103,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99.describe102",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99.describe102.it103",
+    "access": null,
+    "description": "resolves with an empty array",
+    "lineNumber": 137
+  },
+  {
+    "__docId__": 248,
+    "kind": "test",
+    "name": "describe104",
+    "testId": 104,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99.describe104",
+    "access": null,
+    "description": "when the artifact does not exist",
+    "lineNumber": 143
+  },
+  {
+    "__docId__": 249,
+    "kind": "test",
+    "name": "it105",
+    "testId": 105,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99.describe104",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe99.describe104.it105",
+    "access": null,
+    "description": "resolves with an empty array",
+    "lineNumber": 148
+  },
+  {
+    "__docId__": 250,
+    "kind": "test",
+    "name": "describe106",
+    "testId": 106,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe106",
+    "access": null,
+    "description": "#upload",
+    "lineNumber": 155
+  },
+  {
+    "__docId__": 251,
+    "kind": "test",
+    "name": "describe107",
+    "testId": 107,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe106",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe106.describe107",
+    "access": null,
+    "description": "when all files can be uploaded successfully",
+    "lineNumber": 156
+  },
+  {
+    "__docId__": 252,
+    "kind": "test",
+    "name": "it108",
+    "testId": 108,
+    "memberof": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe106.describe107",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/destination.test.js~describe87.describe106.describe107.it108",
+    "access": null,
+    "description": "resolves with an array of remote locations",
+    "lineNumber": 173
+  },
+  {
+    "__docId__": 253,
     "kind": "testFile",
     "name": "__tests__/functions/transfer/transfer/uploader.test.js",
-    "content": "/* eslint-disable import/no-unresolved */\n\nimport Uploader from '@functions/transfer/transfer/uploader';\n// import Artifact from '@functions/transfer/transfer/artifact';\n\n// import faker from 'faker';\n// import AWS from 'aws-sdk-mock';\n// import Zip from 'node-zip';\n\ndescribe('Uploader', () => {\n  test('TODO');\n});\n",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport Uploader from '@functions/transfer/transfer/uploader';\nimport Artifact from '@functions/transfer/transfer/artifact';\nimport Destination from '@functions/transfer/transfer/destination';\n\nimport faker from 'faker';\nimport AWS from 'aws-sdk-mock';\nimport Zip from 'node-zip';\n\ndescribe('Uploader', () => {\n  const artifactName = faker.random.word();\n\n  const roleArnKey = faker.random.word();\n\n  const roleArn = faker.internet.url();\n\n  const bucketKey = faker.random.word();\n\n  const bucket = faker.random.uuid();\n\n  const jsonFile = JSON.stringify({ [roleArnKey]: roleArn, [bucketKey]: bucket });\n\n  const jsonFileName = faker.system.fileName();\n\n  const credentials = {\n    AccessKeyId: faker.random.uuid(),\n    SecretAccessKey: faker.random.uuid(),\n    SessionToken: faker.random.uuid(),\n  };\n\n  beforeEach(() => {\n    const zipFile = new Zip();\n    zipFile.file(jsonFileName, jsonFile);\n    AWS.mock('S3', 'getObject', (params, cb) => {\n      process.nextTick(() => {\n        const zipped = zipFile.generate({ base64: false, compression: 'DEFLATE' });\n        cb(null, { Body: new Buffer(zipped, 'binary') });\n      });\n    });\n  });\n\n  beforeEach(() => {\n    AWS.mock('S3', 'putObject', (params, cb) => {\n      process.nextTick(() => { cb(null, {}); });\n    });\n  });\n\n  beforeEach(() => {\n    AWS.mock('STS', 'assumeRole', (params, cb) => {\n      expect(params).toEqual(expect.objectContaining({\n        RoleSessionName: process.env.AWS_LAMBDA_FUNCTION_NAME,\n        ExternalId: process.env.AWS_LAMBDA_FUNCTION_NAME,\n        RoleArn: roleArn,\n      }));\n      cb(null, { Credentials: credentials });\n    });\n  });\n\n  afterEach(() => {\n    AWS.restore('S3', 'getObject');\n    AWS.restore('STS', 'assumeRole');\n  });\n\n  const job = {\n    data: {\n      actionConfiguration: {\n        configuration: {\n          UserParameters: JSON.stringify([\n            {\n              roleArn: {\n                'Fn::GetParam': [artifactName, jsonFileName, roleArnKey],\n              },\n              bucket: {\n                'Fn::GetParam': [artifactName, jsonFileName, bucketKey],\n              },\n              src: [\n                `${artifactName}::${jsonFileName}`,\n              ],\n            },\n          ]),\n        },\n      },\n      inputArtifacts: [\n        {\n          location: {\n            s3Location: {\n              bucketName: faker.random.word(),\n              objectKey: faker.random.uuid(),\n            },\n          },\n          name: artifactName,\n        },\n      ],\n      artifactCredentials: {\n        secretAccessKey: faker.random.uuid(),\n        sessionToken: faker.random.uuid(),\n        accessKeyId: faker.random.uuid(),\n      },\n    },\n  };\n\n  describe('#new', () => {\n    describe('when the job is valid', () => {\n      it('instantiates correctly', () => {\n        const uploader = new Uploader(job);\n        expect(uploader.data).toEqual(job.data);\n        expect(uploader.parameters).toEqual(expect.any(Object));\n        expect(uploader.artifacts).toEqual(expect.objectContaining({\n          [artifactName]: expect.any(Artifact),\n        }));\n      });\n    });\n\n    describe('when there are no input artifacts', () => {\n      const invalidJob = {\n        data: {\n          actionConfiguration: {\n            configuration: {\n              UserParameters: JSON.stringify({}),\n            },\n          },\n          inputArtifacts: [],\n        },\n      };\n\n      it('throws an error', () => expect(() => new Uploader(invalidJob)).toThrow(Error));\n    });\n  });\n\n  describe('#userParameters', () => {\n    describe('when data is valid', () => {\n      it('returns the correct data object', () => {\n        const uploader = new Uploader(job);\n        return expect(uploader.userParameters()).resolves.toEqual(expect.arrayContaining([\n          expect.objectContaining({\n            roleArn: {\n              'Fn::GetParam': [artifactName, jsonFileName, roleArnKey],\n            },\n            bucket: {\n              'Fn::GetParam': [artifactName, jsonFileName, bucketKey],\n            },\n            src: [\n              `${artifactName}::${jsonFileName}`,\n            ],\n          }),\n        ]));\n      });\n    });\n\n    describe('when there is no data', () => {\n      it('throws an error', () => {\n        const uploader = new Uploader(job);\n        uploader.parameters = {};\n        return expect(uploader.userParameters()).rejects.toEqual(expect.any(Error));\n      });\n    });\n\n    describe('when data is not valid', () => {\n      const invalidData = [{\n        [faker.random.uuid()]: faker.random.number(),\n      }];\n\n      it('throws an error', () => {\n        const uploader = new Uploader(job);\n        uploader.parameters = invalidData;\n        return expect(uploader.userParameters()).rejects.toEqual(expect.any(Error));\n      });\n    });\n  });\n\n  describe('#destinations', () => {\n    describe('when the job is valid', () => {\n      it('returns an array of destination objects', () => {\n        const uploader = new Uploader(job);\n        return expect(uploader.destinations()).resolves.toEqual(expect.arrayContaining([\n          expect.any(Destination),\n        ]));\n      });\n    });\n\n    describe('when the job is invalid', () => {\n      const invalidData = [{\n        [faker.random.uuid()]: faker.random.number(),\n      }];\n\n      it('throws an error', () => {\n        const uploader = new Uploader(job);\n        uploader.parameters = invalidData;\n        return expect(uploader.destinations()).rejects.toEqual(expect.any(Error));\n      });\n    });\n  });\n\n  describe('#perform', () => {\n    describe('when the destination can be uploaded', () => {\n      const remoteLocation = faker.internet.url();\n\n      const upload = jest.fn().mockImplementation(async () => remoteLocation);\n\n      const uploader = new Uploader(job);\n\n      jest.spyOn(uploader, 'destinations').mockImplementation(async () => ([{ upload }]));\n\n      it('returns an array of remote locations', async () => {\n        const urls = await uploader.perform();\n        expect(urls).toEqual(expect.arrayContaining([\n          expect.stringMatching(remoteLocation),\n        ]));\n        expect(upload).toHaveBeenCalled();\n        expect(uploader.destinations).toHaveBeenCalled();\n      });\n    });\n  });\n});\n",
     "static": true,
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/uploader.test.js",
     "access": null,
@@ -3379,33 +4126,280 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 200,
+    "__docId__": 254,
     "kind": "test",
-    "name": "describe61",
-    "testId": 61,
+    "name": "describe109",
+    "testId": 109,
     "memberof": "__tests__/functions/transfer/transfer/uploader.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe61",
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109",
     "access": null,
     "description": "Uploader",
-    "lineNumber": 10
-  },
-  {
-    "__docId__": 201,
-    "kind": "test",
-    "name": "test62",
-    "testId": 62,
-    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe61",
-    "testDepth": 1,
-    "static": true,
-    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe61.test62",
-    "access": null,
-    "description": "TODO",
     "lineNumber": 11
   },
   {
-    "__docId__": 202,
+    "__docId__": 255,
+    "kind": "test",
+    "name": "describe110",
+    "testId": 110,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe110",
+    "access": null,
+    "description": "#new",
+    "lineNumber": 103
+  },
+  {
+    "__docId__": 256,
+    "kind": "test",
+    "name": "describe111",
+    "testId": 111,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe110",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe110.describe111",
+    "access": null,
+    "description": "when the job is valid",
+    "lineNumber": 104
+  },
+  {
+    "__docId__": 257,
+    "kind": "test",
+    "name": "it112",
+    "testId": 112,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe110.describe111",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe110.describe111.it112",
+    "access": null,
+    "description": "instantiates correctly",
+    "lineNumber": 105
+  },
+  {
+    "__docId__": 258,
+    "kind": "test",
+    "name": "describe113",
+    "testId": 113,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe110",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe110.describe113",
+    "access": null,
+    "description": "when there are no input artifacts",
+    "lineNumber": 115
+  },
+  {
+    "__docId__": 259,
+    "kind": "test",
+    "name": "it114",
+    "testId": 114,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe110.describe113",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe110.describe113.it114",
+    "access": null,
+    "description": "throws an error",
+    "lineNumber": 127
+  },
+  {
+    "__docId__": 260,
+    "kind": "test",
+    "name": "describe115",
+    "testId": 115,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115",
+    "access": null,
+    "description": "#userParameters",
+    "lineNumber": 131
+  },
+  {
+    "__docId__": 261,
+    "kind": "test",
+    "name": "describe116",
+    "testId": 116,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115.describe116",
+    "access": null,
+    "description": "when data is valid",
+    "lineNumber": 132
+  },
+  {
+    "__docId__": 262,
+    "kind": "test",
+    "name": "it117",
+    "testId": 117,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115.describe116",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115.describe116.it117",
+    "access": null,
+    "description": "returns the correct data object",
+    "lineNumber": 133
+  },
+  {
+    "__docId__": 263,
+    "kind": "test",
+    "name": "describe118",
+    "testId": 118,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115.describe118",
+    "access": null,
+    "description": "when there is no data",
+    "lineNumber": 151
+  },
+  {
+    "__docId__": 264,
+    "kind": "test",
+    "name": "it119",
+    "testId": 119,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115.describe118",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115.describe118.it119",
+    "access": null,
+    "description": "throws an error",
+    "lineNumber": 152
+  },
+  {
+    "__docId__": 265,
+    "kind": "test",
+    "name": "describe120",
+    "testId": 120,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115.describe120",
+    "access": null,
+    "description": "when data is not valid",
+    "lineNumber": 159
+  },
+  {
+    "__docId__": 266,
+    "kind": "test",
+    "name": "it121",
+    "testId": 121,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115.describe120",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe115.describe120.it121",
+    "access": null,
+    "description": "throws an error",
+    "lineNumber": 164
+  },
+  {
+    "__docId__": 267,
+    "kind": "test",
+    "name": "describe122",
+    "testId": 122,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe122",
+    "access": null,
+    "description": "#destinations",
+    "lineNumber": 172
+  },
+  {
+    "__docId__": 268,
+    "kind": "test",
+    "name": "describe123",
+    "testId": 123,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe122",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe122.describe123",
+    "access": null,
+    "description": "when the job is valid",
+    "lineNumber": 173
+  },
+  {
+    "__docId__": 269,
+    "kind": "test",
+    "name": "it124",
+    "testId": 124,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe122.describe123",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe122.describe123.it124",
+    "access": null,
+    "description": "returns an array of destination objects",
+    "lineNumber": 174
+  },
+  {
+    "__docId__": 270,
+    "kind": "test",
+    "name": "describe125",
+    "testId": 125,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe122",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe122.describe125",
+    "access": null,
+    "description": "when the job is invalid",
+    "lineNumber": 182
+  },
+  {
+    "__docId__": 271,
+    "kind": "test",
+    "name": "it126",
+    "testId": 126,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe122.describe125",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe122.describe125.it126",
+    "access": null,
+    "description": "throws an error",
+    "lineNumber": 187
+  },
+  {
+    "__docId__": 272,
+    "kind": "test",
+    "name": "describe127",
+    "testId": 127,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109",
+    "testDepth": 1,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe127",
+    "access": null,
+    "description": "#perform",
+    "lineNumber": 195
+  },
+  {
+    "__docId__": 273,
+    "kind": "test",
+    "name": "describe128",
+    "testId": 128,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe127",
+    "testDepth": 2,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe127.describe128",
+    "access": null,
+    "description": "when the destination can be uploaded",
+    "lineNumber": 196
+  },
+  {
+    "__docId__": 274,
+    "kind": "test",
+    "name": "it129",
+    "testId": 129,
+    "memberof": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe127.describe128",
+    "testDepth": 3,
+    "static": true,
+    "longname": "__tests__/functions/transfer/transfer/uploader.test.js~describe109.describe127.describe128.it129",
+    "access": null,
+    "description": "returns an array of remote locations",
+    "lineNumber": 205
+  },
+  {
+    "__docId__": 275,
     "kind": "testFile",
     "name": "__tests__/functions/transfer/transfer/validate/schema.test.js",
     "content": "/* eslint-disable import/no-unresolved */\n\nimport Schema from '@functions/transfer/transfer/validate/schema';\n\nimport Ajv from 'ajv';\n\ndescribe('Schema', () => {\n  it('compiles successfully', () => {\n    expect(() => { new Ajv().compile(Schema); }).not.toThrow();\n  });\n});\n",
@@ -3416,36 +4410,36 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 203,
+    "__docId__": 276,
     "kind": "test",
-    "name": "describe63",
-    "testId": 63,
+    "name": "describe130",
+    "testId": 130,
     "memberof": "__tests__/functions/transfer/transfer/validate/schema.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/validate/schema.test.js~describe63",
+    "longname": "__tests__/functions/transfer/transfer/validate/schema.test.js~describe130",
     "access": null,
     "description": "Schema",
     "lineNumber": 7
   },
   {
-    "__docId__": 204,
+    "__docId__": 277,
     "kind": "test",
-    "name": "it64",
-    "testId": 64,
-    "memberof": "__tests__/functions/transfer/transfer/validate/schema.test.js~describe63",
+    "name": "it131",
+    "testId": 131,
+    "memberof": "__tests__/functions/transfer/transfer/validate/schema.test.js~describe130",
     "testDepth": 1,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/validate/schema.test.js~describe63.it64",
+    "longname": "__tests__/functions/transfer/transfer/validate/schema.test.js~describe130.it131",
     "access": null,
     "description": "compiles successfully",
     "lineNumber": 8
   },
   {
-    "__docId__": 205,
+    "__docId__": 278,
     "kind": "testFile",
     "name": "__tests__/functions/transfer/transfer/validate/validate.test.js",
-    "content": "/* eslint-disable import/no-unresolved */\n\nimport validate from '@functions/transfer/transfer/validate';\n\nimport faker from 'faker';\n\ndescribe('#validate', () => {\n  describe('when a schema is valid', () => {\n    const data = [\n      {\n        bucket: faker.random.word(),\n        prefix: '/some/random/key',\n        roleArn: {\n          'Fn::GetArtifactAtt': ['DeployOutput', 'Outputs.json', 'S3BucketKey'],\n        },\n        src: [\n          'BuildOutput::out/**/*.png',\n        ],\n      },\n    ];\n\n    it('resolves with the correct object', () =>\n      expect(validate(data)).resolves.toMatchObject(data));\n  });\n\n  describe('when a schema is invalid', () => {\n    it('rejects on empty schema', () =>\n      expect(validate({})).rejects.toEqual(expect.any(Error)));\n  });\n});\n",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport validate from '@functions/transfer/transfer/validate';\n\nimport faker from 'faker';\n\ndescribe('#validate', () => {\n  describe('when a schema is valid', () => {\n    const data = [\n      {\n        bucket: faker.random.word(),\n        prefix: '/some/random/key',\n        roleArn: {\n          'Fn::GetParam': ['DeployOutput', 'Outputs.json', 'S3BucketKey'],\n        },\n        src: [\n          'BuildOutput::out/**/*.png',\n        ],\n      },\n    ];\n\n    it('resolves with the correct object', () =>\n      expect(validate(data)).resolves.toMatchObject(data));\n  });\n\n  describe('when a schema is invalid', () => {\n    it('rejects on empty schema', () =>\n      expect(validate({})).rejects.toEqual(expect.any(Error)));\n  });\n});\n",
     "static": true,
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer/validate/validate.test.js",
     "access": null,
@@ -3453,75 +4447,75 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 206,
+    "__docId__": 279,
     "kind": "test",
-    "name": "describe65",
-    "testId": 65,
+    "name": "describe132",
+    "testId": 132,
     "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65",
+    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe132",
     "access": null,
     "description": "#validate",
     "lineNumber": 7
   },
   {
-    "__docId__": 207,
+    "__docId__": 280,
     "kind": "test",
-    "name": "describe66",
-    "testId": 66,
-    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65",
+    "name": "describe133",
+    "testId": 133,
+    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe132",
     "testDepth": 1,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe66",
+    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe132.describe133",
     "access": null,
     "description": "when a schema is valid",
     "lineNumber": 8
   },
   {
-    "__docId__": 208,
+    "__docId__": 281,
     "kind": "test",
-    "name": "it67",
-    "testId": 67,
-    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe66",
+    "name": "it134",
+    "testId": 134,
+    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe132.describe133",
     "testDepth": 2,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe66.it67",
+    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe132.describe133.it134",
     "access": null,
     "description": "resolves with the correct object",
     "lineNumber": 22
   },
   {
-    "__docId__": 209,
+    "__docId__": 282,
     "kind": "test",
-    "name": "describe68",
-    "testId": 68,
-    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65",
+    "name": "describe135",
+    "testId": 135,
+    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe132",
     "testDepth": 1,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe68",
+    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe132.describe135",
     "access": null,
     "description": "when a schema is invalid",
     "lineNumber": 26
   },
   {
-    "__docId__": 210,
+    "__docId__": 283,
     "kind": "test",
-    "name": "it69",
-    "testId": 69,
-    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe68",
+    "name": "it136",
+    "testId": 136,
+    "memberof": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe132.describe135",
     "testDepth": 2,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe65.describe68.it69",
+    "longname": "__tests__/functions/transfer/transfer/validate/validate.test.js~describe132.describe135.it136",
     "access": null,
     "description": "rejects on empty schema",
     "lineNumber": 27
   },
   {
-    "__docId__": 211,
+    "__docId__": 284,
     "kind": "testFile",
     "name": "__tests__/functions/transfer/transfer.test.js",
-    "content": "/* eslint-disable import/no-unresolved */\n\n// import Pipeline from '@functions/pipeline';\n\n// import faker from 'faker';\n// import AWS from 'aws-sdk-mock';\n\ndescribe('Pipeline', () => {\n  test('TODO');\n});\n",
+    "content": "/* eslint-disable import/no-unresolved */\n\nimport Pipeline from '@functions/transfer';\n\n// import faker from 'faker';\n// import AWS from 'aws-sdk-mock';\n\ndescribe('Pipeline', () => {\n  test('TODO');\n});\n",
     "static": true,
     "longname": "/Users/davidk/github.com/davidkelley/aws-pipeline-transfer/__tests__/functions/transfer/transfer.test.js",
     "access": null,
@@ -3529,27 +4523,27 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 212,
+    "__docId__": 285,
     "kind": "test",
-    "name": "describe70",
-    "testId": 70,
+    "name": "describe137",
+    "testId": 137,
     "memberof": "__tests__/functions/transfer/transfer.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer.test.js~describe70",
+    "longname": "__tests__/functions/transfer/transfer.test.js~describe137",
     "access": null,
     "description": "Pipeline",
     "lineNumber": 8
   },
   {
-    "__docId__": 213,
+    "__docId__": 286,
     "kind": "test",
-    "name": "test71",
-    "testId": 71,
-    "memberof": "__tests__/functions/transfer/transfer.test.js~describe70",
+    "name": "test138",
+    "testId": 138,
+    "memberof": "__tests__/functions/transfer/transfer.test.js~describe137",
     "testDepth": 1,
     "static": true,
-    "longname": "__tests__/functions/transfer/transfer.test.js~describe70.test71",
+    "longname": "__tests__/functions/transfer/transfer.test.js~describe137.test138",
     "access": null,
     "description": "TODO",
     "lineNumber": 9

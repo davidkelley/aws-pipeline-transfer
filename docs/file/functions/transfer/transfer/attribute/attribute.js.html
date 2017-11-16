@@ -32,6 +32,7 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AWS_REGION">AWS_REGION</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOG_LEVEL">LOG_LEVEL</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/trentm/node-bunyan">Logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer">transfer</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-handler">handler</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#transfer-transfer">transfer/transfer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/destination.js~Destination.html">Destination</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/functions/transfer/transfer/uploader.js~Uploader.html">Uploader</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FUNCTION_NAME">FUNCTION_NAME</a></span></span></li>
@@ -45,8 +46,7 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">functions/transfer/transfer/attribute/attribute.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import wrappedError from &apos;error/wrapped&apos;;
-import typedError from &apos;error/typed&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import typedError from &apos;error/typed&apos;;
 
 /**
  * An unsupported parameter value object was encountered.
@@ -56,16 +56,6 @@ import typedError from &apos;error/typed&apos;;
 const artifactParameterError = typedError({
   message: &apos;Unsupported object key &quot;{keys}&quot;&apos;,
   type: &apos;pipeline.attribute&apos;,
-});
-
-/**
- * The remote artifact file did not contain a truthy key value.
- *
- * @type {Error}
- */
-const remoteArtifactValueError = wrappedError({
-  message: &apos;Value was null or undefined for &quot;{path}&quot;&apos;,
-  type: &apos;pipeline.attribute.artifact.value&apos;,
 });
 
 /**
@@ -146,7 +136,7 @@ export default class Attribute {
     if (type === STATIC) {
       return mapping;
     }
-    const properties = mapping[&apos;Fn::GetArtifactAtt&apos;];
+    const properties = mapping[&apos;Fn::GetParam&apos;];
     if (!properties) {
       const keys = Object.keys(mapping).join(&apos;, &apos;);
       throw artifactParameterError({ keys });
@@ -172,14 +162,7 @@ export default class Attribute {
       throw artifactNotFound({ artifactName });
     } else {
       await artifact.ready();
-      const value = artifact.attribute(filename, key);
-      if (!value) {
-        throw remoteArtifactValueError({
-          path: `${artifactName}::${filename}::${key}`,
-        });
-      } else {
-        return value;
-      }
+      return artifact.attribute(filename, key);
     }
   }
 }
