@@ -237,13 +237,35 @@ Resources:
             Version: '2012-10-17'
             Statement:
               - Action:
-                  - '*'
+                  - 'cloudformation:CreateChangeSet'
                 Effect: Allow
-                Resource: '*'
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:cloudformation:${AWS::Region}:aws:transform/Serverless-2016-10-31"
+              - Action:
+                  - 'cloudformation:ExecuteChangeSet'
+                Effect: Allow
+                Resource:
+                  - '*'
                 Condition:
                   StringLike:
-                    cloudformation:TemplateURL: !Sub "*${PipelineArtifactStore}*"
                     cloudformation:ChangeSetName: !Sub "${AWS::StackName}-*"
+              - Action:
+                  - 'cloudformation:CreateStack'
+                  - 'cloudformation:DescribeStacks'
+                  - 'cloudformation:DeleteStack'
+                  - 'cloudformation:UpdateStack'
+                  - 'cloudformation:CreateChangeSet'
+                  - 'cloudformation:ExecuteChangeSet'
+                  - 'cloudformation:DeleteChangeSet'
+                  - 'cloudformation:DescribeChangeSet'
+                  - 'cloudformation:SetStackPolicy'
+                Effect: Allow
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${AWS::StackName}*/*"
+                Condition:
+                  ForAllValues:StringLike:
+                    cloudformation:TemplateURL: !Sub "https://s3.${AWS::URLSuffix}/${PipelineArtifactStore}/*"
+                    # cloudformation:ChangeSetName: !Sub "${AWS::StackName}-*"
 
   # Deploys the IAM Role that CodePipeline uses, in-order to access services utilized
   # by the pipeline resource defined in this file.
@@ -274,19 +296,19 @@ Resources:
                 Effect: Allow
                 Resource:
                   - !GetAtt Build.Arn
-              - Action:
-                  - 'cloudformation:CreateStack'
-                  - 'cloudformation:DescribeStacks'
-                  - 'cloudformation:DeleteStack'
-                  - 'cloudformation:UpdateStack'
-                  - 'cloudformation:CreateChangeSet'
-                  - 'cloudformation:ExecuteChangeSet'
-                  - 'cloudformation:DeleteChangeSet'
-                  - 'cloudformation:DescribeChangeSet'
-                  - 'cloudformation:SetStackPolicy'
-                Effect: Allow
-                Resource:
-                  - '*'
+              # - Action:
+              #     - 'cloudformation:CreateStack'
+              #     - 'cloudformation:DescribeStacks'
+              #     - 'cloudformation:DeleteStack'
+              #     - 'cloudformation:UpdateStack'
+              #     - 'cloudformation:CreateChangeSet'
+              #     - 'cloudformation:ExecuteChangeSet'
+              #     - 'cloudformation:DeleteChangeSet'
+              #     - 'cloudformation:DescribeChangeSet'
+              #     - 'cloudformation:SetStackPolicy'
+              #   Effect: Allow
+              #   Resource:
+              #     - '*'
               - Action:
                   - 'iam:PassRole'
                 Effect: Allow
