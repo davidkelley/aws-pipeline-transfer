@@ -240,6 +240,10 @@ Resources:
                   - '*'
                 Effect: Allow
                 Resource: '*'
+                Condition:
+                  StringLike:
+                    cloudformation:TemplateURL: !Sub "*${PipelineArtifactStore}*"
+                    cloudformation:ChangeSetName: !Sub "${AWS::StackName}-*"
 
   # Deploys the IAM Role that CodePipeline uses, in-order to access services utilized
   # by the pipeline resource defined in this file.
