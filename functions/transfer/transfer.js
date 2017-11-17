@@ -14,7 +14,6 @@ export async function handler(event, context, cb) {
   const result = { jobId: id };
   try {
     const urls = await new Uploader(pipeline).perform();
-    urls.forEach(url => Logger.info(`Uploaded: ${url}`));
     result.executionDetails = { externalExecutionId };
     await client.putJobSuccessResult(result).promise();
     cb(null, result);
