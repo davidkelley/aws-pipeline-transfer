@@ -36,7 +36,7 @@ describe('File', () => {
 
     const prefix = Path.join('/', faker.random.uuid());
 
-    const prefixed = Path.join('/', prefix, path, filename);
+    const prefixed = Path.join('/', prefix, path, filename).replace(/^\//, '');
 
     describe('when the upload succeeds', () => {
       beforeEach(() => {
@@ -57,13 +57,13 @@ describe('File', () => {
       it('returns the correct fully resolved path', () => {
         const file = new File(path, filename, data);
         return expect(file.upload({ bucket, credentials, prefix })).resolves.toEqual(
-          expect.stringMatching(`s3://${bucket}${prefixed}`),
+          expect.stringMatching(`s3://${bucket}/${prefixed}`),
         );
       });
     });
 
     describe('when there is no prefix', () => {
-      const filepath = Path.join('/', path, filename);
+      const filepath = Path.join('/', path, filename).replace(/^\//, '');
 
       beforeEach(() => {
         AWS.mock('S3', 'putObject', (params, cb) => {
@@ -83,7 +83,7 @@ describe('File', () => {
       it('returns the correct fully resolved path', () => {
         const file = new File(path, filename, data);
         return expect(file.upload({ bucket, credentials })).resolves.toEqual(
-          expect.stringMatching(`s3://${bucket}${filepath}`),
+          expect.stringMatching(`s3://${bucket}/${filepath}`),
         );
       });
     });

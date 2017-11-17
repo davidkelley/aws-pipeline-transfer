@@ -52,9 +52,9 @@ export default class File {
     const { data, key } = this;
     try {
       const s3 = new S3({ region: AWS_REGION, credentials });
-      const prefixedKey = Path.join('/', prefix, key);
+      const prefixedKey = Path.join('/', prefix, key).replace(/^\//, '');
       await s3.putObject({ Bucket, Key: prefixedKey, Body: data }).promise();
-      return `s3://${Bucket}${prefixedKey}`;
+      return `s3://${Bucket}/${prefixedKey}`;
     } catch (err) {
       throw uploadError(err, { key });
     }
