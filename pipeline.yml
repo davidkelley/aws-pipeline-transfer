@@ -13,15 +13,12 @@ Description: "[Pipeline] [Utility] AWS CodePipeline S3 transfer deployment pipel
 # optional so that you don't need to pass in a value when creating a stack.
 Parameters:
 
-  # A GitHub API Token that has permissions to access either a public or
-  # private repository.
-  #
-  # @see https://github.com/settings/tokens
   GitHubToken:
-    Type: String
-    NoEcho: true
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: "/Secrets/GitHubToken"
     Description: |
-      A Github OAuth Token with public_repo or repo scope
+      Retrieves the GitHubToken from the AWS SSM Parameter Store
+    NoEcho: true
 
   # The GitHub repository to poll for changes. This parameter accepts both
   # the username/organization that owns the repository and the name of the
@@ -51,19 +48,6 @@ Parameters:
       Only alpha numeric characters, as well as "-" and "_" are allowed.
     Description: |
       Branch to use from the repository.
-
-  # A logical name for the project inside AWS. The project is used, in combination
-  # with the branch to produce unique physical resource names, where required.
-  #
-  # Due to AWS naming restrictions and where this parameter is used to
-  # provide uniqueness it is restricted to alpha-numeric characters only.
-  Project:
-    Type: String
-    AllowedPattern: "^[-_a-zA-Z0-9]+$"
-    ConstraintDescription: |
-      Only alpha numeric characters, as well as "-" and "_" are allowed.
-    Description: |
-      The logical name of this project identified inside AWS.
 
 # The required Resources section declares the AWS resources that you want to
 # include in the stack, such as a CodePipeline, CodeBuild and IAM Resources.

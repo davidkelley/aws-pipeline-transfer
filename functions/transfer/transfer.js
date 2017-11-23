@@ -13,7 +13,7 @@ export async function handler(event, context, cb) {
   const { id } = pipeline;
   const result = { jobId: id };
   try {
-    const urls = await new Uploader(pipeline).perform();
+    await new Uploader(pipeline).perform();
     result.executionDetails = { externalExecutionId };
     await client.putJobSuccessResult(result).promise();
     cb(null, result);
