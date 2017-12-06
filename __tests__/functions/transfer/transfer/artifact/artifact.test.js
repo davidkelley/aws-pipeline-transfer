@@ -162,7 +162,7 @@ describe('Artifact', () => {
 
       it('should return the correct files', async () => {
         const [file] = await artifact.match(selector);
-        expect(file.key).toEqual(`/${relativePath}/${filename}`);
+        expect(file.key).toEqual(`/${filename}`);
         expect(file.data).toEqual(new Buffer(data).toString('binary'));
       });
     });
