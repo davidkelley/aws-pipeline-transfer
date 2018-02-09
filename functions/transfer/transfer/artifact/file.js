@@ -1,4 +1,5 @@
 import Path from 'path';
+import mime from 'mime-types';
 import { S3 } from 'aws-sdk';
 import wrappedError from 'error/wrapped';
 
@@ -40,6 +41,16 @@ export default class File {
   }
 
   /**
+   * The determined mime type for the file
+   *
+   * @type {String}
+   */
+  get contentType() {
+    const { key } = this;
+    return mime.lookup(key) || null;
+  }
+
+  /**
    * Uploads the file to the specific remote S3 bucket, using the supplied
    * credentials and an optional prefix.
    *
@@ -49,11 +60,12 @@ export default class File {
    * @param {String} opts.prefix - An optional prefix to apply to this file.
    */
   async upload({ bucket: Bucket, credentials, prefix = '' }) {
-    const { data, key } = this;
+    const { data, key, contentType: ContentType } = this;
     try {
       const s3 = new S3({ region: AWS_REGION, credentials });
       const prefixedKey = Path.join('/', prefix, key).replace(/^\//, '');
-      await s3.putObject({ Bucket, Key: prefixedKey, Body: data }).promise();
+      const params = { Bucket, Key: prefixedKey, Body: data, ContentType };
+      await s3.putObject(params).promise();
       return `s3://${Bucket}/${prefixedKey}`;
     } catch (err) {
       throw uploadError(err, { key });

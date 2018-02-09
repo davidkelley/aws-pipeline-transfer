@@ -11,6 +11,7 @@
     "bunyan": "^1.8.12",
     "error": "^7.0.2",
     "extract-zip": "^1.6.6",
+    "mime-types": "^2.1.17",
     "node-glob": "^1.2.0",
     "node-zip": "^1.1.1",
     "uuid": "^3.1.0"

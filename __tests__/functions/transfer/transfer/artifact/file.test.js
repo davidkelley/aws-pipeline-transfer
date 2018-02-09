@@ -22,6 +22,39 @@ describe('File', () => {
     });
   });
 
+  describe('#contentType', () => {
+    describe('when .html', () => {
+      const htmlFilename = `${faker.random.uuid()}.html`;
+
+      const expectedType = 'text/html';
+
+      it('returns the correct contentType', () => {
+        const file = new File(path, htmlFilename, data);
+        expect(file.contentType).toEqual(expectedType);
+      });
+    });
+
+    describe('when .txt', () => {
+      const txtFilename = `${faker.random.uuid()}.txt`;
+
+      const expectedType = 'text/plain';
+
+      it('returns the correct contentType', () => {
+        const file = new File(path, txtFilename, data);
+        expect(file.contentType).toEqual(expectedType);
+      });
+    });
+
+    describe('when (no extension)', () => {
+      const nullFilename = faker.random.uuid();
+
+      it('returns the expected contentType', () => {
+        const file = new File(path, nullFilename, data);
+        expect(file.contentType).toBe(null);
+      });
+    });
+  });
+
   describe('#upload', () => {
     const accessKeyId = faker.random.uuid();
 
@@ -43,6 +76,7 @@ describe('File', () => {
           expect(params).toEqual(expect.objectContaining({
             Bucket: bucket,
             Key: prefixed,
+            ContentType: expect.any(String),
             Body: data,
           }));
           cb(null, { });
@@ -69,6 +103,7 @@ describe('File', () => {
           expect(params).toEqual(expect.objectContaining({
             Bucket: bucket,
             Key: filepath,
+            ContentType: expect.any(String),
             Body: data,
           }));
           cb(null, { });
