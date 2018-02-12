@@ -197,13 +197,15 @@ export default class Artifact {
    * files from inside the retrieved, decompressed artifact.
    *
    * @param {String} select - a linux-style file glob to match files with.
+   * @param {String} path - a relative path used to match files
    *
    * @return {Array[File]} an array of all matched {@link File} instances.
    */
-  async match(select) {
+  async match(select, path = '') {
     return new Promise((resolve, reject) => {
       try {
-        const { dir: cwd } = this;
+        const { dir } = this;
+        const cwd = Path.join(dir, path);
         glob(select, { cwd, nonull: false, nodir: true }, (err, files) => {
           if (err) {
             // TODO: throw error

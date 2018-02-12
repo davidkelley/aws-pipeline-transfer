@@ -59,6 +59,10 @@ const Schema = {
         type: 'string',
         default: '/',
       },
+      cwd: {
+        type: 'string',
+        default: '',
+      },
       src: {
         type: 'array',
         minItems: 1,

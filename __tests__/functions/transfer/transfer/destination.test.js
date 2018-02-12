@@ -36,7 +36,9 @@ describe('Destination', () => {
 
   const prefix = Path.join('/', faker.random.uuid());
 
-  const properties = { roleArn, bucket, src: sources, prefix };
+  const cwd = faker.random.uuid();
+
+  const properties = { roleArn, bucket, src: sources, prefix, cwd };
 
   describe('#new', () => {
     it('instantiates correctly', () => {
@@ -46,6 +48,7 @@ describe('Destination', () => {
       expect(destination.bucket).toEqual(expect.any(Attribute));
       expect(destination.sources).toEqual(sources);
       expect(destination.prefix).toEqual(prefix);
+      expect(destination.cwd).toEqual(cwd);
       expect(destination.sts).toEqual(expect.any(STS));
     });
 

@@ -33,6 +33,7 @@ An example action definition inside a CodePipeline CloudFormation resource defin
                 "Fn::GetParam": ["DeployOutput", "Outputs.json", "AssetS3Bucket"]
               },
               "prefix": "s3/key/prefix/",
+              "cwd": "compiled/",
               "src": [
                 "BuildOutput::*.js"
               ]

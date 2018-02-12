@@ -160,8 +160,14 @@ describe('Artifact', () => {
         fs.rmdirSync(dir);
       });
 
-      it('should return the correct files', async () => {
+      it('should return the correct files (without path)', async () => {
         const [file] = await artifact.match(selector);
+        expect(file.key).toEqual(`/${relativePath}/${filename}`);
+        expect(file.data).toEqual(new Buffer(data).toString('binary'));
+      });
+
+      it('should return the correct files (with path)', async () => {
+        const [file] = await artifact.match(selector, relativePath);
         expect(file.key).toEqual(`/${filename}`);
         expect(file.data).toEqual(new Buffer(data).toString('binary'));
       });

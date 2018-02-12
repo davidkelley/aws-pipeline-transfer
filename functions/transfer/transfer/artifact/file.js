@@ -31,7 +31,7 @@ export default class File {
      *
      * @type {String}
      */
-    this.key = Path.join('/', filename);
+    this.key = Path.join('/', path, filename);
     /**
      * The data contained inside the file
      *
