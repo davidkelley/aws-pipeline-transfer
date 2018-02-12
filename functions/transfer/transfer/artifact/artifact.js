@@ -211,10 +211,9 @@ export default class Artifact {
             // TODO: throw error
           } else {
             resolve(files.map((file) => {
-              const { dir, base: filename } = Path.parse(file);
-              const path = Path.join(cwd, file);
-              const data = fs.readFileSync(path, { encoding: 'binary' });
-              return new File(dir, filename, data);
+              const { dir: relativeDir, base: filename } = Path.parse(file);
+              const data = fs.readFileSync(Path.join(cwd, file), { encoding: 'binary' });
+              return new File(relativeDir, filename, data);
             }));
           }
         });
