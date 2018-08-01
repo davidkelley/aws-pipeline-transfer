@@ -147,16 +147,16 @@ describe('Artifact', () => {
 
       const selector = '**/*';
 
-      const data = JSON.stringify({ [faker.random.word()]: faker.random.number() });
+      const absolutePath = `${path}/${filename}`;
 
       beforeEach(() => {
         fs.mkdirSync(dir);
         fs.mkdirSync(path);
-        fs.writeFileSync(`${path}/${filename}`, data, { encoding: 'utf8' });
+        fs.writeFileSync(absolutePath, '', { encoding: 'utf8' });
       });
 
       afterEach(() => {
-        fs.unlinkSync(`${path}/${filename}`);
+        fs.unlinkSync(absolutePath);
         fs.rmdirSync(path);
         fs.rmdirSync(dir);
       });
@@ -164,13 +164,13 @@ describe('Artifact', () => {
       it('should return the correct files (without path)', async () => {
         const [file] = await artifact.match(selector);
         expect(file.key).toEqual(`/${relativePath}/${filename}`);
-        expect(file.data).toEqual(Buffer.from(data).toString('binary'));
+        expect(file.absolutePath).toEqual(absolutePath);
       });
 
       it('should return the correct files (with path)', async () => {
         const [file] = await artifact.match(selector, relativePath);
         expect(file.key).toEqual(`/${filename}`);
-        expect(file.data).toEqual(Buffer.from(data).toString('binary'));
+        expect(file.absolutePath).toEqual(absolutePath);
       });
     });
   });

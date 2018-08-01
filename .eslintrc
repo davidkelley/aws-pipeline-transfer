@@ -15,5 +15,10 @@
   env: {
     node: true,
     mocha: true,
+  },
+  settings: {
+    "import/resolver": {
+      "babel-module": {}
+    }
   }
 }
