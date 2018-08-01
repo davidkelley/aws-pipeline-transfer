@@ -115,6 +115,7 @@ Resources:
                 Repo: !Select [ 1, !Split [ "/", !Ref Repository ] ]
                 Branch: !Ref Branch
                 OAuthToken: !Ref GitHubToken
+                PollForSourceChanges: false
         - Name: Build
           Actions:
             - Name: Build
@@ -162,6 +163,20 @@ Resources:
                 RoleArn: !GetAtt CloudformationRole.Arn
                 StackName: !Sub "${AWS::StackName}-service"
 
+  PipelineTrigger:
+    Type: AWS::CodePipeline::Webhook
+    Properties:
+      AuthenticationConfiguration:
+        SecretToken: !Ref AWS::StackName
+      Filters:
+        - JsonPath: "$.ref"
+          MatchEquals: refs/heads/{Branch}
+      Authentication: GITHUB_HMAC
+      TargetPipeline: !Ref Pipeline
+      TargetPipelineVersion: !GetAtt Pipeline.Version
+      TargetAction: GitHub
+      RegisterWithThirdParty: true
+
   # Deploys our CodeBuild project which enables us to lint, test and build our
   # project (the commands defined inside buildspec.yml). This CodeBuild project
   # is configured specifically to be triggered by CodePipeline, in addition to
@@ -176,7 +191,7 @@ Resources:
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: aws/codebuild/nodejs:6.3.1
+        Image: aws/codebuild/nodejs:8.11.0
         EnvironmentVariables:
           # We pass in references from this CloudFormation as variables that
           # will be made accessible inside the environment, such as $AWS_ACCOUNT_ID.
