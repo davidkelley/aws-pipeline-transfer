@@ -35,24 +35,28 @@ describe('Uploader', () => {
     AWS.mock('S3', 'getObject', (params, cb) => {
       process.nextTick(() => {
         const zipped = zipFile.generate({ base64: false, compression: 'DEFLATE' });
-        cb(null, { Body: new Buffer(zipped, 'binary') });
+        cb(null, { Body: Buffer.from(zipped, 'binary') });
       });
     });
   });
 
   beforeEach(() => {
     AWS.mock('S3', 'putObject', (params, cb) => {
-      process.nextTick(() => { cb(null, {}); });
+      process.nextTick(() => {
+        cb(null, {});
+      });
     });
   });
 
   beforeEach(() => {
     AWS.mock('STS', 'assumeRole', (params, cb) => {
-      expect(params).toEqual(expect.objectContaining({
-        RoleSessionName: process.env.AWS_LAMBDA_FUNCTION_NAME,
-        ExternalId: process.env.AWS_LAMBDA_FUNCTION_NAME,
-        RoleArn: roleArn,
-      }));
+      expect(params).toEqual(
+        expect.objectContaining({
+          RoleSessionName: process.env.AWS_LAMBDA_FUNCTION_NAME,
+          ExternalId: process.env.AWS_LAMBDA_FUNCTION_NAME,
+          RoleArn: roleArn,
+        })
+      );
       cb(null, { Credentials: credentials });
     });
   });
@@ -74,9 +78,7 @@ describe('Uploader', () => {
               bucket: {
                 'Fn::GetParam': [artifactName, jsonFileName, bucketKey],
               },
-              src: [
-                `${artifactName}::${jsonFileName}`,
-              ],
+              src: [`${artifactName}::${jsonFileName}`],
             },
           ]),
         },
@@ -106,9 +108,11 @@ describe('Uploader', () => {
         const uploader = new Uploader(job);
         expect(uploader.data).toEqual(job.data);
         expect(uploader.parameters).toEqual(expect.any(Object));
-        expect(uploader.artifacts).toEqual(expect.objectContaining({
-          [artifactName]: expect.any(Artifact),
-        }));
+        expect(uploader.artifacts).toEqual(
+          expect.objectContaining({
+            [artifactName]: expect.any(Artifact),
+          })
+        );
       });
     });
 
@@ -132,19 +136,19 @@ describe('Uploader', () => {
     describe('when data is valid', () => {
       it('returns the correct data object', () => {
         const uploader = new Uploader(job);
-        return expect(uploader.userParameters()).resolves.toEqual(expect.arrayContaining([
-          expect.objectContaining({
-            roleArn: {
-              'Fn::GetParam': [artifactName, jsonFileName, roleArnKey],
-            },
-            bucket: {
-              'Fn::GetParam': [artifactName, jsonFileName, bucketKey],
-            },
-            src: [
-              `${artifactName}::${jsonFileName}`,
-            ],
-          }),
-        ]));
+        return expect(uploader.userParameters()).resolves.toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              roleArn: {
+                'Fn::GetParam': [artifactName, jsonFileName, roleArnKey],
+              },
+              bucket: {
+                'Fn::GetParam': [artifactName, jsonFileName, bucketKey],
+              },
+              src: [`${artifactName}::${jsonFileName}`],
+            }),
+          ])
+        );
       });
     });
 
@@ -157,9 +161,11 @@ describe('Uploader', () => {
     });
 
     describe('when data is not valid', () => {
-      const invalidData = [{
-        [faker.random.uuid()]: faker.random.number(),
-      }];
+      const invalidData = [
+        {
+          [faker.random.uuid()]: faker.random.number(),
+        },
+      ];
 
       it('throws an error', () => {
         const uploader = new Uploader(job);
@@ -173,16 +179,18 @@ describe('Uploader', () => {
     describe('when the job is valid', () => {
       it('returns an array of destination objects', () => {
         const uploader = new Uploader(job);
-        return expect(uploader.destinations()).resolves.toEqual(expect.arrayContaining([
-          expect.any(Destination),
-        ]));
+        return expect(uploader.destinations()).resolves.toEqual(
+          expect.arrayContaining([expect.any(Destination)])
+        );
       });
     });
 
     describe('when the job is invalid', () => {
-      const invalidData = [{
-        [faker.random.uuid()]: faker.random.number(),
-      }];
+      const invalidData = [
+        {
+          [faker.random.uuid()]: faker.random.number(),
+        },
+      ];
 
       it('throws an error', () => {
         const uploader = new Uploader(job);
@@ -200,13 +208,11 @@ describe('Uploader', () => {
 
       const uploader = new Uploader(job);
 
-      jest.spyOn(uploader, 'destinations').mockImplementation(async () => ([{ upload }]));
+      jest.spyOn(uploader, 'destinations').mockImplementation(async () => [{ upload }]);
 
       it('returns an array of remote locations', async () => {
         const urls = await uploader.perform();
-        expect(urls).toEqual(expect.arrayContaining([
-          expect.stringMatching(remoteLocation),
-        ]));
+        expect(urls).toEqual(expect.arrayContaining([expect.stringMatching(remoteLocation)]));
         expect(upload).toHaveBeenCalled();
         expect(uploader.destinations).toHaveBeenCalled();
       });

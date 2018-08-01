@@ -1,77 +1,78 @@
 {
   "name": "pipeline-transfer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=4.3"
+    "node": ">=8.10"
   },
   "dependencies": {
-    "ajv": "^5.3.0",
-    "babel-runtime": "6.11.6",
+    "ajv": "^6.5.2",
+    "babel-runtime": "6.26.0",
     "bunyan": "^1.8.12",
     "error": "^7.0.2",
-    "extract-zip": "^1.6.6",
-    "mime-types": "^2.1.17",
+    "extract-zip": "^1.6.7",
+    "mime-types": "^2.1.19",
     "node-glob": "^1.2.0",
     "node-zip": "^1.1.1",
-    "uuid": "^3.1.0"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "aws-sdk": "^2.6.7",
-    "aws-sdk-mock": "~1.6.1",
-    "babel-eslint": "^7.2.3",
-    "babel-jest": "^20.0.3",
-    "babel-loader": "^7.0.0",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-env": "^1.4.0",
-    "esdoc": "^1.0.2",
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.1",
+    "aws-sdk": "^2.284.1",
+    "aws-sdk-mock": "~4.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-airbnb": "^2.5.3",
+    "babel-preset-env": "^1.7.0",
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "esdoc": "^1.1.0",
     "esdoc-coverage-plugin": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
-    "eslint": "^3.1.1",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.11.1",
-    "eslint-plugin-jsx-a11y": "^2.0.1",
-    "eslint-plugin-react": "^5.2.2",
+    "eslint": "^5.2.0",
+    "eslint-config-airbnb": ">=17.0",
+    "eslint-config-prettier": ">=2.9",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-mocha": "^5.1.0",
+    "eslint-plugin-prettier": ">=2.6",
+    "eslint-plugin-react": "^7.10.0",
     "faker": "~4.1.0",
-    "jest": "^20.0",
-    "uglifyjs-webpack-plugin": "^1.0.1",
-    "webpack": "^2.4.1"
-  },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": "6.1"
-          }
-        }
-      ]
-    ]
-  },
-  "jest": {
-    "transform": {
-      "\\.(js|jsx)$": "babel-jest",
-      "\\.(json)$": "<rootDir>/__tests__/__utils__/fileTransformer.js"
-    },
-    "moduleNameMapper": {
-      "^@functions/(.+)": "<rootDir>/functions/$1"
-    },
-    "setupTestFrameworkScriptFile": "<rootDir>/__tests__/__utils__/setup.js"
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "extends": "airbnb",
-    "env": {
-      "jest": true
-    }
+    "husky": "^1.0.0-rc.13",
+    "jest": "^23.4.2",
+    "jest-circus": "^23.4.2",
+    "prettier": "^1.14.0",
+    "source-map-support": "^0.5.6",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.1.0"
   },
   "scripts": {
-    "build": "webpack --progress --colors",
+    "commit": "git-cz",
+    "commit:lint": "commitlint -E HUSKY_GIT_PARAMS",
+    "lint": "eslint __tests__ functions *.js --cache",
+    "build": "webpack",
     "build:doc": "esdoc",
-    "lint": "eslint events __tests__ functions pages test handler.js webpack.config.js",
-    "lint:fix": "eslint --fix $1",
-    "test": "NODE_ENV=test jest __tests__/.+/*.test.js --coverage --notify",
-    "test:watch": "npm run test -- --watch"
+    "test": "jest __tests__/.+/*.test.js",
+    "prebuild": "npm test",
+    "pretest": "npm run lint",
+    "postbuild": "npm run build:doc"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }

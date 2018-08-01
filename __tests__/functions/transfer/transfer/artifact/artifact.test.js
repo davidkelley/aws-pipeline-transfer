@@ -105,11 +105,13 @@ describe('Artifact', () => {
         zipFile.file(jsonFile, data);
         const zipped = zipFile.generate({ base64: false, compression: 'DEFLATE' });
         AWS.mock('S3', 'getObject', (params, cb) => {
-          expect(params).toEqual(expect.objectContaining({
-            Bucket: bucketName,
-            Key: objectKey,
-          }));
-          cb(null, { Body: new Buffer(zipped, 'binary') });
+          expect(params).toEqual(
+            expect.objectContaining({
+              Bucket: bucketName,
+              Key: objectKey,
+            })
+          );
+          cb(null, { Body: Buffer.from(zipped, 'binary') });
         });
       });
 
@@ -120,8 +122,7 @@ describe('Artifact', () => {
         AWS.restore('S3', 'getObject');
       });
 
-      it('fetches, loads and unzips correctly', () =>
-        expect(artifact.ready()).resolves.toBe(true));
+      it('fetches, loads and unzips correctly', () => expect(artifact.ready()).resolves.toBe(true));
     });
 
     describe('when the artifact fails to ready', () => {
@@ -163,13 +164,13 @@ describe('Artifact', () => {
       it('should return the correct files (without path)', async () => {
         const [file] = await artifact.match(selector);
         expect(file.key).toEqual(`/${relativePath}/${filename}`);
-        expect(file.data).toEqual(new Buffer(data).toString('binary'));
+        expect(file.data).toEqual(Buffer.from(data).toString('binary'));
       });
 
       it('should return the correct files (with path)', async () => {
         const [file] = await artifact.match(selector, relativePath);
         expect(file.key).toEqual(`/${filename}`);
-        expect(file.data).toEqual(new Buffer(data).toString('binary'));
+        expect(file.data).toEqual(Buffer.from(data).toString('binary'));
       });
     });
   });
@@ -365,11 +366,13 @@ describe('Artifact', () => {
 
       beforeEach(() => {
         AWS.mock('S3', 'getObject', (params, cb) => {
-          expect(params).toEqual(expect.objectContaining({
-            Bucket: bucketName,
-            Key: objectKey,
-          }));
-          cb(null, { Body: new Buffer(data) });
+          expect(params).toEqual(
+            expect.objectContaining({
+              Bucket: bucketName,
+              Key: objectKey,
+            })
+          );
+          cb(null, { Body: Buffer.from(data) });
         });
       });
 
@@ -378,7 +381,7 @@ describe('Artifact', () => {
       });
 
       it('should retrieve the correct data', () =>
-        expect(artifact.fetch()).resolves.toEqual(new Buffer(data)));
+        expect(artifact.fetch()).resolves.toEqual(Buffer.from(data)));
     });
 
     describe('when the artifact cannot be retrieved', () => {

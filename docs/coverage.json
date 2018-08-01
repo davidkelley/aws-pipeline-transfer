@@ -1,7 +1,7 @@
 {
-  "coverage": "96.2%",
-  "expectCount": 79,
-  "actualCount": 76,
+  "coverage": "96.29%",
+  "expectCount": 81,
+  "actualCount": 78,
   "files": {
     "functions/globals.js": {
       "expectCount": 2,
@@ -19,8 +19,8 @@
       "undocumentLines": []
     },
     "functions/transfer/transfer/artifact/file.js": {
-      "expectCount": 6,
-      "actualCount": 6,
+      "expectCount": 7,
+      "actualCount": 7,
       "undocumentLines": []
     },
     "functions/transfer/transfer/attribute/attribute.js": {
@@ -34,8 +34,8 @@
       "undocumentLines": []
     },
     "functions/transfer/transfer/destination.js": {
-      "expectCount": 13,
-      "actualCount": 13,
+      "expectCount": 14,
+      "actualCount": 14,
       "undocumentLines": []
     },
     "functions/transfer/transfer/uploader.js": {

@@ -6,7 +6,7 @@ import { LOG_LEVEL } from './globals';
  * Custom serializer for errors that are thrown by the Error library
  * that this function utilizes.
  */
-const ErrorSerializer = (err) => {
+const ErrorSerializer = err => {
   const { message, name, type, origMessage, code = {} } = err;
   return { message, name, type, origMessage, detail: code };
 };

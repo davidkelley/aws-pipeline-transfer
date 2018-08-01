@@ -158,7 +158,9 @@ export default class Artifact {
    * @return {Artifact} a new artifact file with correctly mapped parameters.
    */
   static toArtifact(artifact, credentials = {}) {
-    const { location: { s3Location } } = artifact;
+    const {
+      location: { s3Location },
+    } = artifact;
     return new Artifact(s3Location, credentials);
   }
 
@@ -210,11 +212,13 @@ export default class Artifact {
           if (err) {
             // TODO: throw error
           } else {
-            resolve(files.map((file) => {
-              const { dir: relativeDir, base: filename } = Path.parse(file);
-              const data = fs.readFileSync(Path.join(cwd, file), { encoding: 'binary' });
-              return new File(relativeDir, filename, data);
-            }));
+            resolve(
+              files.map(file => {
+                const { dir: relativeDir, base: filename } = Path.parse(file);
+                const data = fs.readFileSync(Path.join(cwd, file), { encoding: 'binary' });
+                return new File(relativeDir, filename, data);
+              })
+            );
           }
         });
       } catch (err) {
@@ -274,7 +278,7 @@ export default class Artifact {
     return new Promise((resolve, reject) => {
       const { filepath, dir } = this;
       fs.mkdirSync(dir);
-      extract(filepath, { dir }, (err) => {
+      extract(filepath, { dir }, err => {
         if (err) {
           reject(decompressionError(err));
         } else {

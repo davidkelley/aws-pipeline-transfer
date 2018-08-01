@@ -110,16 +110,14 @@ export default class Destination {
     const roleArn = await this.roleArn.value();
     try {
       const {
-        Credentials: {
-          AccessKeyId,
-          SecretAccessKey,
-          SessionToken,
-        },
-      } = await sts.assumeRole({
-        RoleSessionName: FUNCTION_NAME,
-        ExternalId: FUNCTION_NAME,
-        RoleArn: roleArn,
-      }).promise();
+        Credentials: { AccessKeyId, SecretAccessKey, SessionToken },
+      } = await sts
+        .assumeRole({
+          RoleSessionName: FUNCTION_NAME,
+          ExternalId: FUNCTION_NAME,
+          RoleArn: roleArn,
+        })
+        .promise();
       return new Credentials(AccessKeyId, SecretAccessKey, SessionToken);
     } catch (err) {
       throw couldNotAssumeRole(err, { roleArn });
@@ -138,7 +136,7 @@ export default class Destination {
    */
   async files() {
     const { artifacts, sources, cwd } = this;
-    const files = sources.map(async (src) => {
+    const files = sources.map(async src => {
       const [artifactName, glob] = src.split('::');
       const artifact = artifacts[artifactName];
       if (!artifact) {
@@ -165,6 +163,6 @@ export default class Destination {
     const bucket = await this.bucket.value();
     const files = await this.files();
     const details = { bucket, credentials, prefix };
-    return await Promise.all(files.map(f => f.upload(details)));
+    return Promise.all(files.map(f => f.upload(details)));
   }
 }

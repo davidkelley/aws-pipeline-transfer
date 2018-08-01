@@ -116,7 +116,7 @@ export default class Uploader {
    * @return {Object} valid parameters to be used to construct the state machine input.
    */
   async userParameters() {
-    return await validate(this.parameters);
+    return validate(this.parameters);
   }
 
   /**
@@ -142,6 +142,6 @@ export default class Uploader {
    */
   async perform() {
     const destinations = await this.destinations();
-    return await Promise.all(destinations.map(d => d.upload()));
+    return Promise.all(destinations.map(d => d.upload()));
   }
 }

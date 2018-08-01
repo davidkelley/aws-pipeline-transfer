@@ -19,10 +19,8 @@ describe('Destination', () => {
     match: async () => {
       const path = Path.join('/', faker.random.uuid());
       const filename = faker.system.fileName();
-      const data = new Buffer(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));
-      return [
-        new File(path, filename, data),
-      ];
+      const data = Buffer.from(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));
+      return [new File(path, filename, data)];
     },
   };
 
@@ -30,9 +28,7 @@ describe('Destination', () => {
 
   const artifacts = { [artifactName]: artifact };
 
-  const sources = [
-    `${artifactName}::**/*`,
-  ];
+  const sources = [`${artifactName}::**/*`];
 
   const prefix = Path.join('/', faker.random.uuid());
 
@@ -83,11 +79,13 @@ describe('Destination', () => {
 
       beforeEach(() => {
         AWS.mock('STS', 'assumeRole', (params, cb) => {
-          expect(params).toEqual(expect.objectContaining({
-            RoleSessionName: process.env.AWS_LAMBDA_FUNCTION_NAME,
-            ExternalId: process.env.AWS_LAMBDA_FUNCTION_NAME,
-            RoleArn: roleArn,
-          }));
+          expect(params).toEqual(
+            expect.objectContaining({
+              RoleSessionName: process.env.AWS_LAMBDA_FUNCTION_NAME,
+              ExternalId: process.env.AWS_LAMBDA_FUNCTION_NAME,
+              RoleArn: roleArn,
+            })
+          );
           cb(null, { Credentials: credentials });
         });
       });
@@ -128,9 +126,9 @@ describe('Destination', () => {
     describe('when the artifact exists', () => {
       it('resolves with an array of instantiated files', () => {
         const destination = new Destination(properties, artifacts);
-        return expect(destination.files()).resolves.toEqual(expect.arrayContaining([
-          expect.any(File),
-        ]));
+        return expect(destination.files()).resolves.toEqual(
+          expect.arrayContaining([expect.any(File)])
+        );
       });
     });
 
@@ -144,9 +142,12 @@ describe('Destination', () => {
     });
 
     describe('when the artifact does not exist', () => {
-      const invalidFileProperties = { roleArn, bucket, src: [
-        `${faker.random.uuid()}::${faker.system.fileName()}`,
-      ], prefix };
+      const invalidFileProperties = {
+        roleArn,
+        bucket,
+        src: [`${faker.random.uuid()}::${faker.system.fileName()}`],
+        prefix,
+      };
 
       it('resolves with an empty array', () => {
         const destination = new Destination(invalidFileProperties, artifacts);
@@ -169,22 +170,22 @@ describe('Destination', () => {
         faker.random.uuid()
       );
 
-      jest.spyOn(destination, 'files').mockImplementation(async () => ([{ upload }]));
+      jest.spyOn(destination, 'files').mockImplementation(async () => [{ upload }]);
 
       jest.spyOn(destination, 'credentials').mockImplementation(async () => credentials);
 
       it('resolves with an array of remote locations', async () => {
         const urls = await destination.upload();
-        expect(urls).toEqual(expect.arrayContaining([
-          expect.stringMatching(uploadLocation),
-        ]));
+        expect(urls).toEqual(expect.arrayContaining([expect.stringMatching(uploadLocation)]));
         expect(destination.files).toHaveBeenCalled();
         expect(destination.credentials).toHaveBeenCalled();
-        expect(upload).toHaveBeenCalledWith(expect.objectContaining({
-          bucket,
-          credentials,
-          prefix,
-        }));
+        expect(upload).toHaveBeenCalledWith(
+          expect.objectContaining({
+            bucket,
+            credentials,
+            prefix,
+          })
+        );
       });
     });
   });

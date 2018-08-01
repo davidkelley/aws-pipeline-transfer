@@ -13,9 +13,7 @@ describe('#validate', () => {
         roleArn: {
           'Fn::GetParam': ['DeployOutput', 'Outputs.json', 'S3BucketKey'],
         },
-        src: [
-          'BuildOutput::out/**/*.png',
-        ],
+        src: ['BuildOutput::out/**/*.png'],
       },
     ];
 
@@ -24,7 +22,6 @@ describe('#validate', () => {
   });
 
   describe('when a schema is invalid', () => {
-    it('rejects on empty schema', () =>
-      expect(validate({})).rejects.toEqual(expect.any(Error)));
+    it('rejects on empty schema', () => expect(validate({})).rejects.toEqual(expect.any(Error)));
   });
 });
