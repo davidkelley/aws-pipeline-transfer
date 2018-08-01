@@ -11,9 +11,7 @@ const remoteAttribute = {
     },
     {
       type: 'object',
-      required: [
-        'Fn::GetParam',
-      ],
+      required: ['Fn::GetParam'],
       properties: {
         'Fn::GetParam': {
           type: 'array',
@@ -47,11 +45,7 @@ const Schema = {
   uniqueItems: true,
   items: {
     type: 'object',
-    required: [
-      'roleArn',
-      'bucket',
-      'src',
-    ],
+    required: ['roleArn', 'bucket', 'src'],
     properties: {
       roleArn: remoteAttribute,
       bucket: remoteAttribute,

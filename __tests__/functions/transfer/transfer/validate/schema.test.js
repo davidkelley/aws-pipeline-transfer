@@ -6,6 +6,8 @@ import Ajv from 'ajv';
 
 describe('Schema', () => {
   it('compiles successfully', () => {
-    expect(() => { new Ajv().compile(Schema); }).not.toThrow();
+    expect(() => {
+      new Ajv().compile(Schema);
+    }).not.toThrow();
   });
 });

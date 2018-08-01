@@ -60,7 +60,7 @@ describe(&apos;File&apos;, () =&gt; {
 
   const filename = faker.system.fileName();
 
-  const data = new Buffer(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));
+  const data = Buffer.from(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));
 
   describe(&apos;#new&apos;, () =&gt; {
     it(&apos;initialises correctly&apos;, () =&gt; {

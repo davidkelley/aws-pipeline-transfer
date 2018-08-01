@@ -83,7 +83,7 @@ describe(&apos;Uploader&apos;, () =&gt; {
     AWS.mock(&apos;S3&apos;, &apos;getObject&apos;, (params, cb) =&gt; {
       process.nextTick(() =&gt; {
         const zipped = zipFile.generate({ base64: false, compression: &apos;DEFLATE&apos; });
-        cb(null, { Body: new Buffer(zipped, &apos;binary&apos;) });
+        cb(null, { Body: Buffer.from(zipped, &apos;binary&apos;) });
       });
     });
   });

@@ -157,7 +157,7 @@ describe(&apos;Artifact&apos;, () =&gt; {
             Bucket: bucketName,
             Key: objectKey,
           }));
-          cb(null, { Body: new Buffer(zipped, &apos;binary&apos;) });
+          cb(null, { Body: Buffer.from(zipped, &apos;binary&apos;) });
         });
       });
 
@@ -211,7 +211,7 @@ describe(&apos;Artifact&apos;, () =&gt; {
       it(&apos;should return the correct files&apos;, async () =&gt; {
         const [file] = await artifact.match(selector);
         expect(file.key).toEqual(`/${relativePath}/${filename}`);
-        expect(file.data).toEqual(new Buffer(data).toString(&apos;binary&apos;));
+        expect(file.data).toEqual(Buffer.from(data).toString(&apos;binary&apos;));
       });
     });
   });
@@ -411,7 +411,7 @@ describe(&apos;Artifact&apos;, () =&gt; {
             Bucket: bucketName,
             Key: objectKey,
           }));
-          cb(null, { Body: new Buffer(data) });
+          cb(null, { Body: Buffer.from(data) });
         });
       });
 
@@ -420,7 +420,7 @@ describe(&apos;Artifact&apos;, () =&gt; {
       });
 
       it(&apos;should retrieve the correct data&apos;, () =&gt;
-        expect(artifact.fetch()).resolves.toEqual(new Buffer(data)));
+        expect(artifact.fetch()).resolves.toEqual(Buffer.from(data)));
     });
 
     describe(&apos;when the artifact cannot be retrieved&apos;, () =&gt; {

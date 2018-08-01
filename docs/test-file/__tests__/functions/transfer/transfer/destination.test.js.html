@@ -67,7 +67,7 @@ describe(&apos;Destination&apos;, () =&gt; {
     match: async () =&gt; {
       const path = Path.join(&apos;/&apos;, faker.random.uuid());
       const filename = faker.system.fileName();
-      const data = new Buffer(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));
+      const data = Buffer.from(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));
       return [
         new File(path, filename, data),
       ];

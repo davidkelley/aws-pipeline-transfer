@@ -12,7 +12,7 @@ describe('File', () => {
 
   const filename = faker.system.fileName();
 
-  const data = new Buffer(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));
+  const data = Buffer.from(JSON.stringify({ [faker.random.uuid()]: faker.random.uuid() }));
 
   describe('#new', () => {
     it('initialises correctly', () => {
@@ -73,13 +73,15 @@ describe('File', () => {
     describe('when the upload succeeds', () => {
       beforeEach(() => {
         AWS.mock('S3', 'putObject', (params, cb) => {
-          expect(params).toEqual(expect.objectContaining({
-            Bucket: bucket,
-            Key: prefixed,
-            ContentType: expect.any(String),
-            Body: data,
-          }));
-          cb(null, { });
+          expect(params).toEqual(
+            expect.objectContaining({
+              Bucket: bucket,
+              Key: prefixed,
+              ContentType: expect.any(String),
+              Body: data,
+            })
+          );
+          cb(null, {});
         });
       });
 
@@ -90,7 +92,7 @@ describe('File', () => {
       it('returns the correct fully resolved path', () => {
         const file = new File(path, filename, data);
         return expect(file.upload({ bucket, credentials, prefix })).resolves.toEqual(
-          expect.stringMatching(`s3://${bucket}/${prefixed}`),
+          expect.stringMatching(`s3://${bucket}/${prefixed}`)
         );
       });
     });
@@ -100,13 +102,15 @@ describe('File', () => {
 
       beforeEach(() => {
         AWS.mock('S3', 'putObject', (params, cb) => {
-          expect(params).toEqual(expect.objectContaining({
-            Bucket: bucket,
-            Key: filepath,
-            ContentType: expect.any(String),
-            Body: data,
-          }));
-          cb(null, { });
+          expect(params).toEqual(
+            expect.objectContaining({
+              Bucket: bucket,
+              Key: filepath,
+              ContentType: expect.any(String),
+              Body: data,
+            })
+          );
+          cb(null, {});
         });
       });
 
@@ -117,7 +121,7 @@ describe('File', () => {
       it('returns the correct fully resolved path', () => {
         const file = new File(path, filename, data);
         return expect(file.upload({ bucket, credentials })).resolves.toEqual(
-          expect.stringMatching(`s3://${bucket}/${filepath}`),
+          expect.stringMatching(`s3://${bucket}/${filepath}`)
         );
       });
     });
@@ -136,7 +140,7 @@ describe('File', () => {
       it('throws a well-formed error', () => {
         const file = new File(path, filename, data);
         return expect(file.upload({ bucket, credentials, prefix })).rejects.toEqual(
-          expect.any(Error),
+          expect.any(Error)
         );
       });
     });

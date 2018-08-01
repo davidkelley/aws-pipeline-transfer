@@ -4,4 +4,4 @@
  *
  * @type {String}
  */
-export const FUNCTION_NAME = (process.env.AWS_LAMBDA_FUNCTION_NAME || 'default');
+export const FUNCTION_NAME = process.env.AWS_LAMBDA_FUNCTION_NAME || 'default';

@@ -93,7 +93,7 @@ export default class Attribute {
       const keys = Object.keys(mapping).join(', ');
       throw artifactParameterError({ keys });
     }
-    return await this.fetch(...properties);
+    return this.fetch(...properties);
   }
 
   /**

@@ -35,7 +35,7 @@ const validate = ajv.compile(Schema);
  * @return {Object} a mutated data object, containing any defaulted properties
  *  where defined in the schema.
  */
-export default function (data) {
+export default function(data) {
   return new Promise((resolve, reject) => {
     const valid = validate(data);
     if (!valid) {

@@ -13,9 +13,7 @@ module.exports = {
     path: `${__dirname}/out`,
     filename: '[name].js',
   },
-  plugins: [
-    new UglifyJSPlugin(),
-  ],
+  plugins: [new UglifyJSPlugin()],
   module: {
     loaders: [
       {

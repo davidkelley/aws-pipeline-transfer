@@ -6,7 +6,6 @@ npm-debug.log
 client_secret.json
 .DS_Store
 jest
-jest*
 coverage
 .webpack
 out/

@@ -7,8 +7,7 @@ import Uploader from './transfer/uploader';
 
 const client = new CodePipeline({ region: AWS_REGION });
 
-export async function handler(event, context, cb) {
-  const externalExecutionId = context.awsRequestId;
+export async function handler(event, { awsRequestId: externalExecutionId }, cb) {
   const pipeline = event['CodePipeline.job'];
   const { id } = pipeline;
   const result = { jobId: id };
