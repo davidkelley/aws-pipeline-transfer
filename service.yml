@@ -15,13 +15,15 @@ Resources:
       MemorySize: 512
       Timeout: 30
       Policies:
-        - Effect: Allow
-          Action:
-            - sts:AssumeRole
-            - codepipeline:PutJobSuccessResult
-            - codepipeline:PutJobFailureResult
-          Resource:
-            - "*"
+        - Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - sts:AssumeRole
+                - codepipeline:PutJobSuccessResult
+                - codepipeline:PutJobFailureResult
+              Resource:
+                - '*'
 
   TransferFunctionLogGroup:
     Type: AWS::Logs::LogGroup
