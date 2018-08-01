@@ -4,64 +4,24 @@ Transform: AWS::Serverless-2016-10-31
 
 Description: "[Pipeline] [Utility] Deploys a Lambda function that controls AWS S3 file uploads via CodePipeline."
 
-Parameters:
-
-  Name:
-    Type: String
-    Default: aws-pipeline-transfer
-    Description: A logical resource name for the service
-
 Resources:
 
   TransferFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: transfer.handler
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       CodeUri: ./out
-      Timeout: 10
-      Role: !GetAtt TransferFunctionExecutionRole.Arn
-
-  TransferFunctionExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      Path: !Sub "/${Name}/"
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: "Allow"
-            Principal:
-              Service:
-                - !Sub "lambda.${AWS::URLSuffix}"
-            Action: sts:AssumeRole
-
-  TransferFunctionExecutionPolicy:
-    Type: AWS::IAM::Policy
-    Properties:
-      PolicyName: APIPermissions
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Action:
-              - logs:CreateLogGroup
-              - logs:CreateLogStream
-              - logs:PutLogEvents
-            Resource:
-              - !GetAtt TransferFunctionLogGroup.Arn
-          - Effect: Allow
-            Action:
-              - sts:AssumeRole
-            Resource:
-              - !Sub "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/*"
-          - Effect: Allow
-            Action:
-              - codepipeline:PutJobSuccessResult
-              - codepipeline:PutJobFailureResult
-            Resource:
-              - "*"
-      Roles:
-        - !Ref TransferFunctionExecutionRole
+      MemorySize: 512
+      Timeout: 30
+      Policies:
+        - Effect: Allow
+          Action:
+            - sts:AssumeRole
+            - codepipeline:PutJobSuccessResult
+            - codepipeline:PutJobFailureResult
+          Resource:
+            - "*"
 
   TransferFunctionLogGroup:
     Type: AWS::Logs::LogGroup

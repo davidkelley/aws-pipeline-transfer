@@ -1,8 +1,12 @@
+const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+const entry = file => ['source-map-support/register', file];
+
 module.exports = {
+  mode: 'production',
   entry: {
-    transfer: './functions/transfer',
+    transfer: entry('./functions/transfer'),
   },
   target: 'node',
   externals: {
@@ -13,9 +17,19 @@ module.exports = {
     path: `${__dirname}/out`,
     filename: '[name].js',
   },
-  plugins: [new UglifyJSPlugin()],
+  plugins: [
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[file].map',
+      append: '\n//# sourceMappingURL=./[url]',
+    }),
+    new UglifyJSPlugin({
+      parallel: true,
+      cache: true,
+      sourceMap: true,
+    }),
+  ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         loader: ['babel-loader'],

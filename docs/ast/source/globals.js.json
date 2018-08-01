@@ -30,8 +30,8 @@
     "body": [
       {
         "type": "ExportNamedDeclaration",
-        "start": 350,
-        "end": 409,
+        "start": 359,
+        "end": 416,
         "loc": {
           "start": {
             "line": 11,
@@ -39,15 +39,15 @@
           },
           "end": {
             "line": 11,
-            "column": 59
+            "column": 57
           }
         },
         "specifiers": [],
         "source": null,
         "declaration": {
           "type": "VariableDeclaration",
-          "start": 357,
-          "end": 409,
+          "start": 366,
+          "end": 416,
           "loc": {
             "start": {
               "line": 11,
@@ -55,14 +55,14 @@
             },
             "end": {
               "line": 11,
-              "column": 59
+              "column": 57
             }
           },
           "declarations": [
             {
               "type": "VariableDeclarator",
-              "start": 363,
-              "end": 408,
+              "start": 372,
+              "end": 415,
               "loc": {
                 "start": {
                   "line": 11,
@@ -70,13 +70,13 @@
                 },
                 "end": {
                   "line": 11,
-                  "column": 58
+                  "column": 56
                 }
               },
               "id": {
                 "type": "Identifier",
-                "start": 363,
-                "end": 372,
+                "start": 372,
+                "end": 381,
                 "loc": {
                   "start": {
                     "line": 11,
@@ -93,58 +93,58 @@
               },
               "init": {
                 "type": "LogicalExpression",
-                "start": 376,
-                "end": 407,
+                "start": 384,
+                "end": 415,
                 "loc": {
                   "start": {
                     "line": 11,
-                    "column": 26
+                    "column": 25
                   },
                   "end": {
                     "line": 11,
-                    "column": 57
+                    "column": 56
                   }
                 },
                 "left": {
                   "type": "MemberExpression",
-                  "start": 376,
-                  "end": 397,
+                  "start": 384,
+                  "end": 405,
                   "loc": {
                     "start": {
                       "line": 11,
-                      "column": 26
+                      "column": 25
                     },
                     "end": {
                       "line": 11,
-                      "column": 47
+                      "column": 46
                     }
                   },
                   "object": {
                     "type": "MemberExpression",
-                    "start": 376,
-                    "end": 387,
+                    "start": 384,
+                    "end": 395,
                     "loc": {
                       "start": {
                         "line": 11,
-                        "column": 26
+                        "column": 25
                       },
                       "end": {
                         "line": 11,
-                        "column": 37
+                        "column": 36
                       }
                     },
                     "object": {
                       "type": "Identifier",
-                      "start": 376,
-                      "end": 383,
+                      "start": 384,
+                      "end": 391,
                       "loc": {
                         "start": {
                           "line": 11,
-                          "column": 26
+                          "column": 25
                         },
                         "end": {
                           "line": 11,
-                          "column": 33
+                          "column": 32
                         },
                         "identifierName": "process"
                       },
@@ -152,16 +152,16 @@
                     },
                     "property": {
                       "type": "Identifier",
-                      "start": 384,
-                      "end": 387,
+                      "start": 392,
+                      "end": 395,
                       "loc": {
                         "start": {
                           "line": 11,
-                          "column": 34
+                          "column": 33
                         },
                         "end": {
                           "line": 11,
-                          "column": 37
+                          "column": 36
                         },
                         "identifierName": "env"
                       },
@@ -171,16 +171,16 @@
                   },
                   "property": {
                     "type": "Identifier",
-                    "start": 388,
-                    "end": 397,
+                    "start": 396,
+                    "end": 405,
                     "loc": {
                       "start": {
                         "line": 11,
-                        "column": 38
+                        "column": 37
                       },
                       "end": {
                         "line": 11,
-                        "column": 47
+                        "column": 46
                       },
                       "identifierName": "LOG_LEVEL"
                     },
@@ -191,16 +191,16 @@
                 "operator": "||",
                 "right": {
                   "type": "StringLiteral",
-                  "start": 401,
-                  "end": 407,
+                  "start": 409,
+                  "end": 415,
                   "loc": {
                     "start": {
                       "line": 11,
-                      "column": 51
+                      "column": 50
                     },
                     "end": {
                       "line": 11,
-                      "column": 57
+                      "column": 56
                     }
                   },
                   "extra": {
@@ -208,10 +208,6 @@
                     "raw": "'info'"
                   },
                   "value": "info"
-                },
-                "extra": {
-                  "parenthesized": true,
-                  "parenStart": 375
                 }
               },
               "leadingComments": null
@@ -221,9 +217,9 @@
           "leadingComments": [
             {
               "type": "CommentBlock",
-              "value": "*\n* Determines the level of logging that the function will output. This enables\n* us to reduce the amount of \"noise\" generated by a battle-tested function,\n* whilst enabling us to output additional logging on a new version.\n*\n* Setting `process.env.LOG_LEVEL` will overwrite the default value of `\"info\"`\n* for this variable.\n*\n* @type {String}\n",
+              "value": "*\n * Determines the level of logging that the function will output. This enables\n * us to reduce the amount of \"noise\" generated by a battle-tested function,\n * whilst enabling us to output additional logging on a new version.\n *\n * Setting `process.env.LOG_LEVEL` will overwrite the default value of `\"info\"`\n * for this variable.\n *\n * @type {String}\n ",
               "start": 0,
-              "end": 349,
+              "end": 358,
               "loc": {
                 "start": {
                   "line": 1,
@@ -231,7 +227,7 @@
                 },
                 "end": {
                   "line": 10,
-                  "column": 2
+                  "column": 3
                 }
               }
             }
@@ -240,8 +236,8 @@
             {
               "type": "CommentBlock",
               "value": "*\n * The AWS Region that this Lambda function is currently executing in.\n *\n * _Note: This is normally populated by the Lambda execution environment._\n *\n * @type {String}\n ",
-              "start": 411,
-              "end": 588,
+              "start": 418,
+              "end": 595,
               "loc": {
                 "start": {
                   "line": 13,
@@ -258,9 +254,9 @@
         "leadingComments": [
           {
             "type": "CommentBlock",
-            "value": "*\n* Determines the level of logging that the function will output. This enables\n* us to reduce the amount of \"noise\" generated by a battle-tested function,\n* whilst enabling us to output additional logging on a new version.\n*\n* Setting `process.env.LOG_LEVEL` will overwrite the default value of `\"info\"`\n* for this variable.\n*\n* @type {String}\n",
+            "value": "*\n * Determines the level of logging that the function will output. This enables\n * us to reduce the amount of \"noise\" generated by a battle-tested function,\n * whilst enabling us to output additional logging on a new version.\n *\n * Setting `process.env.LOG_LEVEL` will overwrite the default value of `\"info\"`\n * for this variable.\n *\n * @type {String}\n ",
             "start": 0,
-            "end": 349,
+            "end": 358,
             "loc": {
               "start": {
                 "line": 1,
@@ -268,7 +264,7 @@
               },
               "end": {
                 "line": 10,
-                "column": 2
+                "column": 3
               }
             }
           }
@@ -277,8 +273,8 @@
           {
             "type": "CommentBlock",
             "value": "*\n * The AWS Region that this Lambda function is currently executing in.\n *\n * _Note: This is normally populated by the Lambda execution environment._\n *\n * @type {String}\n ",
-            "start": 411,
-            "end": 588,
+            "start": 418,
+            "end": 595,
             "loc": {
               "start": {
                 "line": 13,
@@ -294,7 +290,7 @@
       },
       {
         "type": "ExportNamedDeclaration",
-        "start": 589,
+        "start": 596,
         "end": 638,
         "loc": {
           "start": {
@@ -303,14 +299,14 @@
           },
           "end": {
             "line": 20,
-            "column": 49
+            "column": 42
           }
         },
         "specifiers": [],
         "source": null,
         "declaration": {
           "type": "VariableDeclaration",
-          "start": 596,
+          "start": 603,
           "end": 638,
           "loc": {
             "start": {
@@ -319,13 +315,13 @@
             },
             "end": {
               "line": 20,
-              "column": 49
+              "column": 42
             }
           },
           "declarations": [
             {
               "type": "VariableDeclarator",
-              "start": 602,
+              "start": 609,
               "end": 637,
               "loc": {
                 "start": {
@@ -334,13 +330,13 @@
                 },
                 "end": {
                   "line": 20,
-                  "column": 48
+                  "column": 41
                 }
               },
               "id": {
-                "type": "Identifier",
-                "start": 602,
-                "end": 612,
+                "type": "ObjectPattern",
+                "start": 609,
+                "end": 623,
                 "loc": {
                   "start": {
                     "line": 20,
@@ -348,80 +344,104 @@
                   },
                   "end": {
                     "line": 20,
-                    "column": 23
-                  },
-                  "identifierName": "AWS_REGION"
+                    "column": 27
+                  }
                 },
-                "name": "AWS_REGION",
+                "properties": [
+                  {
+                    "type": "ObjectProperty",
+                    "start": 611,
+                    "end": 621,
+                    "loc": {
+                      "start": {
+                        "line": 20,
+                        "column": 15
+                      },
+                      "end": {
+                        "line": 20,
+                        "column": 25
+                      }
+                    },
+                    "method": false,
+                    "shorthand": true,
+                    "computed": false,
+                    "key": {
+                      "type": "Identifier",
+                      "start": 611,
+                      "end": 621,
+                      "loc": {
+                        "start": {
+                          "line": 20,
+                          "column": 15
+                        },
+                        "end": {
+                          "line": 20,
+                          "column": 25
+                        },
+                        "identifierName": "AWS_REGION"
+                      },
+                      "name": "AWS_REGION",
+                      "leadingComments": null
+                    },
+                    "value": {
+                      "type": "Identifier",
+                      "start": 611,
+                      "end": 621,
+                      "loc": {
+                        "start": {
+                          "line": 20,
+                          "column": 15
+                        },
+                        "end": {
+                          "line": 20,
+                          "column": 25
+                        },
+                        "identifierName": "AWS_REGION"
+                      },
+                      "name": "AWS_REGION"
+                    },
+                    "leadingComments": null,
+                    "extra": {
+                      "shorthand": true
+                    }
+                  }
+                ],
                 "leadingComments": null
               },
               "init": {
                 "type": "MemberExpression",
-                "start": 615,
+                "start": 626,
                 "end": 637,
                 "loc": {
                   "start": {
                     "line": 20,
-                    "column": 26
+                    "column": 30
                   },
                   "end": {
                     "line": 20,
-                    "column": 48
+                    "column": 41
                   }
                 },
                 "object": {
-                  "type": "MemberExpression",
-                  "start": 615,
-                  "end": 626,
+                  "type": "Identifier",
+                  "start": 626,
+                  "end": 633,
                   "loc": {
                     "start": {
                       "line": 20,
-                      "column": 26
+                      "column": 30
                     },
                     "end": {
                       "line": 20,
                       "column": 37
-                    }
-                  },
-                  "object": {
-                    "type": "Identifier",
-                    "start": 615,
-                    "end": 622,
-                    "loc": {
-                      "start": {
-                        "line": 20,
-                        "column": 26
-                      },
-                      "end": {
-                        "line": 20,
-                        "column": 33
-                      },
-                      "identifierName": "process"
                     },
-                    "name": "process"
+                    "identifierName": "process"
                   },
-                  "property": {
-                    "type": "Identifier",
-                    "start": 623,
-                    "end": 626,
-                    "loc": {
-                      "start": {
-                        "line": 20,
-                        "column": 34
-                      },
-                      "end": {
-                        "line": 20,
-                        "column": 37
-                      },
-                      "identifierName": "env"
-                    },
-                    "name": "env"
-                  },
-                  "computed": false
+                  "name": "process"
                 },
                 "property": {
                   "type": "Identifier",
-                  "start": 627,
+                  "start": 634,
                   "end": 637,
                   "loc": {
                     "start": {
@@ -430,11 +450,11 @@
                     },
                     "end": {
                       "line": 20,
-                      "column": 48
+                      "column": 41
                     },
-                    "identifierName": "AWS_REGION"
+                    "identifierName": "env"
                   },
-                  "name": "AWS_REGION"
+                  "name": "env"
                 },
                 "computed": false
               },
@@ -446,8 +466,8 @@
             {
               "type": "CommentBlock",
               "value": "*\n * The AWS Region that this Lambda function is currently executing in.\n *\n * _Note: This is normally populated by the Lambda execution environment._\n *\n * @type {String}\n ",
-              "start": 411,
-              "end": 588,
+              "start": 418,
+              "end": 595,
               "loc": {
                 "start": {
                   "line": 13,
@@ -466,8 +486,8 @@
           {
             "type": "CommentBlock",
             "value": "*\n * The AWS Region that this Lambda function is currently executing in.\n *\n * _Note: This is normally populated by the Lambda execution environment._\n *\n * @type {String}\n ",
-            "start": 411,
-            "end": 588,
+            "start": 418,
+            "end": 595,
             "loc": {
               "start": {
                 "line": 13,
@@ -487,9 +507,9 @@
   "comments": [
     {
       "type": "CommentBlock",
-      "value": "*\n* Determines the level of logging that the function will output. This enables\n* us to reduce the amount of \"noise\" generated by a battle-tested function,\n* whilst enabling us to output additional logging on a new version.\n*\n* Setting `process.env.LOG_LEVEL` will overwrite the default value of `\"info\"`\n* for this variable.\n*\n* @type {String}\n",
+      "value": "*\n * Determines the level of logging that the function will output. This enables\n * us to reduce the amount of \"noise\" generated by a battle-tested function,\n * whilst enabling us to output additional logging on a new version.\n *\n * Setting `process.env.LOG_LEVEL` will overwrite the default value of `\"info\"`\n * for this variable.\n *\n * @type {String}\n ",
       "start": 0,
-      "end": 349,
+      "end": 358,
       "loc": {
         "start": {
           "line": 1,
@@ -497,15 +517,15 @@
         },
         "end": {
           "line": 10,
-          "column": 2
+          "column": 3
         }
       }
     },
     {
       "type": "CommentBlock",
       "value": "*\n * The AWS Region that this Lambda function is currently executing in.\n *\n * _Note: This is normally populated by the Lambda execution environment._\n *\n * @type {String}\n ",
-      "start": 411,
-      "end": 588,
+      "start": 418,
+      "end": 595,
       "loc": {
         "start": {
           "line": 13,
@@ -521,9 +541,9 @@
   "tokens": [
     {
       "type": "CommentBlock",
-      "value": "*\n* Determines the level of logging that the function will output. This enables\n* us to reduce the amount of \"noise\" generated by a battle-tested function,\n* whilst enabling us to output additional logging on a new version.\n*\n* Setting `process.env.LOG_LEVEL` will overwrite the default value of `\"info\"`\n* for this variable.\n*\n* @type {String}\n",
+      "value": "*\n * Determines the level of logging that the function will output. This enables\n * us to reduce the amount of \"noise\" generated by a battle-tested function,\n * whilst enabling us to output additional logging on a new version.\n *\n * Setting `process.env.LOG_LEVEL` will overwrite the default value of `\"info\"`\n * for this variable.\n *\n * @type {String}\n ",
       "start": 0,
-      "end": 349,
+      "end": 358,
       "loc": {
         "start": {
           "line": 1,
@@ -531,7 +551,7 @@
         },
         "end": {
           "line": 10,
-          "column": 2
+          "column": 3
         }
       }
     },
@@ -550,8 +570,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 350,
-      "end": 356,
+      "start": 359,
+      "end": 365,
       "loc": {
         "start": {
           "line": 11,
@@ -578,8 +598,8 @@
         "updateContext": null
       },
       "value": "const",
-      "start": 357,
-      "end": 362,
+      "start": 366,
+      "end": 371,
       "loc": {
         "start": {
           "line": 11,
@@ -604,8 +624,8 @@
         "binop": null
       },
       "value": "LOG_LEVEL",
-      "start": 363,
-      "end": 372,
+      "start": 372,
+      "end": 381,
       "loc": {
         "start": {
           "line": 11,
@@ -631,8 +651,8 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 373,
-      "end": 374,
+      "start": 382,
+      "end": 383,
       "loc": {
         "start": {
           "line": 11,
@@ -641,31 +661,6 @@
         "end": {
           "line": 11,
           "column": 24
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "(",
-        "beforeExpr": true,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "start": 375,
-      "end": 376,
-      "loc": {
-        "start": {
-          "line": 11,
-          "column": 25
-        },
-        "end": {
-          "line": 11,
-          "column": 26
         }
       }
     },
@@ -682,16 +677,16 @@
         "binop": null
       },
       "value": "process",
-      "start": 376,
-      "end": 383,
+      "start": 384,
+      "end": 391,
       "loc": {
         "start": {
           "line": 11,
-          "column": 26
+          "column": 25
         },
         "end": {
           "line": 11,
-          "column": 33
+          "column": 32
         }
       }
     },
@@ -708,16 +703,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 383,
-      "end": 384,
+      "start": 391,
+      "end": 392,
       "loc": {
         "start": {
           "line": 11,
-          "column": 33
+          "column": 32
         },
         "end": {
           "line": 11,
-          "column": 34
+          "column": 33
         }
       }
     },
@@ -734,16 +729,16 @@
         "binop": null
       },
       "value": "env",
-      "start": 384,
-      "end": 387,
+      "start": 392,
+      "end": 395,
       "loc": {
         "start": {
           "line": 11,
-          "column": 34
+          "column": 33
         },
         "end": {
           "line": 11,
-          "column": 37
+          "column": 36
         }
       }
     },
@@ -760,16 +755,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 387,
-      "end": 388,
+      "start": 395,
+      "end": 396,
       "loc": {
         "start": {
           "line": 11,
-          "column": 37
+          "column": 36
         },
         "end": {
           "line": 11,
-          "column": 38
+          "column": 37
         }
       }
     },
@@ -786,16 +781,16 @@
         "binop": null
       },
       "value": "LOG_LEVEL",
-      "start": 388,
-      "end": 397,
+      "start": 396,
+      "end": 405,
       "loc": {
         "start": {
           "line": 11,
-          "column": 38
+          "column": 37
         },
         "end": {
           "line": 11,
-          "column": 47
+          "column": 46
         }
       }
     },
@@ -813,16 +808,16 @@
         "updateContext": null
       },
       "value": "||",
-      "start": 398,
-      "end": 400,
+      "start": 406,
+      "end": 408,
       "loc": {
         "start": {
           "line": 11,
-          "column": 48
+          "column": 47
         },
         "end": {
           "line": 11,
-          "column": 50
+          "column": 49
         }
       }
     },
@@ -840,41 +835,16 @@
         "updateContext": null
       },
       "value": "info",
-      "start": 401,
-      "end": 407,
+      "start": 409,
+      "end": 415,
       "loc": {
         "start": {
           "line": 11,
-          "column": 51
+          "column": 50
         },
         "end": {
           "line": 11,
-          "column": 57
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ")",
-        "beforeExpr": false,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "start": 407,
-      "end": 408,
-      "loc": {
-        "start": {
-          "line": 11,
-          "column": 57
-        },
-        "end": {
-          "line": 11,
-          "column": 58
+          "column": 56
         }
       }
     },
@@ -891,24 +861,24 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 408,
-      "end": 409,
+      "start": 415,
+      "end": 416,
       "loc": {
         "start": {
           "line": 11,
-          "column": 58
+          "column": 56
         },
         "end": {
           "line": 11,
-          "column": 59
+          "column": 57
         }
       }
     },
     {
       "type": "CommentBlock",
       "value": "*\n * The AWS Region that this Lambda function is currently executing in.\n *\n * _Note: This is normally populated by the Lambda execution environment._\n *\n * @type {String}\n ",
-      "start": 411,
-      "end": 588,
+      "start": 418,
+      "end": 595,
       "loc": {
         "start": {
           "line": 13,
@@ -935,8 +905,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 589,
-      "end": 595,
+      "start": 596,
+      "end": 602,
       "loc": {
         "start": {
           "line": 20,
@@ -963,8 +933,8 @@
         "updateContext": null
       },
       "value": "const",
-      "start": 596,
-      "end": 601,
+      "start": 603,
+      "end": 608,
       "loc": {
         "start": {
           "line": 20,
@@ -973,6 +943,31 @@
         "end": {
           "line": 20,
           "column": 12
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 609,
+      "end": 610,
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 13
+        },
+        "end": {
+          "line": 20,
+          "column": 14
         }
       }
     },
@@ -989,16 +984,41 @@
         "binop": null
       },
       "value": "AWS_REGION",
-      "start": 602,
-      "end": 612,
+      "start": 611,
+      "end": 621,
       "loc": {
         "start": {
           "line": 20,
-          "column": 13
+          "column": 15
         },
         "end": {
           "line": 20,
-          "column": 23
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 622,
+      "end": 623,
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 26
+        },
+        "end": {
+          "line": 20,
+          "column": 27
         }
       }
     },
@@ -1016,16 +1036,16 @@
         "updateContext": null
       },
       "value": "=",
-      "start": 613,
-      "end": 614,
+      "start": 624,
+      "end": 625,
       "loc": {
         "start": {
           "line": 20,
-          "column": 24
+          "column": 28
         },
         "end": {
           "line": 20,
-          "column": 25
+          "column": 29
         }
       }
     },
@@ -1042,16 +1062,16 @@
         "binop": null
       },
       "value": "process",
-      "start": 615,
-      "end": 622,
+      "start": 626,
+      "end": 633,
       "loc": {
         "start": {
           "line": 20,
-          "column": 26
+          "column": 30
         },
         "end": {
           "line": 20,
-          "column": 33
+          "column": 37
         }
       }
     },
@@ -1068,16 +1088,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 622,
-      "end": 623,
+      "start": 633,
+      "end": 634,
       "loc": {
         "start": {
           "line": 20,
-          "column": 33
+          "column": 37
         },
         "end": {
           "line": 20,
-          "column": 34
+          "column": 38
         }
       }
     },
@@ -1094,59 +1114,7 @@
         "binop": null
       },
       "value": "env",
-      "start": 623,
-      "end": 626,
-      "loc": {
-        "start": {
-          "line": 20,
-          "column": 34
-        },
-        "end": {
-          "line": 20,
-          "column": 37
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ".",
-        "beforeExpr": false,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 626,
-      "end": 627,
-      "loc": {
-        "start": {
-          "line": 20,
-          "column": 37
-        },
-        "end": {
-          "line": 20,
-          "column": 38
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "AWS_REGION",
-      "start": 627,
+      "start": 634,
       "end": 637,
       "loc": {
         "start": {
@@ -1155,7 +1123,7 @@
         },
         "end": {
           "line": 20,
-          "column": 48
+          "column": 41
         }
       }
     },
@@ -1177,11 +1145,11 @@
       "loc": {
         "start": {
           "line": 20,
-          "column": 48
+          "column": 41
         },
         "end": {
           "line": 20,
-          "column": 49
+          "column": 42
         }
       }
     },

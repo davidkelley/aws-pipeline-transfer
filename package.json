@@ -50,7 +50,8 @@
     "prettier": "^1.14.0",
     "source-map-support": "^0.5.6",
     "uglifyjs-webpack-plugin": "^1.2.7",
-    "webpack": "^4.16.3"
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.1.0"
   },
   "scripts": {
     "commit": "git-cz",
@@ -61,7 +62,7 @@
     "test": "jest __tests__/.+/*.test.js",
     "prebuild": "npm test",
     "pretest": "npm run lint",
-    "postbuild": "build:doc"
+    "postbuild": "npm run build:doc"
   },
   "config": {
     "commitizen": {
