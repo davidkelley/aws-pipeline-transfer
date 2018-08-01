@@ -215,8 +215,7 @@ export default class Artifact {
             resolve(
               files.map(file => {
                 const { dir: relativeDir, base: filename } = Path.parse(file);
-                const data = fs.readFileSync(Path.join(cwd, file), { encoding: 'binary' });
-                return new File(relativeDir, filename, data);
+                return new File(relativeDir, filename, Path.join(cwd, file));
               })
             );
           }

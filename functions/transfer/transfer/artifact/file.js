@@ -1,4 +1,5 @@
 import Path from 'path';
+import fs from 'fs';
 import mime from 'mime-types';
 import { S3 } from 'aws-sdk';
 import wrappedError from 'error/wrapped';
@@ -23,9 +24,9 @@ export default class File {
   /**
    * @param {String} path - the path to the file inside the artifact
    * @param {String} filename - The name of the file, including the extension name
-   * @param {Buffer} data - A buffer of the files contents.
+   * @param {String} absolutePath - An absolute path to the underlying file
    */
-  constructor(path, filename, data) {
+  constructor(path, filename, absolutePath) {
     /**
      * The S3 key which represents this file (path + filename)
      *
@@ -33,11 +34,15 @@ export default class File {
      */
     this.key = Path.join('/', path, filename);
     /**
-     * The data contained inside the file
+     * An absolute path to the underlying file
      *
-     * @type {Buffer}
+     * @type {String}
      */
-    this.data = data;
+    this.absolutePath = absolutePath;
+  }
+
+  get data() {
+    return fs.readFileSync(this.absolutePath);
   }
 
   /**
@@ -60,12 +65,13 @@ export default class File {
    * @param {String} opts.prefix - An optional prefix to apply to this file.
    */
   async upload({ bucket: Bucket, credentials, prefix = '' }) {
-    const { data, key, contentType: ContentType } = this;
+    const { absolutePath, key, contentType: ContentType } = this;
     try {
+      const stream = fs.createReadStream(absolutePath);
       const s3 = new S3({ region: AWS_REGION, credentials });
       const prefixedKey = Path.join('/', prefix, key).replace(/^\//, '');
-      const params = { Bucket, Key: prefixedKey, Body: data, ContentType };
-      await s3.putObject(params).promise();
+      const params = { Bucket, Key: prefixedKey, ContentType, Body: stream };
+      await s3.upload(params).promise();
       return `s3://${Bucket}/${prefixedKey}`;
     } catch (err) {
       throw uploadError(err, { key });
