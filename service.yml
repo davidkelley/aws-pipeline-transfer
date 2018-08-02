@@ -14,16 +14,42 @@ Resources:
       CodeUri: ./out
       MemorySize: 512
       Timeout: 30
-      Policies:
-        - Version: 2012-10-17
-          Statement:
-            - Effect: Allow
-              Action:
-                - sts:AssumeRole
-                - codepipeline:PutJobSuccessResult
-                - codepipeline:PutJobFailureResult
-              Resource:
-                - '*'
+
+  TransferFunctionExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - !Sub "lambda.${AWS::URLSuffix}"
+            Action: sts:AssumeRole
+
+  TransferFunctionExecutionPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: ExecutionPermissions
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource:
+              - !GetAtt TransferFunctionLogGroup.Arn
+          - Effect: Allow
+            Action:
+              - sts:AssumeRole
+              - codepipeline:PutJobSuccessResult
+              - codepipeline:PutJobFailureResult
+            Resource:
+              - "*"
+      Roles:
+        - !Ref TransferFunctionExecutionRole
 
   TransferFunctionLogGroup:
     Type: AWS::Logs::LogGroup
