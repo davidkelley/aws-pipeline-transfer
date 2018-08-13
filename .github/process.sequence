@@ -1,0 +1,30 @@
+
+CodePipeline->Lambda: Invoke
+note over CodePipeline,Lambda:
+  With JSON contents
+  of UserParameters
+end note
+
+loop for each transfer
+    Lambda-->CodePipeline: Download Input \nArtifacts from S3
+
+    Lambda->Lambda: Extract Artifact
+
+    Lambda->Lambda: Match files\nusing glob
+
+    opt If files are matched
+        Lambda->*IAM: AssumeRole
+        note over Lambda,IAM:
+          Use IAM Role defined
+          in UserParameters
+        end note
+
+        IAM-->Lambda: Credentials
+        destroy IAM
+
+        Lambda->*S3: Upload files
+        destroy S3
+    end
+end
+
+Lambda-->CodePipeline: Report job result

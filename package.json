@@ -61,7 +61,7 @@
     "lint": "eslint __tests__ functions *.js --cache",
     "build": "webpack",
     "build:doc": "esdoc",
-    "test": "jest __tests__/.+/*.test.js",
+    "test": "jest __tests__/.+/*.test.js  --coverage",
     "prebuild": "npm test",
     "pretest": "npm run lint",
     "postbuild": "npm run build:doc"
