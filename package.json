@@ -20,7 +20,7 @@
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
     "aws-sdk": "^2.284.1",
-    "aws-sdk-mock": "~4.0.0",
+    "aws-sdk-mock": "~4.1.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.6",
     "babel-loader": "^7.1.5",
