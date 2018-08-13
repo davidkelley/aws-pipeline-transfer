@@ -12,3 +12,4 @@ out/
 /cloudformation.yml
 tmp/
 .eslintcache
+junit.xml

@@ -1,0 +1,70 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:8
+
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - run:
+          name: Update NPM
+          command: sudo npm install -g npm@latest
+
+      - restore_cache:
+          keys:
+          - deps-{{ checksum "package.json" }}
+
+      - run:
+          name: Install Dependencies
+          command: npm ci
+
+      - save_cache:
+          paths:
+            - node_modules
+            - node_modules/.bin
+          key: deps-{{ checksum "package.json" }}
+
+      - run:
+          name: Run Test Suite
+          command: npm test -- --ci
+          environment:
+            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+
+      - run:
+          name: Publish Coverage
+          command: npx codecov
+
+      - store_test_results:
+          path: reports
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - ./
+
+  publish:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ./
+
+      - run:
+          name: Placeholder
+          command: echo "todo"
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - publish:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

@@ -1,4 +1,5 @@
 module.exports = {
+  reporters: ['default', 'jest-junit'],
   moduleFileExtensions: ['js'],
   transform: {
     '\\.js$': 'babel-jest',
