@@ -2,7 +2,7 @@
 
 [![Known Vulnerabilities](https://snyk.io/test/github/davidkelley/aws-pipeline-transfer/badge.svg?targetFile=package.json)](https://snyk.io/test/github/davidkelley/aws-pipeline-transfer?targetFile=package.json) [![Documentation](https://doc.esdoc.org/github.com/davidkelley/aws-pipeline-transfer/badge.svg)](https://doc.esdoc.org/github.com/davidkelley/aws-pipeline-transfer)
 
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org/)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org/) [![Greenkeeper badge](https://badges.greenkeeper.io/davidkelley/aws-pipeline-transfer.svg)](https://greenkeeper.io/)
 
 This project enables a custom CodePipeline action that allows you to specify files from pipeline artifacts, to be transferred to S3 buckets (see example below). Each transfer must contain a destination bucket, an optional key prefix to apply to all transfers and a source (`src`) key, which defines in a glob fashion the files to be uploaded.
 
