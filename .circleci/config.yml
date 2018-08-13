@@ -62,6 +62,11 @@ jobs:
           command: npm run build
 
       - run:
+          name: Package CloudFormation
+          command: >
+            aws cloudformation package --template-file service.yml --s3-prefix $CIRCLE_SHA1 --s3-bucket $SAR_BUCKET --output-template-file packaged.yml
+
+      - run:
           name: Create GitHub Publish
           command: npx semantic-release
 

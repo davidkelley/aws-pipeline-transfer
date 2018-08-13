@@ -1,0 +1,4 @@
+{
+  "ApplicationId": "arn:aws:serverlessrepo:us-east-1:417677358778:applications/codepipeline-file-transfer",
+  "SourceCodeUrl": "https://github.com/davidkelley/aws-pipeline-transfer"
+}
