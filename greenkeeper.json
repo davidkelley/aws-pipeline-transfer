@@ -1,0 +1,13 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "functions/transfer/package.json",
+        "functions/transfer/transfer/artifact/package.json",
+        "functions/transfer/transfer/attribute/package.json",
+        "functions/transfer/transfer/validate/package.json",
+        "package.json"
+      ]
+    }
+  }
+}
