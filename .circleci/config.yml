@@ -54,12 +54,16 @@ jobs:
           at: ./
 
       - run:
+          name: Trust GitHub SSH Host
+          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+
+      - run:
           name: Build Application
           command: npm run build
 
       - run:
           name: Create GitHub Publish
-          command: npx semantic-release 
+          command: npx semantic-release
 
 workflows:
   version: 2
