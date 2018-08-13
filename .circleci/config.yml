@@ -54,8 +54,12 @@ jobs:
           at: ./
 
       - run:
-          name: Placeholder
-          command: echo "todo"
+          name: Build Application
+          command: npm run build
+
+      - run:
+          name: Create GitHub Publish
+          command: npx semantic-release 
 
 workflows:
   version: 2
