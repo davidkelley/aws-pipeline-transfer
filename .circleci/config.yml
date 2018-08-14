@@ -60,7 +60,7 @@ jobs:
             sudo apt-get -y -qq update
             sudo apt-get -y -qq install python3.4-dev groff-base
             cd ~ && { curl -O https://bootstrap.pypa.io/get-pip.py ; cd -; }
-            python3.4 get-pip.py --user
+            python3.4 ~/get-pip.py --user
             export PATH=~/.local/bin:$PATH
             pip install awscli --upgrade --user
 
