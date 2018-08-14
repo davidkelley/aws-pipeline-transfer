@@ -61,7 +61,8 @@ jobs:
             sudo apt-get -y -qq install python3.4-dev groff-base
             cd ~ && { curl -O https://bootstrap.pypa.io/get-pip.py ; cd -; }
             python3.4 ~/get-pip.py --user
-            export PATH=~/.local/bin:$PATH
+            echo 'export PATH="~/.local/bin:$PATH"' >> $BASH_ENV
+            source $BASH_ENV
             pip install awscli --upgrade --user
 
       - run:
