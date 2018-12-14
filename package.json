@@ -32,7 +32,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-airbnb": "^2.5.3",
+    "babel-preset-airbnb": "^3.2.0",
     "babel-preset-env": "^1.7.0",
     "commitizen": "^2.10.1",
     "cz-conventional-changelog": "^2.1.0",
