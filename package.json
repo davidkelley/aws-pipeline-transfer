@@ -52,7 +52,7 @@
     "husky": "^1.0.0-rc.13",
     "jest": "^23.4.2",
     "jest-circus": "^23.4.2",
-    "jest-junit": "^5.1.0",
+    "jest-junit": "^8.0.0",
     "prettier": "^1.14.0",
     "source-map-support": "^0.5.6",
     "uglifyjs-webpack-plugin": "^1.2.7",
