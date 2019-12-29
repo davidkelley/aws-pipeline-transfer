@@ -9,7 +9,7 @@
     "ajv": "^6.5.2",
     "babel-runtime": "6.26.0",
     "bunyan": "^1.8.12",
-    "error": "^7.0.2",
+    "error": "^10.0.1",
     "extract-zip": "^1.6.7",
     "mime-types": "^2.1.19",
     "node-glob": "^1.2.0",
