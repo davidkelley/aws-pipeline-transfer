@@ -10,7 +10,7 @@
     "babel-runtime": "6.26.0",
     "bunyan": "^1.8.12",
     "error": "^7.0.2",
-    "extract-zip": "^1.6.7",
+    "extract-zip": "^1.7.0",
     "mime-types": "^2.1.19",
     "node-glob": "^1.2.0",
     "node-zip": "^1.1.1",
