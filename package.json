@@ -6,7 +6,7 @@
     "node": ">=8.10"
   },
   "dependencies": {
-    "ajv": "^6.5.2",
+    "ajv": "^6.12.2",
     "babel-runtime": "6.26.0",
     "bunyan": "^1.8.12",
     "error": "^7.0.2",
